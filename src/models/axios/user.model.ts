@@ -13,9 +13,6 @@ export interface IUserCompleto {
   id: string;
   nickname: string;
   tipoUsuario: string;
-  puntoVentaId: string;
-  almacenId: string;
-  vendedorId: string;
   token: string;
   refreshToken: string;
   expirationToken: number;
@@ -24,9 +21,6 @@ export const defaultUserCompleto: IUserCompleto = {
   id: "",
   nickname: "",
   tipoUsuario: "",
-  puntoVentaId: "",
-  almacenId: "",
-  vendedorId: "",
   token: "",
   refreshToken: "",
   expirationToken: 0,
