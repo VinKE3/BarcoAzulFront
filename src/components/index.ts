@@ -1,3 +1,4 @@
+export * from "./actionBar"
 export * from "./keys";
 export * from "./keys/basicKeyHandler";
 export * from "./notFound/components/logo";
