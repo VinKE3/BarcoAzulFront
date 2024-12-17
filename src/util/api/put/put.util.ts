@@ -34,6 +34,8 @@ export const put = async ({
   const endPoint: string = urlParams ? `${url}?${urlParams}` : url;
   const responseType: ConfigResponseType = isBlob ? "blob" : "json";
 
-  const response: IResponse = await callEndpoint(putService({ endPoint, data, allData, responseType }));
+  const response: IResponse = await callEndpoint(
+    putService({ endPoint, data, allData, responseType })
+  );
   return allData ? response : response.messages; // Devolver toda la respuesta o solo los mensajes, según allData
 };

@@ -10,7 +10,7 @@ export interface IButtonFooter {
   backPage?: string; // Página de retorno
   inputFocus?: string; // Input al que se debe enfocar al manejar errores
   allData?: boolean; // Indicador para devolver toda la respuesta o solo los datos (opcional)
-
+  sendId?: boolean; //Indicardor para enviar el id en la url
   showSend?: boolean; // Mostrar botón de enviar
   onSend?: () => Promise<void> | void; // Función a ejecutar al enviar
   replaceSend?: boolean; // Reemplazar la función de enviar por defecto

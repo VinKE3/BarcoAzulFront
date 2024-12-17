@@ -4,3 +4,9 @@ export * from "./login/components/Logo";
 export * from "./login/components";
 export * from "./login";
 export * from "./mantenimiento";
+export * from "./mantenimiento/Linea";
+export * from "./mantenimiento/TipoCambio";
+export * from "./mantenimiento/Departamento";
+export * from "./mantenimiento/Provincia";
+export * from "./mantenimiento/Distrito";
+export * from "./mantenimiento/Marca"

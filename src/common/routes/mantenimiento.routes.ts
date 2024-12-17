@@ -8,6 +8,9 @@ export const mantenimientoRoutes = {
 
   ALMACEN: "almacen",
   LINEA: "linea",
+  SUBLINEA: "sublinea",
+  MARCA: "marca",
+  UNIDADES:"unidadesmedida",
   DEPARTAMENTO: "departamento",
   PROVINCIA: "provincia",
   DISTRITO: "distrito",

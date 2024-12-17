@@ -8,8 +8,8 @@ const useLineaColumn = (): Column<ILineaTable>[] => {
   return useMemo<Column<ILineaTable>[]>(
     () => [
       {
-        Header: "Código Interno",
-        accessor: "codigoInterno",
+        Header: "ID",
+        accessor: "id",
       },
       {
         Header: "Descripción",

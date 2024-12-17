@@ -1,9 +1,22 @@
 import { useEffect, useState } from "react";
 import { LineaFilter, LineaModal, useLineaColumn } from ".";
-import { ButtonGroup, DeleteModal, Loading, Messages, NotFound, Table } from "../../../components";
+import {
+  ButtonGroup,
+  DeleteModal,
+  Loading,
+  Messages,
+  NotFound,
+  Table,
+} from "../../../components";
 import { useGlobalContext, usePermisos } from "../../../hooks";
 import { ILinea, defaultLinea } from "../../../models";
-import { handleInitialData, handlePrimaryModal, handleResetContext, handleResetMensajeError, handleSetPermisoYMenu } from "../../../util";
+import {
+  handleInitialData,
+  handlePrimaryModal,
+  handleResetContext,
+  handleResetMensajeError,
+  handleSetPermisoYMenu,
+} from "../../../util";
 
 const Linea: React.FC = () => {
   //#region useState
@@ -18,6 +31,9 @@ const Linea: React.FC = () => {
   //#endregion
 
   //#region useEffect
+  useEffect(() => {
+    console.log(table, "API");
+  }, []);
   useEffect(() => {
     const resetContext = async () => {
       handleResetContext(setGlobalContext);
@@ -47,6 +63,7 @@ const Linea: React.FC = () => {
       .then((response) => {
         const { data }: { data: ILinea } = response;
         handlePrimaryModal(setGlobalContext, data);
+        console.log(data);
       })
       .catch((error) => {
         handleResetMensajeError(setGlobalContext, true, true, error);
@@ -69,9 +86,17 @@ const Linea: React.FC = () => {
           <>
             {mensaje.length > 0 && <Messages mensajes={mensajes} />}
             {visible && <LineaFilter />}
-            {visible && <Table data={table.data} columns={columns} tableClassName="linea-table" />}
+            {visible && (
+              <Table
+                data={table.data}
+                columns={columns}
+                tableClassName="linea-table"
+              />
+            )}
 
-            {primer.tipo === "eliminar" && <DeleteModal propText={"descripcion"} />}
+            {primer.tipo === "eliminar" && (
+              <DeleteModal propText={"descripcion"} />
+            )}
             {form.data && primer.tipo && api.menu === menu && <LineaModal />}
           </>
         )}

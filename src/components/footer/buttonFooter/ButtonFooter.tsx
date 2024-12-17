@@ -2,8 +2,20 @@ import { BiExit } from "react-icons/bi";
 import { FiSave } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../../../hooks";
-import { IButtonFooter, IMensajes, defaultForm, defaultMensajes, defaultModal } from "../../../models";
-import { handleClearMensajes, handleFocus, handleSetErrorMensaje, post, put } from "../../../util";
+import {
+  IButtonFooter,
+  IMensajes,
+  defaultForm,
+  defaultMensajes,
+  defaultModal,
+} from "../../../models";
+import {
+  handleClearMensajes,
+  handleFocus,
+  handleSetErrorMensaje,
+  post,
+  put,
+} from "../../../util";
 
 /**
  * Componente ButtonFooter que muestra botones para Cerrar el formulario y Registrar|Modificar haciendo envíos al endpoint
@@ -18,7 +30,7 @@ const ButtonFooter: React.FC<IButtonFooter> = ({
   clearForm = true,
   inputFocus,
   allData = false,
-
+  sendId = false,
   showSend = true,
   onSend,
   replaceSend = false,
@@ -53,8 +65,13 @@ const ButtonFooter: React.FC<IButtonFooter> = ({
       const resultMessages: IMensajes[] =
         selectedModal.tipo === "registrar"
           ? await post(globalContext, data, selectedMenu, allData)
-          : await put({ globalContext, id: selectedModal.id, data, menu: selectedMenu, allData });
-
+          : await put({
+              globalContext,
+              id: sendId ? selectedModal.id : null,
+              data,
+              menu: selectedMenu,
+              allData,
+            });
       onSend && (await onSend()); //Ejecuta onSend en caso haya sido declarado
       handleSuccessClose(resultMessages); //Maneja los mensajes de éxito de la operación ejecutada
     } catch (error) {
@@ -111,7 +128,10 @@ const ButtonFooter: React.FC<IButtonFooter> = ({
   };
 
   // Función para manejar la tecla Enter en los botones, llamando a las funciones de guardar o cerrar según el botón presionado.
-  const handleKey = (e: React.KeyboardEvent<HTMLButtonElement>, action: "send" | "close"): void => {
+  const handleKey = (
+    e: React.KeyboardEvent<HTMLButtonElement>,
+    action: "send" | "close"
+  ): void => {
     if (e.key === "Enter") {
       action === "send" ? handleSend() : handleClose([defaultMensajes]);
     }
@@ -151,7 +171,9 @@ const ButtonFooter: React.FC<IButtonFooter> = ({
         >
           <BiExit size="1.5rem" className="button-base-icon" />
           <span className="button-base-text-hidden-info">[ ALT + S ]</span>
-          <span className="button-base-text-hidden">{selectedModal.tipo !== "consultar" ? "Cancelar" : "Cerrar"}</span>
+          <span className="button-base-text-hidden">
+            {selectedModal.tipo !== "consultar" ? "Cancelar" : "Cerrar"}
+          </span>
         </button>
       )}
     </div>
