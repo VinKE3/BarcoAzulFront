@@ -7,6 +7,8 @@ import { Provincia } from "./Provincia";
 import { Linea } from "./Linea";
 import { TipoCambio } from "./TipoCambio";
 import { Marca } from "./Marca";
+import { UnidadMedida } from "./UnidadMedida";
+import { EntidadBancaria } from "./EntidadBancaria";
 
 const Mantenimiento = () => {
   return (
@@ -16,12 +18,20 @@ const Mantenimiento = () => {
         <Route path={mantenimientoRoutes.LINEA} element={<Linea />} />
         <Route path={mantenimientoRoutes.MARCA} element={<Marca />} />
         <Route
+          path={mantenimientoRoutes.UNIDADESMEDIDA}
+          element={<UnidadMedida />}
+        />
+        <Route
           path={mantenimientoRoutes.DEPARTAMENTO}
           element={<Departamento />}
         />
         <Route path={mantenimientoRoutes.PROVINCIA} element={<Provincia />} />
         <Route path={mantenimientoRoutes.DISTRITO} element={<Distrito />} />
         <Route path={mantenimientoRoutes.TIPOCAMBIO} element={<TipoCambio />} />
+        <Route
+          path={mantenimientoRoutes.ENTIDADBANCARIA}
+          element={<EntidadBancaria />}
+        />
       </>
     </RoutesWithNotFound>
   );

@@ -21,6 +21,8 @@ export * from "./tipoIngreso.model";
 export * from "./tipoPago.model";
 export * from "./tipoProducto.model";
 export * from "./tipoVenta.model";
+export * from "./tipoEntidadBancaria";
 export * from "./transportista.model";
+export * from "./unidadMedida.model";
 export * from "./usuario";
 export * from "./vendedor.model";

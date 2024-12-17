@@ -15,11 +15,11 @@ export const defaultEntidadBancaria: IEntidadBancaria = {
 };
 
 export interface IEntidadBancariaTablas {
-  tipos: ICombo[];
+  tiposEntidadesBancarias: ICombo[];
 }
 
 export const defaultEntidadBancariaTablas: IEntidadBancariaTablas = {
-  tipos: [],
+  tiposEntidadesBancarias: [],
 };
 
 export interface IEntidadBancariaFilter {
@@ -36,4 +36,3 @@ export interface IEntidadBancariaTable {
   ruc: string | null;
   tipo: string;
 }
-

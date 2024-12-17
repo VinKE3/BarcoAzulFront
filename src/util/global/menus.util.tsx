@@ -17,6 +17,8 @@ const {
   MEDICO,
   LINEA,
   MARCA,
+  UNIDADESMEDIDA,
+  ENTIDADBANCARIA,
   DEPARTAMENTO,
   PROVINCIA,
   DISTRITO,
@@ -57,6 +59,14 @@ export function navbarMenu(): IMenuElement[] {
         { text: "Tipo de Cambio", path: `${MANTENIMIENTO}/${TIPOCAMBIO}` },
         { text: "Línea", path: `${MANTENIMIENTO}/${LINEA}` },
         { text: "Marca", path: `${MANTENIMIENTO}/${MARCA}` },
+        {
+          text: "Unidades de Medida",
+          path: `${MANTENIMIENTO}/${UNIDADESMEDIDA}`,
+        },
+        {
+          text: "Entidad Bancaria",
+          path: `${MANTENIMIENTO}/${ENTIDADBANCARIA}`,
+        },
         { text: "Departamento", path: `${MANTENIMIENTO}/${DEPARTAMENTO}` },
         { text: "Provincia", path: `${MANTENIMIENTO}/${PROVINCIA}` },
         { text: "Distrito", path: `${MANTENIMIENTO}/${DISTRITO}` },
