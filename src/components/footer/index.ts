@@ -1,1 +1,1 @@
-export * from "./buttonFooter"
+export * from './ButtonFooter';

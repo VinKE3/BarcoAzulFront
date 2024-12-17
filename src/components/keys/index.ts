@@ -1,1 +1,2 @@
-export * from "./basicKeyHandler";
+export * from "./BasicKeyHandler";
+export * from "./TableKeyHandler";

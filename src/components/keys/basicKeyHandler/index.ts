@@ -1,1 +1,1 @@
-export { default as BasicKeyHandler } from "./BasicKeyHandler";
+export { default as BasicKeyHandler } from './BasicKeyHandler';

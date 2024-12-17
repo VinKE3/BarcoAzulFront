@@ -2,6 +2,7 @@ export interface ICombo {
   id: string;
   descripcion: string;
 
+  isActivo?: boolean;
   isDefault?: boolean;
   numero?: number;
   nombre?: string;
@@ -12,6 +13,7 @@ export const defaultCombo: ICombo = {
   id: "",
   descripcion: "",
 
+  isActivo: true,
   isDefault: false,
   numero: 0,
   nombre: "",

@@ -1,1 +1,2 @@
-export * from "./modalForm"
+export * from './ModalForm';
+export * from './ModalHelp';

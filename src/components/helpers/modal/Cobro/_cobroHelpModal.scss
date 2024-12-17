@@ -1,0 +1,31 @@
+.cobro-help-modal-table {
+  th {
+    @apply text-center;
+    &:first-child {
+      @apply w-[40px] min-w-[40px];
+    }
+
+    &:nth-child(2) {
+      @apply w-[80px] min-w-[80px];
+    }
+    &:nth-child(3) {
+      @apply min-w-[90px];
+    }
+    &:nth-child(4) {
+      @apply min-w-[100px];
+    }
+    // &:nth-child(5) {
+    //   @apply min-w-[100px];
+    // }
+    &:nth-child(5) {
+      @apply w-[40px] min-w-[40px];
+    }
+    &:nth-child(6),
+    &:nth-child(7) {
+      @apply w-[100px] min-w-[100px];
+    }
+    &:last-child {
+      @apply w-[40px] min-w-[40px];
+    }
+  }
+}

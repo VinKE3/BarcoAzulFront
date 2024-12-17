@@ -7,6 +7,7 @@ import store from "./redux/store";
 import { RoutesWithNotFound, SnackbarConfigurator } from "./util";
 import Home from "./pages/home/Home";
 import { Login } from "./pages";
+import { Mantenimiento } from "./pages";
 function App() {
   return (
     <>
@@ -39,6 +40,10 @@ function App() {
 
               <Route element={<Layout />}>
                 <Route path={`${privateRoutes.HOME}/*`} element={<Home />} />
+                <Route
+                  path={`${privateRoutes.MANTENIMIENTO}/*`}
+                  element={<Mantenimiento />}
+                />
               </Route>
             </RoutesWithNotFound>
           </BrowserRouter>

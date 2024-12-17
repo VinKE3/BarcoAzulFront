@@ -2,9 +2,9 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import { useFocus, useGlobalContext } from "../../../../hooks";
 import { IMensajes, IPassword, defaultForm, defaultIPassword, defaultModales } from "../../../../models";
 import { handleClearMensajes, handleInputType, handleSetInputs, put } from "../../../../util";
-import { ButtonFooter } from "../../../footer";
-import { BasicKeyHandler } from "../../../keys";
-import { ModalForm } from "../../../modal";
+import { ButtonFooter } from "../../../Footer";
+import { BasicKeyHandler } from "../../../Keys";
+import { ModalForm } from "../../../Modal";
 
 const PasswordHelpModal: React.FC = () => {
   //#region useState

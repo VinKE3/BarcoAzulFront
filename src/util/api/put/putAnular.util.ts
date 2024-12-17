@@ -1,4 +1,4 @@
-import { IGlobalContext, IMensajes, IResponse, ModalPropType } from "../../../models";
+import { IMensajes, IPutAnularParams, IResponse } from "../../../models";
 import { getIsPermitido } from "../get";
 import { put } from "./put.util";
 
@@ -13,26 +13,29 @@ import { put } from "./put.util";
  * @param allData - (Opcional) Indicador para devolver toda la respuesta (`true`) o solo los mensajes (`false`).
  * @returns Una promesa que resuelve con la respuesta completa o solo los mensajes, dependiendo del valor de `allData`.
  */
-export const putAnular = async (
-  global: IGlobalContext,
-  modalProp: ModalPropType = "primer",
-  menu?: string,
-  isPermitido?: boolean,
-  allData?: boolean
-): Promise<IResponse | IMensajes[]> => {
-  const { api, modal } = global; // Desestructuración del contexto global
+export const putAnular = async ({
+  globalContext,
+  modalProp = "primer",
+  menu,
+  isPermitido = false,
+  allData = false,
+}: IPutAnularParams): Promise<IResponse | IMensajes[]> => {
+  const { api, modal } = globalContext; // Desestructuración del contexto global
   const selectedModal = modal[modalProp];
   const { id } = selectedModal;
+
   const selectedMenu: string = menu ?? api.menu; // Determinar el menú seleccionado
   const url: string = `${selectedMenu}/Anular`; // Construir la URL
   const selectedPermitido = isPermitido ?? selectedModal.isPermitido;
 
   if (selectedPermitido) {
-    // Si isPermitido es verdadero, verificar los permisos para la acción "anular"
-    await getIsPermitido({ globalContext: global, accion: "anular", modalProp, menu: selectedMenu }); // Verificar si la acción está permitida
+    await getIsPermitido({
+      globalContext,
+      accion: "anular",
+      modalProp,
+      menu: selectedMenu,
+    }); // Verificar si la acción está permitida
   }
 
-  // Realizar la llamada al endpoint para anular el elemento
-  const response: IResponse = await put({ globalContext: global, id, data: null, menu: url, allData });
-  return allData ? response : response.messages; // Devolver toda la respuesta o solo los mensajes, según allData
+  return await put({ globalContext, id, data: null, menu: url, allData });
 };
