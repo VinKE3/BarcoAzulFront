@@ -1,4 +1,5 @@
-import { IGlobalContext } from "../../../models";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { ConfigResponseType, IGetParams } from "../../../models";
 import { getService } from "../../../services";
 
 /**
@@ -9,19 +10,21 @@ import { getService } from "../../../services";
  * @param isBlob - Indicador para devolver la respuesta en formato Blob (opcional, por defecto es false).
  * @returns Una promesa que resuelve con la respuesta de la solicitud HTTP.
  */
-export const get = async (
-  global: IGlobalContext,
-  menu?: string,
-  params?: URLSearchParams,
-  allData?: boolean,
-  isBlob?: boolean
-): Promise<any> => {
-  const { api } = global; // Obtener la API del contexto
-  const { callEndpoint } = api; // Obtener la función callEndpoint de la API
-  const selectedMenu: string = menu ?? api.menu; // Determinar el menú seleccionado
-  const url: string = params ? `${selectedMenu}?${params}` : selectedMenu; // Construir la URL con los parámetros si existen
+export const get = async ({
+  globalContext,
+  menu,
+  urlParams,
+  allData = false,
+  isBlob = false,
+}: IGetParams): Promise<any> => {
+  const { api } = globalContext;
+  const { callEndpoint } = api;
+  const selectedMenu: string = menu ?? api.menu;
+  const url: string = urlParams ? `${selectedMenu}?${urlParams}` : selectedMenu;
+  const responseType: ConfigResponseType = isBlob ? "blob" : "json";
 
-  // Realizar la llamada al endpoint utilizando getService
-  const response = await callEndpoint(getService(url, isBlob, allData));
-  return allData ? response : response.data; // Devolver toda la respuesta o solo los datos, según allData
+  const response = await callEndpoint(
+    getService({ url, isBlob, allData, responseType })
+  );
+  return allData ? response : response.data;
 };

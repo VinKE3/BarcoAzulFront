@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { IGlobalContext, ITable } from "../../../models";
 import { get } from "./get.util";
 
@@ -10,7 +11,11 @@ import { get } from "./get.util";
  * @param menu - Identificador opcional del menú, para especificar el endpoint al que se realiza la solicitud.
  * @returns Una promesa que resuelve con la respuesta, retorna un objeto ITable en caso sea satisfactoria.
  */
-export const getListar = async (globalContext: IGlobalContext, params?: URLSearchParams, menu?: string): Promise<ITable | any> => {
+export const getListar = async (
+  globalContext: IGlobalContext,
+  params?: URLSearchParams,
+  menu?: string
+): Promise<ITable | any> => {
   const { api, table } = globalContext; // Obtener api y table del contexto global
   const { pagina } = table; // Obtener la página actual de la tabla
   const selectedMenu: string = menu ?? api.menu; // Determinar el menú seleccionado

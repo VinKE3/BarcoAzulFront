@@ -1,10 +1,8 @@
-import { IGlobalContext } from "../context";
-import { ModalCrudType, ModalIdType, ModalPropType } from "../types";
+import { ConfigResponseType } from "../types";
 
-export interface IGetIsPermitidoParams {
-  globalContext: IGlobalContext;
-  accion: ModalCrudType;
-  modalProp?: ModalPropType;
-  id?: ModalIdType;
-  menu?: string;
+export interface IGetServiceParams {
+  url: string;
+  allData?: boolean;
+  isBlob?: boolean;
+  responseType: ConfigResponseType;
 }

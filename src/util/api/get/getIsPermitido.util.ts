@@ -1,4 +1,9 @@
-import { IGetIsPermitidoParams, IResponse } from "../../../models";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import {
+  IGetIsPermitidoParams,
+  IResponse,
+  IResponseFull,
+} from "../../../models";
 import { handleIsPermitido } from "../api.util";
 import { get } from "./get.util";
 
@@ -25,14 +30,20 @@ export const getIsPermitido = async ({
   const selectedAccion: string = handleIsPermitido(accion);
   const selectedId = id ?? selectedModal.id;
 
-  const params = new URLSearchParams({ accion: selectedAccion, id: String(selectedId) });
-  const endpoint: string = `${url}/IsPermitido`; // Construir la URL
+  const urlParams = new URLSearchParams({
+    accion: selectedAccion,
+    id: String(selectedId),
+  });
 
   // Realizar la solicitud
-  const { data, messages }: IResponse = await get(globalContext, endpoint, params, true);
+  const response: IResponseFull = await get({
+    globalContext,
+    menu: `${url}/IsPermitido`,
+    urlParams,
+    allData: true,
+  });
+  const { data, messages } = response.data as IResponse;
 
-  // Verificar data es false
   if (!data) throw messages; // Lanzar el primer mensaje de error si no está permitido
-
   return data; // Devolver true si la solicitud es exitosa
 };

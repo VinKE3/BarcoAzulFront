@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { IGlobalContext, ModalIdType } from "../../../models";
 import { get } from "./get.util";
 
@@ -8,9 +9,13 @@ import { get } from "./get.util";
  * @param menu - Identificador opcional del menú, para especificar el endpoint al que se realiza la solicitud.
  * @returns Una promesa que resuelve con la respuesta de la solicitud HTTP.
  */
-export const getId = async (global: IGlobalContext, id: ModalIdType, menu?: string): Promise<any> => {
-  const { api } = global;
+export const getId = async (
+  globalContext: IGlobalContext,
+  id: ModalIdType,
+  menu?: string
+): Promise<any> => {
+  const { api } = globalContext;
   const selectedMenu: string = menu ?? api.menu; // Determinar el menú seleccionado
   const url: string = `${selectedMenu}/${id}`;
-  return await get(global, url); // Llamada al servicio para obtener la data
+  return await get({ globalContext, menu: url }); // Llamada al servicio para obtener la data
 };

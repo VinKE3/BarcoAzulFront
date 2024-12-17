@@ -6,6 +6,11 @@ import { get } from "./get.util";
  * @param global El contexto global de la aplicación.
  * @returns Una promesa que resuelve con la respuesta de la solicitud HTTP.
  */
-export const getSimplificado = async (global: IGlobalContext): Promise<ISimplificado> => {
-  return await get(global, "Empresa/Configuracion/GetSimplificado"); // Llamada al servicio para consultar el almacenRelacionado
+export const getSimplificado = async (
+  globalContext: IGlobalContext
+): Promise<ISimplificado> => {
+  return await get({
+    globalContext,
+    menu: "Empresa/Configuracion/GetSimplificado",
+  }); // Llamada al servicio para consultar el almacenRelacionado
 };
