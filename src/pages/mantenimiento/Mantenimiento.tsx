@@ -9,6 +9,8 @@ import { TipoCambio } from "./TipoCambio";
 import { Marca } from "./Marca";
 import { UnidadMedida } from "./UnidadMedida";
 import { EntidadBancaria } from "./EntidadBancaria";
+import { CuentaCorriente } from "./CuentaCorriente";
+import { SubLinea } from "./SubLinea";
 
 const Mantenimiento = () => {
   return (
@@ -16,6 +18,7 @@ const Mantenimiento = () => {
       <>
         <Route path="/" element={<Navigate to={mantenimientoRoutes.LINEA} />} />
         <Route path={mantenimientoRoutes.LINEA} element={<Linea />} />
+        <Route path={mantenimientoRoutes.SUBLINEA} element={<SubLinea />} />
         <Route path={mantenimientoRoutes.MARCA} element={<Marca />} />
         <Route
           path={mantenimientoRoutes.UNIDADESMEDIDA}
@@ -31,6 +34,10 @@ const Mantenimiento = () => {
         <Route
           path={mantenimientoRoutes.ENTIDADBANCARIA}
           element={<EntidadBancaria />}
+        />
+        <Route
+          path={mantenimientoRoutes.CUENTASCORRIENTES}
+          element={<CuentaCorriente />}
         />
       </>
     </RoutesWithNotFound>

@@ -16,8 +16,10 @@ const {
   TRANSPORTISTA,
   MEDICO,
   LINEA,
+  SUBLINEA,
   MARCA,
   UNIDADESMEDIDA,
+  CUENTASCORRIENTES,
   ENTIDADBANCARIA,
   DEPARTAMENTO,
   PROVINCIA,
@@ -58,6 +60,7 @@ export function navbarMenu(): IMenuElement[] {
       subMenus: createSubMenu([
         { text: "Tipo de Cambio", path: `${MANTENIMIENTO}/${TIPOCAMBIO}` },
         { text: "Línea", path: `${MANTENIMIENTO}/${LINEA}` },
+        { text: "SubLínea", path: `${MANTENIMIENTO}/${SUBLINEA}` },
         { text: "Marca", path: `${MANTENIMIENTO}/${MARCA}` },
         {
           text: "Unidades de Medida",
@@ -66,6 +69,10 @@ export function navbarMenu(): IMenuElement[] {
         {
           text: "Entidad Bancaria",
           path: `${MANTENIMIENTO}/${ENTIDADBANCARIA}`,
+        },
+        {
+          text: "Cuenta Corriente",
+          path: `${MANTENIMIENTO}/${CUENTASCORRIENTES}`,
         },
         { text: "Departamento", path: `${MANTENIMIENTO}/${DEPARTAMENTO}` },
         { text: "Provincia", path: `${MANTENIMIENTO}/${PROVINCIA}` },

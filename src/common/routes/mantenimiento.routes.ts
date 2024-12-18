@@ -12,6 +12,8 @@ export const mantenimientoRoutes = {
   MARCA: "marca",
   UNIDADESMEDIDA: "unidadesmedida",
   ENTIDADESBANCARIAS: "entidadesBancarias",
+  CUENTASCORRIENTES: "cuentasCorrientes",
+
   DEPARTAMENTO: "departamento",
   PROVINCIA: "provincia",
   DISTRITO: "distrito",
