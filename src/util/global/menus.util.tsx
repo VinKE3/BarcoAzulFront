@@ -14,7 +14,7 @@ const {
   PROVEEDOR,
   VENDEDOR,
   TRANSPORTISTA,
-  MEDICO,
+  VEHICULOS,
   LINEA,
   SUBLINEA,
   MARCA,
@@ -47,10 +47,13 @@ export function navbarMenu(): IMenuElement[] {
         { text: "Proveedor", path: `${MANTENIMIENTO}/${PROVEEDOR}` },
         { text: "Vendedor", path: `${MANTENIMIENTO}/${VENDEDOR}` },
         {
+          text: "Vehículos",
+          path: `${MANTENIMIENTO}/${VEHICULOS}`,
+        },
+        {
           text: "Conductor / Transportista",
           path: `${MANTENIMIENTO}/${TRANSPORTISTA}`,
         },
-        { text: "Médico", path: `${MANTENIMIENTO}/${MEDICO}` },
       ]),
     },
     {

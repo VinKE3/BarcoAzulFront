@@ -28,6 +28,11 @@ export * from "./Provincia/components/Filter";
 export * from "./Provincia/components/Modal";
 export * from "./Provincia/components";
 export * from "./Provincia";
+export * from "./SubLinea/components/Column";
+export * from "./SubLinea/components/Filter";
+export * from "./SubLinea/components/Modal";
+export * from "./SubLinea/components";
+export * from "./SubLinea";
 export * from "./TipoCambio/components/Column";
 export * from "./TipoCambio/components/Filter";
 export * from "./TipoCambio/components/Modal";
@@ -37,4 +42,10 @@ export * from "./UnidadMedida/components/Column";
 export * from "./UnidadMedida/components/Filter";
 export * from "./UnidadMedida/components/Modal";
 export * from "./UnidadMedida/components";
-export * from "./UnidadMedida"
+export * from "./UnidadMedida";
+export * from "./Vehiculo/components/Column";
+export * from "./Vehiculo/components/Filter";
+export * from "./Vehiculo/components/Modal";
+export * from "./Vehiculo/components";
+export * from "./Vehiculo";
+

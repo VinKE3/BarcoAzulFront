@@ -13,7 +13,8 @@ export const mantenimientoRoutes = {
   UNIDADESMEDIDA: "unidadesmedida",
   ENTIDADESBANCARIAS: "entidadesBancarias",
   CUENTASCORRIENTES: "cuentasCorrientes",
-
+  VEHICULOS: "vehiculos",
+  TRANSPORTISTAS: "transportistas",
   DEPARTAMENTO: "departamento",
   PROVINCIA: "provincia",
   DISTRITO: "distrito",

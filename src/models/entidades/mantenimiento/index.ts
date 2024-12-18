@@ -28,3 +28,4 @@ export * from "./transportista.model";
 export * from "./unidadMedida.model";
 export * from "./usuario";
 export * from "./vendedor.model";
+export * from "./vehiculo.model";
