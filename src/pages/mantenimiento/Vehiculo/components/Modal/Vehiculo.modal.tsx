@@ -142,6 +142,24 @@ const VehiculoModal: React.FC = () => {
 
               <div className="input-base-row">
                 <div className="input-base-container-50">
+                  <label
+                    htmlFor="certificadoInscripcion"
+                    className="label-base"
+                  >
+                    Inscripción
+                  </label>
+                  <input
+                    id="certificadoInscripcion"
+                    name="certificadoInscripcion"
+                    placeholder="Inscripción"
+                    value={data.certificadoInscripcion ?? ""}
+                    onChange={handleData}
+                    autoComplete="off"
+                    disabled={primer.tipo === "consultar"}
+                    className="input-base"
+                  />
+                </div>
+                <div className="input-base-container-50">
                   <label htmlFor="observacion" className="label-base">
                     Observación
                   </label>
@@ -150,21 +168,6 @@ const VehiculoModal: React.FC = () => {
                     name="observacion"
                     placeholder="Observación"
                     value={data.observacion ?? ""}
-                    onChange={handleData}
-                    autoComplete="off"
-                    disabled={primer.tipo === "consultar"}
-                    className="input-base"
-                  />
-                </div>
-                <div className="input-base-container-50">
-                  <label htmlFor="modelo" className="label-base">
-                    Modelo
-                  </label>
-                  <input
-                    id="modelo"
-                    name="modelo"
-                    placeholder="Modelo"
-                    value={data.modelo}
                     onChange={handleData}
                     autoComplete="off"
                     disabled={primer.tipo === "consultar"}

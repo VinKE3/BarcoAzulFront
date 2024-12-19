@@ -12,6 +12,7 @@ import { EntidadBancaria } from "./EntidadBancaria";
 import { CuentaCorriente } from "./CuentaCorriente";
 import { SubLinea } from "./SubLinea";
 import { Vehiculo } from "./Vehiculo";
+import { Transportista } from "./Transportista";
 
 const Mantenimiento = () => {
   return (
@@ -26,6 +27,10 @@ const Mantenimiento = () => {
           element={<UnidadMedida />}
         />
         <Route path={mantenimientoRoutes.VEHICULOS} element={<Vehiculo />} />
+        <Route
+          path={mantenimientoRoutes.TRANSPORTISTA}
+          element={<Transportista />}
+        />
         <Route
           path={mantenimientoRoutes.DEPARTAMENTO}
           element={<Departamento />}

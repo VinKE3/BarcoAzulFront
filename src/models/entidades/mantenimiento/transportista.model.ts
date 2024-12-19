@@ -3,7 +3,8 @@ import { IDepartamento } from "./departamento.model";
 
 export interface ITransportista {
   id: string;
-  tipo: string;
+  empresaId: string;
+  tipoConductor: string;
   tipoDocumentoIdentidadId: string;
   numeroDocumentoIdentidad: string;
   nombre: string;
@@ -15,12 +16,13 @@ export interface ITransportista {
   distritoId: string | null;
   licenciaConducir: string | null;
   telefono: string | null;
-  numeroRegistroMTC: string | null;
+  numeroRegistro: string | null;
 }
 
 export const defaultTransportista: ITransportista = {
   id: "",
-  tipo: "",
+  empresaId: "",
+  tipoConductor: "",
   tipoDocumentoIdentidadId: "",
   numeroDocumentoIdentidad: "",
   nombre: "",
@@ -32,20 +34,25 @@ export const defaultTransportista: ITransportista = {
   distritoId: null,
   licenciaConducir: null,
   telefono: null,
-  numeroRegistroMTC: null,
+  numeroRegistro: null,
 };
+
+export interface ITiposDocumentoIdentidad {
+  id: string;
+  abreviatura: string;
+}
 
 export interface ITransportistaTablas {
   departamentos: IDepartamento[];
   vendedores: ICombo[];
-  tipos: ICombo[];
-  tiposDocumentoIdentidad: ICombo[];
+  tiposTransportista: ICombo[];
+  tiposDocumentoIdentidad: ITiposDocumentoIdentidad[];
 }
 
 export const defaultTransportistaTablas: ITransportistaTablas = {
   departamentos: [],
   vendedores: [],
-  tipos: [],
+  tiposTransportista: [],
   tiposDocumentoIdentidad: [],
 };
 
@@ -60,8 +67,9 @@ export const defaultTransportistaFilter: ITransportistaFilter = {
 };
 
 export interface ITransportistaTable {
-  direccion: string | null;
   id: string;
-  nombre: string;
+  tipoConductor: string;
   numeroDocumentoIdentidad: string;
+  nombre: string;
+  licenciaConducir: string;
 }
