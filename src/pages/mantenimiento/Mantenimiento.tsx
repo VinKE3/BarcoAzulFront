@@ -13,6 +13,7 @@ import { CuentaCorriente } from "./CuentaCorriente";
 import { SubLinea } from "./SubLinea";
 import { Vehiculo } from "./Vehiculo";
 import { Transportista } from "./Transportista";
+import { Articulo } from "./Articulo";
 
 const Mantenimiento = () => {
   return (
@@ -46,6 +47,8 @@ const Mantenimiento = () => {
           path={mantenimientoRoutes.CUENTASCORRIENTES}
           element={<CuentaCorriente />}
         />
+
+        <Route path={mantenimientoRoutes.ARTICULO} element={<Articulo />} />
       </>
     </RoutesWithNotFound>
   );

@@ -1,3 +1,8 @@
+export * from "./Articulo/components/Column";
+export * from "./Articulo/components/Filter";
+export * from "./Articulo/components/Modal";
+export * from "./Articulo/components";
+export * from "./Articulo";
 export * from "./Departamento/components/Column";
 export * from "./Departamento/components/Filter";
 export * from "./Departamento/components/Modal";
@@ -53,4 +58,3 @@ export * from "./Vehiculo/components/Filter";
 export * from "./Vehiculo/components/Modal";
 export * from "./Vehiculo/components";
 export * from "./Vehiculo";
-

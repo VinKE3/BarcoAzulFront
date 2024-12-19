@@ -1,101 +1,95 @@
 import { ICombo, IMoneda } from "../../global";
-import { ILinea } from "./linea.model";
 
 export interface IArticulo {
   id: string;
-  codigoBarras: string | null;
-  descripcion: string;
-  farmacologiaId: string;
-  tipoProductoId: string;
-  grupoFarmacologicoId: string;
-  unidadMedidaId: string;
-  unidadMedidaAlternaId: string;
   lineaId: string;
-  unidadesPorCaja: number;
-  factor: number;
+  subLineaId: string;
+  articuloId: string;
+  tipoExistenciaId: string;
+  unidadMedidaId: string;
+  marcaId: string;
+  descripcion: string;
+  observacion: string;
+  codigoBarras: string | null;
   peso: number;
-  stockMinimo: number;
-  stockMaximo: number;
-  tieneIGVCompra: boolean;
-  tieneIGVVenta: boolean;
   monedaId: string;
-  situacion: string | null;
-  ubicacionSFC: string | null;
-  registroSanitario: string | null;
-  controlarStock: boolean;
-  ventaConReceta: boolean;
 
-  costoCompra: number;
   precioCompra: number;
-  porcUtilidad: number;
-  precioVenta: number;
-  dsctoMaximo: number;
-  precioSugPublico: number;
-  porcDsctoCaja: number;
-  porcDsctoUnidad: number;
-  precioDsctoCaja: number;
-  precioDsctoUnidad: number;
+  precioCompraDescuento: number;
+  precioVenta1: number;
+  precioVenta2: number;
+  precioVenta3: number;
+  precioVenta4: number;
+  porcentajeUtilidad1: number;
+  porcentajeUtilidad2: number;
+  porcentajeUtilidad3: number;
+  porcentajeUtilidad4: number;
+  stock: number;
+  stockMinimo: number;
+
+  precioIncluyeIgv: boolean;
+  percepcionCompra: boolean;
+  isActivo: boolean;
+  controlStock: boolean;
+  actualizarPrecioCompra: boolean;
+  detraccion: boolean;
 }
 
 export const defaultArticulo: IArticulo = {
   id: "",
   codigoBarras: null,
-  descripcion: "",
-  farmacologiaId: "",
-  tipoProductoId: "",
-  grupoFarmacologicoId: "",
-  unidadMedidaId: "",
-  unidadMedidaAlternaId: "",
   lineaId: "",
-  unidadesPorCaja: 1,
+  subLineaId: "",
+  articuloId: "",
+  tipoExistenciaId: "",
+  unidadMedidaId: "",
+  marcaId: "",
+  descripcion: "",
+  observacion: "",
   peso: 0,
-  tieneIGVCompra: true,
-  tieneIGVVenta: true,
   monedaId: "",
-  situacion: null,
-  registroSanitario: null,
-  controlarStock: true,
-  ventaConReceta: false,
-  
-  //Campos fijos
-  factor: 1,
-  stockMinimo: 0,
-  stockMaximo: 0,
-  ubicacionSFC: null,
-  //Campos fijos
-
-  //Presentacion General
-  costoCompra: 0,
   precioCompra: 0,
-  porcUtilidad: 0,
-  precioVenta: 0,
-  dsctoMaximo: 0,
-  precioSugPublico: 0,
-  porcDsctoCaja: 0,
-  porcDsctoUnidad: 0,
-  precioDsctoCaja: 0,
-  precioDsctoUnidad: 0,
-  //Presentacion General
+  precioCompraDescuento: 0,
+  precioVenta1: 0,
+  precioVenta2: 0,
+  precioVenta3: 0,
+  precioVenta4: 0,
+  porcentajeUtilidad1: 0,
+  porcentajeUtilidad2: 0,
+  porcentajeUtilidad3: 0,
+  porcentajeUtilidad4: 0,
+  stock: 0,
+  stockMinimo: 0,
+  precioIncluyeIgv: true,
+  percepcionCompra: false,
+  isActivo: true,
+  controlStock: true,
+  actualizarPrecioCompra: false,
+  detraccion: false,
 };
+export interface ISubLineaArt {
+  id: string;
+  subLineaId: string;
+  lineaId: string;
+  descripcion: string;
+}
 
 export interface IArticuloTablas {
-  farmacologias: ICombo[];
-  gruposFarmacologicos: ICombo[];
-  lineas: ILinea[];
+  tiposExistencia: ICombo[];
+  lineas: ICombo[];
+  subLineas: ISubLineaArt[];
   monedas: IMoneda[];
+  marcas: ICombo[];
   unidadesMedida: ICombo[];
-  situaciones: ICombo[];
-  tiposProducto: ICombo[];
 }
 
 export const defaultArticuloTablas: IArticuloTablas = {
-  farmacologias: [],
-  gruposFarmacologicos: [],
+  tiposExistencia: [],
   lineas: [],
+  subLineas: [],
+  marcas: [],
   monedas: [],
   unidadesMedida: [],
-  situaciones: [],
-  tiposProducto: [],
 };
 
 export interface IArticuloFilter {
@@ -110,10 +104,15 @@ export const defaultArticuloFilter: IArticuloFilter = {
 
 export interface IArticuloTable {
   id: string;
+  codigoBarras: string;
   descripcion: string;
-  factor: number;
-  unidadesPorCaja: number;
-  farmacologiaNombre: string;
-  unidadMedidaDescripcion: string;
-  tipoProductoDescripcion: string;
+  monedaId: string;
+  stock: number;
+  precioCompra: number;
+  precioVenta: number;
+  unidadMedidaAbreviatura: string;
+  isActivo: boolean;
+  controlarStock: boolean;
+  actualizaPrecio: boolean;
+  detraccion: boolean;
 }
