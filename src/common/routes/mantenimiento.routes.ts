@@ -23,6 +23,7 @@ export const mantenimientoRoutes = {
   TIPOVENTA: "tipoventa",
 
   ARTICULO: "articulo",
+  MOVIMIENTOARTICULO: "movimientoArticulo",
   FARMACOLOGIA: "farmacologia",
   GRUPOFARMACOLOGICO: "grupofarmacologico",
   PRESENTACIONGENERAL: "presentationgeneral",

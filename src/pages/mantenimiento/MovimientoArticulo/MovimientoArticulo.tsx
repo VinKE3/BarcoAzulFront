@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { ArticuloFilter, ArticuloModal, useArticuloColumn } from ".";
+import {
+  MovimientoArticuloFilter,
+  MovimientoArticuloModal,
+  useMovimientoArticuloColumn,
+} from ".";
 import {
   ButtonGroup,
   DeleteModal,
@@ -9,7 +13,11 @@ import {
   Table,
 } from "../../../components";
 import { useGlobalContext, usePermisos } from "../../../hooks";
-import { IArticulo, IArticuloTablas, defaultArticulo } from "../../../models";
+import {
+  IMovimientoArticulo,
+  IMovimientoArticuloTablas,
+  defaultMovimientoArticulo,
+} from "../../../models";
 import {
   handleInitialData,
   handlePrimaryModal,
@@ -17,17 +25,17 @@ import {
   handleResetMensajeError,
   handleSetPermisoYMenu,
 } from "../../../util";
-
-const Articulo: React.FC = () => {
+const MovimientoArticulo: React.FC = () => {
   //#region useState
-  const menu: string = "Mantenimiento/Articulo";
+  const menu: string = "Almacen/MovimientoArticulo";
   const { globalContext, setGlobalContext } = useGlobalContext();
   const { api, mensajes, table, modal, form } = globalContext;
   const { primer } = modal;
   const mensaje = mensajes.filter((x) => x.origen === "global" && x.tipo >= 0);
   const [ready, setReady] = useState(false);
-  const { visible, permisos } = usePermisos("Articulo");
-  const columns = useArticuloColumn();
+  const { visible, permisos } = usePermisos("MovimientoArticulo");
+  const columns = useMovimientoArticuloColumn();
+  console.log(columns);
   console.log(table);
   //#endregion
 
@@ -57,9 +65,12 @@ const Articulo: React.FC = () => {
       return;
     }
 
-    handleInitialData(globalContext, defaultArticulo)
+    handleInitialData(globalContext, defaultMovimientoArticulo)
       .then((response) => {
-        const { data, tablas }: { data: IArticulo; tablas: IArticuloTablas } =
+        const {
+          data,
+          tablas,
+        }: { data: IMovimientoArticulo; tablas: IMovimientoArticuloTablas } =
           response;
         handlePrimaryModal(setGlobalContext, data, tablas);
       })
@@ -71,7 +82,7 @@ const Articulo: React.FC = () => {
   return (
     <div className="main-base">
       <div className="main-header">
-        <h4 className="main-header-title">Artículos</h4>
+        <h4 className="main-header-title">Movimiento Artículos</h4>
         {ready && visible && <ButtonGroup isTablas={true} />}
       </div>
 
@@ -82,20 +93,22 @@ const Articulo: React.FC = () => {
         {ready && visible && (
           <>
             {mensaje.length > 0 && <Messages mensajes={mensajes} />}
-            {visible && <ArticuloFilter />}
+            {visible && <MovimientoArticuloFilter />}
             {visible && (
               <Table
-                data={table.data}
+                data={table.data ? table.data : []}
                 columns={columns}
                 isTablas={true}
-                tableClassName="articulo-table"
+                tableClassName="movimiento-articulo-table"
               />
             )}
 
             {primer.tipo === "eliminar" && (
               <DeleteModal propText={"descripcion"} />
             )}
-            {form.data && primer.tipo && api.menu === menu && <ArticuloModal />}
+            {form.data && primer.tipo && api.menu === menu && (
+              <MovimientoArticuloModal />
+            )}
           </>
         )}
       </div>
@@ -103,4 +116,4 @@ const Articulo: React.FC = () => {
   );
 };
 
-export default Articulo;
+export default MovimientoArticulo;

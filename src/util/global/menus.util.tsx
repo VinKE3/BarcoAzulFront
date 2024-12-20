@@ -25,12 +25,7 @@ const {
   PROVINCIA,
   DISTRITO,
   ARTICULO,
-  GRUPOFARMACOLOGICO,
-  FARMACOLOGIA,
-  PRESENTACIONGENERAL,
-  PRECIOMAYORISTA,
-  LOTE,
-  CONFIGURACIONLOTE,
+  MOVIMIENTOARTICULO,
   TIPOCAMBIO,
 } = mantenimientoRoutes;
 const createSubMenu = (items: ISubMenuElement[]) => items;
@@ -93,22 +88,9 @@ export function navbarMenu(): IMenuElement[] {
           icon: <IoMdBarcode className="size-full" />,
         },
         {
-          text: "Grupo Farmacológico",
-          path: `${MANTENIMIENTO}/${GRUPOFARMACOLOGICO}`,
-        },
-        { text: "Farmacología", path: `${MANTENIMIENTO}/${FARMACOLOGIA}` },
-        {
-          text: "Presentación General",
-          path: `${MANTENIMIENTO}/${PRESENTACIONGENERAL}`,
-        },
-        {
-          text: "Precio Mayorista",
-          path: `${MANTENIMIENTO}/${PRECIOMAYORISTA}`,
-        },
-        { text: "Lote", path: `${MANTENIMIENTO}/${LOTE}` },
-        {
-          text: "Lote por Vender",
-          path: `${MANTENIMIENTO}/${CONFIGURACIONLOTE}`,
+          text: "Movimiento Artículo",
+          path: `${MANTENIMIENTO}/${MOVIMIENTOARTICULO}`,
+          icon: <IoMdBarcode className="size-full" />,
         },
       ]),
     },

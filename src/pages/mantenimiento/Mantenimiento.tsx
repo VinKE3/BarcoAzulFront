@@ -14,6 +14,7 @@ import { SubLinea } from "./SubLinea";
 import { Vehiculo } from "./Vehiculo";
 import { Transportista } from "./Transportista";
 import { Articulo } from "./Articulo";
+import { MovimientoArticulo } from "./MovimientoArticulo";
 
 const Mantenimiento = () => {
   return (
@@ -49,6 +50,10 @@ const Mantenimiento = () => {
         />
 
         <Route path={mantenimientoRoutes.ARTICULO} element={<Articulo />} />
+        <Route
+          path={mantenimientoRoutes.MOVIMIENTOARTICULO}
+          element={<MovimientoArticulo />}
+        />
       </>
     </RoutesWithNotFound>
   );
