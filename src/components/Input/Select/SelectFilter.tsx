@@ -17,7 +17,10 @@ const SelectFilter: React.FC<ISelectFilter> = ({
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Estado para controlar si el menú está abierto
 
   // Mapea los datos para poblar las opciones del select
-  const options: IOptionType[] = data.map((x: ICombo) => ({ value: x.id, label: x.nombre || x.descripcion }));
+  const options: IOptionType[] = data.map((x: ICombo) => ({
+    value: x.id,
+    label: x.nombre || x.descripcion,
+  }));
 
   //#region Funciones
   // Maneja la apertura y cierre del menú
@@ -41,7 +44,9 @@ const SelectFilter: React.FC<ISelectFilter> = ({
           const input = nextElement as HTMLInputElement | HTMLSelectElement;
           input.focus(); // Enfoca el siguiente elemento si es un input
         } else if (nextElement && nextElementType === "select") {
-          const select = nextElement.querySelector(".my-react-select__input") as HTMLInputElement;
+          const select = nextElement.querySelector(
+            ".my-react-select__input"
+          ) as HTMLInputElement;
           if (select) {
             select.focus(); // Enfoca el siguiente elemento si es un select
           }

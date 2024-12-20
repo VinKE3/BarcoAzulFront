@@ -2,8 +2,8 @@ import { ICombo, IMoneda } from "../../global";
 
 export interface IArticulo {
   id: string;
-  lineaId: string;
-  subLineaId: string;
+  lineaId: string | null;
+  subLineaId: string | null;
   articuloId: string;
   tipoExistenciaId: string;
   unidadMedidaId: string;
@@ -25,12 +25,16 @@ export interface IArticulo {
   porcentajeUtilidad3: number;
   porcentajeUtilidad4: number;
   stock: number;
+  stockMax: number;
   stockMinimo: number;
 
-  precioIncluyeIgv: boolean;
+  [key: `precioVenta${number}`]: number; // Firma de índice
+  [key: `porcentajeUtilidad${number}`]: number;
+
+  precioIncluyeIGV: boolean;
   percepcionCompra: boolean;
   isActivo: boolean;
-  controlStock: boolean;
+  controlarStock: boolean;
   actualizarPrecioCompra: boolean;
   detraccion: boolean;
 }
@@ -60,10 +64,11 @@ export const defaultArticulo: IArticulo = {
   porcentajeUtilidad4: 0,
   stock: 0,
   stockMinimo: 0,
-  precioIncluyeIgv: true,
+  stockMax: 0,
+  precioIncluyeIGV: true,
   percepcionCompra: false,
   isActivo: true,
-  controlStock: true,
+  controlarStock: true,
   actualizarPrecioCompra: false,
   detraccion: false,
 };
@@ -104,6 +109,7 @@ export const defaultArticuloFilter: IArticuloFilter = {
 
 export interface IArticuloTable {
   id: string;
+  estadoStock: string;
   codigoBarras: string;
   descripcion: string;
   monedaId: string;

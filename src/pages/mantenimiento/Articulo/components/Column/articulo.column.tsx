@@ -8,8 +8,8 @@ const useArticuloColumn = (): Column<IArticuloTable>[] => {
   return useMemo<Column<IArticuloTable>[]>(
     () => [
       {
-        Header: "Id",
-        accessor: "id",
+        Header: "Estado",
+        accessor: "estadoStock",
       },
       {
         Header: "Código Barras",

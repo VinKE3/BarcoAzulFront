@@ -1,12 +1,12 @@
 export interface IOptionType {
-  value: string | number;
+  value: string | number | null;
   label?: string;
   descripcion?: string;
 }
 
 export interface ISelectFilter {
   id: string; // Identificador del select
-  value: string | number; // Valor seleccionado
+  value: string | number | null; // Valor seleccionado
   data: any; // Datos para poblar las opciones del select
   disabled?: boolean; // Indica si el select está deshabilitado
   nextElementType?: "input" | "select"; // Tipo del siguiente elemento al cual enfocar
