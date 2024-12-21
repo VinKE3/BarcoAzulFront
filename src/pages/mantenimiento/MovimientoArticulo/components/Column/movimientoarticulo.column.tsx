@@ -47,7 +47,7 @@ const useMovimientoArticuloColumn = (): Column<IMovimientoArticuloTable>[] => {
         Header: "Acciones",
         Cell: ({ row }: { row: { original: IMovimientoArticuloTable } }) => {
           const codigo = row.original.codigoBarras ?? "Sin código";
-          console.log(codigo);
+
           return (
             <ActionBar id={codigo} rowData={row.original} isTablas={true} />
           );

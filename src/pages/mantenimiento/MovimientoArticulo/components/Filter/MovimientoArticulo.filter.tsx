@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { BasicKeyHandler } from "../../../../../components";
 import { useDebounce, useGlobalContext } from "../../../../../hooks";
 import {
@@ -6,19 +6,13 @@ import {
   IMovimientoArticuloTable,
   defaultMovimientoArticuloFilter,
 } from "../../../../../models";
-import {
-  getListar,
-  handleInputType,
-  handleSetErrorMensaje,
-  resetPagination,
-} from "../../../../../util";
+import { getListar, handleSetErrorMensaje } from "../../../../../util";
 
 const MovimientoArticuloFilter: React.FC = () => {
   //#region useState
   const { globalContext, setGlobalContext } = useGlobalContext();
-  const { table, modal, mensajes } = globalContext;
+  const { modal, mensajes } = globalContext;
   const { primer } = modal;
-  const { pagina } = table;
   const mensaje = mensajes.filter((x) => x.tipo === 0);
   const [filter, setFilter] = useState<IMovimientoArticuloFilter>(
     defaultMovimientoArticuloFilter
@@ -26,17 +20,25 @@ const MovimientoArticuloFilter: React.FC = () => {
   const search = useDebounce(filter);
   const estadosStock = [
     { Id: "", Descripcion: "TODOS" },
-    { Id: "AL01", Descripcion: "STOCK AGOTANDOSE" },
-    { Id: "AL02", Descripcion: "STOCK SUFICIENTE" },
-    { Id: "AL03", Descripcion: "STOCK EXCESIVO" },
-    { Id: "AL04", Descripcion: "SIN STOCK" },
+    { Id: "AL01-01-STOCK AGOTANDOSE", Descripcion: "STOCK AGOTANDOSE" },
+    { Id: "AL02-02-STOCK SUFICIENTE", Descripcion: "STOCK SUFICIENTE" },
+    { Id: "AL03-03-STOCK EXCESIVO", Descripcion: "STOCK EXCESIVO" },
+    { Id: "AL04-04-SIN STOCK", Descripcion: "SIN STOCK" },
   ];
+  const [dataCompleta, setDataCompleta] = useState<IMovimientoArticuloTable[]>(
+    []
+  );
+  console.log(dataCompleta);
   //#endregion
 
   //#region useEffect
   useEffect(() => {
     handleListar();
-  }, [search, pagina]);
+  }, []);
+
+  useEffect(() => {
+    handleFiltrar();
+  }, [search]);
 
   useEffect(() => {
     primer.id === null && mensaje.length > 0 && handleListar();
@@ -44,33 +46,52 @@ const MovimientoArticuloFilter: React.FC = () => {
   //#endregion
 
   //#region Funciones
-  const handleData = ({
-    target,
-  }: ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
-    const { name } = target;
-    const value = handleInputType(target);
-    resetPagination(setGlobalContext);
-    setFilter((x) => ({ ...x, [name]: value }));
+  const handleData = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ): void => {
+    const { name, value } = e.target;
+    setFilter((prev) => ({ ...prev, [name]: value }));
   };
+
   const handleListar = async (): Promise<void> => {
     try {
       const params = new URLSearchParams({
+        estadoStock: search.estadoStock,
         descripcion: search.descripcion,
       });
-      const {
-        data,
-        total,
-      }: { data: IMovimientoArticuloTable[]; total: number } = await getListar(
+      const response: IMovimientoArticuloTable[] = await getListar(
         globalContext,
         params
       );
+      setDataCompleta(response);
       setGlobalContext((x) => ({
         ...x,
-        table: { ...x.table, data, total },
+        table: { ...x.table, data: response, total: response.length },
       }));
     } catch (error) {
       handleSetErrorMensaje(setGlobalContext, error);
     }
+  };
+  const handleFiltrar = (): void => {
+    const filtrado = dataCompleta.filter((x) => {
+      const descripcionMatch = x.articuloDescripcion
+        .toLowerCase()
+        .includes(filter.descripcion.toLowerCase());
+
+      const normalize = (value: string) => value.trim().toLowerCase();
+
+      const estadoStockMatch = filter.estadoStock
+        ? normalize(x.estadoStock) === normalize(filter.estadoStock)
+        : true;
+      console.log(x.estadoStock);
+      console.log(estadoStockMatch);
+      return descripcionMatch && estadoStockMatch;
+    });
+
+    setGlobalContext((x) => ({
+      ...x,
+      table: { ...x.table, data: filtrado, total: filtrado.length },
+    }));
   };
 
   return (

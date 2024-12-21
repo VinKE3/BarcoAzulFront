@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArticuloFilter, ArticuloModal, useArticuloColumn } from ".";
+import { CuadreStockFilter, CuadreStockModal, useCuadreStockColumn } from ".";
 import {
   ButtonGroup,
   DeleteModal,
@@ -9,7 +9,11 @@ import {
   Table,
 } from "../../../components";
 import { useGlobalContext, usePermisos } from "../../../hooks";
-import { IArticulo, IArticuloTablas, defaultArticulo } from "../../../models";
+import {
+  ICuadreStock,
+  ICuadreStockTablas,
+  defaultCuadreStock,
+} from "../../../models";
 import {
   handleInitialData,
   handlePrimaryModal,
@@ -18,16 +22,16 @@ import {
   handleSetPermisoYMenu,
 } from "../../../util";
 
-const Articulo: React.FC = () => {
+const CuadreStock: React.FC = () => {
   //#region useState
-  const menu: string = "Mantenimiento/Articulo";
+  const menu: string = "Almacen/CuadreStock";
   const { globalContext, setGlobalContext } = useGlobalContext();
   const { api, mensajes, table, modal, form } = globalContext;
   const { primer } = modal;
   const mensaje = mensajes.filter((x) => x.origen === "global" && x.tipo >= 0);
   const [ready, setReady] = useState(false);
-  const { visible, permisos } = usePermisos("Articulo");
-  const columns = useArticuloColumn();
+  const { visible, permisos } = usePermisos("CuadreStock");
+  const columns = useCuadreStockColumn();
   //#endregion
 
   //#region useEffect
@@ -56,10 +60,12 @@ const Articulo: React.FC = () => {
       return;
     }
 
-    handleInitialData(globalContext, defaultArticulo)
+    handleInitialData(globalContext, defaultCuadreStock)
       .then((response) => {
-        const { data, tablas }: { data: IArticulo; tablas: IArticuloTablas } =
-          response;
+        const {
+          data,
+          tablas,
+        }: { data: ICuadreStock; tablas: ICuadreStockTablas } = response;
         handlePrimaryModal(setGlobalContext, data, tablas);
       })
       .catch((error) => {
@@ -70,7 +76,7 @@ const Articulo: React.FC = () => {
   return (
     <div className="main-base">
       <div className="main-header">
-        <h4 className="main-header-title">Artículos</h4>
+        <h4 className="main-header-title">Cuadre Stock</h4>
         {ready && visible && <ButtonGroup isTablas={true} />}
       </div>
 
@@ -81,7 +87,7 @@ const Articulo: React.FC = () => {
         {ready && visible && (
           <>
             {mensaje.length > 0 && <Messages mensajes={mensajes} />}
-            {visible && <ArticuloFilter />}
+            {visible && <CuadreStockFilter />}
             {visible && (
               <Table
                 data={table.data}
@@ -94,7 +100,9 @@ const Articulo: React.FC = () => {
             {primer.tipo === "eliminar" && (
               <DeleteModal propText={"descripcion"} />
             )}
-            {form.data && primer.tipo && api.menu === menu && <ArticuloModal />}
+            {form.data && primer.tipo && api.menu === menu && (
+              <CuadreStockModal />
+            )}
           </>
         )}
       </div>
@@ -102,4 +110,4 @@ const Articulo: React.FC = () => {
   );
 };
 
-export default Articulo;
+export default CuadreStock;

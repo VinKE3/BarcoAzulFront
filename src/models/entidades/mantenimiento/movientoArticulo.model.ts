@@ -75,3 +75,7 @@ export interface IMovimientoArticuloTable {
   cantidadSalida: number;
   saldoFinal: number;
 }
+
+export interface IMovimientoArticuloModalTable {
+  
+}

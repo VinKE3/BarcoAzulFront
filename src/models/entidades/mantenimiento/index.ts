@@ -2,6 +2,7 @@ export * from "./almacen.model";
 export * from "./articulo.model";
 export * from "./cliente.model";
 export * from "./configuracionLote";
+export * from "./cuadreStock.model";
 export * from "./cuentaBancaria.model";
 export * from "./cuentaCorriente.model";
 export * from "./departamento.model";

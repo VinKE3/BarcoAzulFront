@@ -15,6 +15,7 @@ import { Vehiculo } from "./Vehiculo";
 import { Transportista } from "./Transportista";
 import { Articulo } from "./Articulo";
 import { MovimientoArticulo } from "./MovimientoArticulo";
+import { CuadreStock } from ".";
 
 const Mantenimiento = () => {
   return (
@@ -53,6 +54,10 @@ const Mantenimiento = () => {
         <Route
           path={mantenimientoRoutes.MOVIMIENTOARTICULO}
           element={<MovimientoArticulo />}
+        />
+        <Route
+          path={mantenimientoRoutes.CUADRESTOCK}
+          element={<CuadreStock />}
         />
       </>
     </RoutesWithNotFound>

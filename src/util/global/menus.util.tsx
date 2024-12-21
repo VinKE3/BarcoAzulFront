@@ -26,6 +26,7 @@ const {
   DISTRITO,
   ARTICULO,
   MOVIMIENTOARTICULO,
+  CUADRESTOCK,
   TIPOCAMBIO,
 } = mantenimientoRoutes;
 const createSubMenu = (items: ISubMenuElement[]) => items;
@@ -90,6 +91,11 @@ export function navbarMenu(): IMenuElement[] {
         {
           text: "Movimiento Artículo",
           path: `${MANTENIMIENTO}/${MOVIMIENTOARTICULO}`,
+          icon: <IoMdBarcode className="size-full" />,
+        },
+        {
+          text: "Cuadre Stock",
+          path: `${MANTENIMIENTO}/${CUADRESTOCK}`,
           icon: <IoMdBarcode className="size-full" />,
         },
       ]),

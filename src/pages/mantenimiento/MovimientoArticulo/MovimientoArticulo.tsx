@@ -35,8 +35,6 @@ const MovimientoArticulo: React.FC = () => {
   const [ready, setReady] = useState(false);
   const { visible, permisos } = usePermisos("MovimientoArticulo");
   const columns = useMovimientoArticuloColumn();
-  console.log(columns);
-  console.log(table);
   //#endregion
 
   //#region useEffect
