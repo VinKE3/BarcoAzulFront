@@ -77,5 +77,34 @@ export interface IMovimientoArticuloTable {
 }
 
 export interface IMovimientoArticuloModalTable {
-  
+  numero: number;
+  fechaEmision: Date;
+  numeroDocumento: string;
+  clienteNombre: string;
+  entradaCantidad: number;
+  entradaCosto: number;
+  entradaImporte: number;
+  salidaCantidad: number;
+  salidaCosto: number;
+  salidaImporte: number;
+  saldoCantidad: number;
+  saldoCosto: number;
+  saldoImporte: number;
 }
+
+export const defaultMovimientoArticuloModalTable: IMovimientoArticuloModalTable =
+  {
+    numero: 0,
+    fechaEmision: new Date(),
+    numeroDocumento: "",
+    clienteNombre: "",
+    entradaCantidad: 0,
+    entradaCosto: 0,
+    entradaImporte: 0,
+    salidaCantidad: 0,
+    salidaCosto: 0,
+    salidaImporte: 0,
+    saldoCantidad: 0,
+    saldoCosto: 0,
+    saldoImporte: 0,
+  };
