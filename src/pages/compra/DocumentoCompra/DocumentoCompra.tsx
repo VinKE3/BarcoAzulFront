@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import {
-  MovimientoArticuloFilter,
-  MovimientoArticuloModal,
-  useMovimientoArticuloColumn,
+  DocumentoCompraFilter,
+  DocumentoCompraModal,
+  useDocumentoCompraColumn,
 } from ".";
 import {
   ButtonGroup,
@@ -13,24 +13,29 @@ import {
   Table,
 } from "../../../components";
 import { useGlobalContext, usePermisos } from "../../../hooks";
-import { IMovimientoArticuloKardex } from "../../../models";
 import {
-  get,
+  IDocumentoCompra,
+  IDocumentoCompraTablas,
+  defaultDocumentoCompra,
+} from "../../../models";
+import {
+  handleInitialData,
   handlePrimaryModal,
   handleResetContext,
+  handleResetMensajeError,
   handleSetPermisoYMenu,
 } from "../../../util";
-const MovimientoArticulo: React.FC = () => {
+
+const DocumentoCompra: React.FC = () => {
   //#region useState
-  const menu: string = "Almacen/MovimientoArticulo";
-  const menuListar: string = "Almacen/MovimientoArticulo/GetKardexArticulo";
+  const menu: string = "Compra/DocumentoCompra";
   const { globalContext, setGlobalContext } = useGlobalContext();
-  const { mensajes, table, modal, form } = globalContext;
+  const { api, mensajes, table, modal, form } = globalContext;
   const { primer } = modal;
   const mensaje = mensajes.filter((x) => x.origen === "global" && x.tipo >= 0);
   const [ready, setReady] = useState(false);
-  const { visible, permisos } = usePermisos("MovimientoArticulo");
-  const columns = useMovimientoArticuloColumn();
+  const { visible, permisos } = usePermisos("DocumentoCompra");
+  const columns = useDocumentoCompraColumn();
   //#endregion
 
   //#region useEffect
@@ -58,23 +63,25 @@ const MovimientoArticulo: React.FC = () => {
     if (primer.tipo === "eliminar" || primer.tipo === "anular") {
       return;
     }
-    const urlParams = new URLSearchParams({
-      id: String(primer.id),
-    });
-    const response: IMovimientoArticuloKardex = await get({
-      globalContext,
-      menu: menuListar,
-      urlParams,
-    });
 
-    handlePrimaryModal(setGlobalContext, response);
+    handleInitialData(globalContext, defaultDocumentoCompra)
+      .then((response) => {
+        const {
+          data,
+          tablas,
+        }: { data: IDocumentoCompra; tablas: IDocumentoCompraTablas } =
+          response;
+        handlePrimaryModal(setGlobalContext, data, tablas);
+      })
+      .catch((error) => {
+        handleResetMensajeError(setGlobalContext, true, true, error);
+      });
   };
-
   //#endregion
   return (
     <div className="main-base">
       <div className="main-header">
-        <h4 className="main-header-title">Movimiento Artículos</h4>
+        <h4 className="main-header-title">Documento de Compra</h4>
         {ready && visible && <ButtonGroup isTablas={true} />}
       </div>
 
@@ -85,20 +92,22 @@ const MovimientoArticulo: React.FC = () => {
         {ready && visible && (
           <>
             {mensaje.length > 0 && <Messages mensajes={mensajes} />}
-            {visible && <MovimientoArticuloFilter />}
+            {visible && <DocumentoCompraFilter />}
             {visible && (
               <Table
-                data={table.data ? table.data : []}
+                data={table.data}
                 columns={columns}
                 isTablas={true}
-                tableClassName="movimiento-articulo-table"
+                tableClassName="documento-compra-table"
               />
             )}
 
             {primer.tipo === "eliminar" && (
               <DeleteModal propText={"descripcion"} />
             )}
-            {form.data && primer.tipo && <MovimientoArticuloModal />}
+            {form.data && primer.tipo && api.menu === menu && (
+              <DocumentoCompraModal />
+            )}
           </>
         )}
       </div>
@@ -106,4 +115,4 @@ const MovimientoArticulo: React.FC = () => {
   );
 };
 
-export default MovimientoArticulo;
+export default DocumentoCompra;

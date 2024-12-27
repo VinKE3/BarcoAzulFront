@@ -67,6 +67,7 @@ export const defaultMovimientoArticuloTablas: IMovimientoArticuloTablas = {
 export interface IMovimientoArticuloTable {
   estadoStock: string;
   codigoBarras: string;
+  marcaNombre: string;
   subLineaDescripcion: string;
   articuloDescripcion: string;
   unidadMedidaAbreviatura: string;
@@ -76,9 +77,22 @@ export interface IMovimientoArticuloTable {
   saldoFinal: number;
 }
 
+export interface IMovimientoArticuloKardex {
+  entradaCantidadTotal: number;
+  entradaCostoTotal: number;
+  entradaImporteTotal: number;
+  salidaCantidadTotal: number;
+  salidaCostoTotal: number;
+  salidaImporteTotal: number;
+  saldoCantidadTotal: number;
+  saldoCostoTotal: number;
+  saldoImporteTotal: number;
+  detalles: IMovimientoArticuloModalTable[];
+}
+
 export interface IMovimientoArticuloModalTable {
   numero: number;
-  fechaEmision: Date;
+  fechaEmision: string;
   numeroDocumento: string;
   clienteNombre: string;
   entradaCantidad: number;
@@ -95,7 +109,7 @@ export interface IMovimientoArticuloModalTable {
 export const defaultMovimientoArticuloModalTable: IMovimientoArticuloModalTable =
   {
     numero: 0,
-    fechaEmision: new Date(),
+    fechaEmision: "",
     numeroDocumento: "",
     clienteNombre: "",
     entradaCantidad: 0,

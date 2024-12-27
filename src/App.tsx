@@ -6,8 +6,9 @@ import "./common/styles/styles.scss";
 import store from "./redux/store";
 import { RoutesWithNotFound, SnackbarConfigurator } from "./util";
 import Home from "./pages/home/Home";
-import { Login } from "./pages";
-import { Mantenimiento } from "./pages";
+import { Login } from "./pages/login";
+import { Mantenimiento } from "./pages/mantenimiento";
+import Compras from "./pages/compra/Compras";
 function App() {
   return (
     <>
@@ -44,6 +45,14 @@ function App() {
                   path={`${privateRoutes.MANTENIMIENTO}/*`}
                   element={<Mantenimiento />}
                 />
+                <Route
+                  path={`${privateRoutes.COMPRAS}/*`}
+                  element={<Compras />}
+                />
+                {/* <Route
+                  path={`${privateRoutes.VENTAS}/*`}
+                  element={<Compras />}
+                /> */}
               </Route>
             </RoutesWithNotFound>
           </BrowserRouter>
