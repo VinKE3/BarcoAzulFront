@@ -33,10 +33,10 @@ export interface IDocumentoCompra {
   total: number;
   incluyeIGV: true;
   afectarStock: true;
-  detalles: IDocumentoCompraDetalles[];
+  detalles: IDocumentoCompraDetalle[];
 }
 
-export interface IDocumentoCompraDetalles {
+export interface IDocumentoCompraDetalle {
   detalleId: number;
   lineaId: string;
   subLineaId: string;
@@ -107,7 +107,7 @@ export interface ITiposPago {
   plazo: number;
 }
 
-export interface IPorcentajes {
+export interface IDocumentoCompraPorcentajes {
   porcentaje: number;
   default: boolean;
 }
@@ -135,8 +135,8 @@ export interface IDocumentoCompraTablas {
   tiposCompra: ICombo[];
   tiposPago: ITiposPago[];
   monedas: ICombo[];
-  porcentajesIGV: IPorcentajes[];
-  porcentajesPercepcion: IPorcentajes[];
+  porcentajesIGV: IDocumentoCompraPorcentajes[];
+  porcentajesPercepcion: IDocumentoCompraPorcentajes[];
   motivosNota: ICombo[];
   cuentasCorriente: IDocumentoCompraCuentaCorriente[];
 }

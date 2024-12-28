@@ -1,11 +1,7 @@
-import React from 'react'
-
 const DocumentoCompraModal = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  return <div>
+    
+  </div>;
+};
 
-export default DocumentoCompraModal
+export default DocumentoCompraModal;
