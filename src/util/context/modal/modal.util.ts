@@ -46,7 +46,12 @@ export const handleInitialData = async (
   // Si es necesario verificar los permisos
   if (selectedPermitido) {
     // Verificar si la acción está permitida
-    await getIsPermitido({ globalContext: global, accion: tipo, modalProp, menu: selectedMenu });
+    await getIsPermitido({
+      globalContext: global,
+      accion: tipo,
+      modalProp,
+      menu: selectedMenu,
+    });
   }
 
   // Obtener datos por ID si se proporciona, de lo contrario usar defaultValue
@@ -126,12 +131,16 @@ export const handleSecondaryModal = ({
  */
 export const handleHelpModal = (
   setGlobalContext: React.Dispatch<React.SetStateAction<IGlobalContext>>,
-  origenModal: string,
+  origen: string,
   modalProp: ModalPropType = "segundo",
   isSubModal: boolean = false
 ): void => {
   // Configura el objeto modal con valores predeterminados
-  const modal: IModal = { tipo: isSubModal ? "registrar" : null, id: isSubModal ? null : origenModal };
+  const modal: IModal = {
+    tipo: isSubModal ? "registrar" : null,
+    id: null,
+    origen,
+  };
 
   // Actualiza el contexto global
   setGlobalContext((x) => ({
@@ -156,7 +165,9 @@ export const handleClearModalProp = (
 ): void => {
   setGlobalContext((x) => {
     // Configura el estado del formulario basado en los parámetros clearForm y clearRetorno
-    const form: IForm = clearForm ? defaultForm : { ...x.form, retorno: clearRetorno ? null : x.form.retorno };
+    const form: IForm = clearForm
+      ? defaultForm
+      : { ...x.form, retorno: clearRetorno ? null : x.form.retorno };
 
     // Configura el estado del modal para la propiedad especificada, estableciéndolo en defaultModal
     const modal: IModales = { ...x.modal, [modalProp]: defaultModal };
@@ -185,7 +196,10 @@ export const handleSetRetorno = (
     const form: IForm = { ...x.form, retorno };
 
     // Define el nuevo estado del modal según el valor de closeModal
-    const modal: IModales = { ...x.modal, [modalProp]: closeModal ? defaultModal : x.modal[modalProp] };
+    const modal: IModales = {
+      ...x.modal,
+      [modalProp]: closeModal ? defaultModal : x.modal[modalProp],
+    };
 
     // Retorna el nuevo estado del contexto global con el formulario y el modal actualizados
     return { ...x, form, modal };
@@ -227,7 +241,11 @@ export const handleSetRetornoSubModal = (
  * @param navigate La función de navegación para redirigir a otra página.
  * @param backPage La página a la que se desea navegar de vuelta.
  */
-export const handleBackPage = (global: IGlobalContext, navigate: NavigateFunction, backPage: string): void => {
+export const handleBackPage = (
+  global: IGlobalContext,
+  navigate: NavigateFunction,
+  backPage: string
+): void => {
   const { modal, form } = global;
 
   // Verifica si el tipo del primer modal es nulo o si los datos del formulario son nulos
@@ -242,8 +260,14 @@ export const handleBackPage = (global: IGlobalContext, navigate: NavigateFunctio
  * @param setGlobalContext La función para establecer el estado del contexto global.
  * @param inputs Array de inputs ref utilizados en formularios y modales.
  */
-export const handleSetInputs = (setGlobalContext: React.Dispatch<React.SetStateAction<IGlobalContext>>, inputs: InputFocusType): void => {
-  setGlobalContext((x) => ({ ...x, extra: { ...x.extra, element: { ...x.extra.element, inputs } } }));
+export const handleSetInputs = (
+  setGlobalContext: React.Dispatch<React.SetStateAction<IGlobalContext>>,
+  inputs: InputFocusType
+): void => {
+  setGlobalContext((x) => ({
+    ...x,
+    extra: { ...x.extra, element: { ...x.extra.element, inputs } },
+  }));
 };
 
 /**

@@ -1,4 +1,10 @@
-import { ICombo } from "../../global";
+import {
+  ICombo,
+  IDocumentoFilter,
+  defaultDocumentoFilter,
+  IMoneda,
+} from "../../global";
+import { format } from "date-fns";
 
 export interface IDocumentoCompra {
   id: string;
@@ -8,9 +14,9 @@ export interface IDocumentoCompra {
   serie: string;
   numero: string;
   clienteId: string;
-  fechaEmision: Date;
-  fechaContable: Date;
-  fechaVencimiento: Date;
+  fechaEmision: string;
+  fechaContable: string;
+  fechaVencimiento: string;
   proveedorNombre: string;
   proveedorNumeroDocumentoIdentidad: string;
   proveedorDireccion: string;
@@ -63,9 +69,9 @@ export const defaultDocumentoCompra: IDocumentoCompra = {
   serie: "",
   numero: "",
   clienteId: "",
-  fechaEmision: new Date(),
-  fechaContable: new Date(),
-  fechaVencimiento: new Date(),
+  fechaEmision: format(new Date(), "yyyy-MM-dd"),
+  fechaContable: format(new Date(), "yyyy-MM-dd"),
+  fechaVencimiento: format(new Date(), "yyyy-MM-dd"),
   proveedorNombre: "",
   proveedorNumeroDocumentoIdentidad: "",
   proveedorDireccion: "",
@@ -91,11 +97,12 @@ export const defaultDocumentoCompra: IDocumentoCompra = {
   detalles: [],
 };
 
-export interface IDocumentoCompraFilter {
+export interface IDocumentoCompraFilter extends IDocumentoFilter {
   proveedor: string;
 }
 
 export const defaultDocumentoCompraFilter: IDocumentoCompraFilter = {
+  ...defaultDocumentoFilter,
   proveedor: "",
 };
 
@@ -134,7 +141,7 @@ export interface IDocumentoCompraTablas {
   tiposDocumento: ICombo[];
   tiposCompra: ICombo[];
   tiposPago: ITiposPago[];
-  monedas: ICombo[];
+  monedas: IMoneda[];
   porcentajesIGV: IDocumentoCompraPorcentajes[];
   porcentajesPercepcion: IDocumentoCompraPorcentajes[];
   motivosNota: ICombo[];

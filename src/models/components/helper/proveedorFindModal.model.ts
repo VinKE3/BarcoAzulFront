@@ -21,4 +21,5 @@ export interface IProveedorFindTable {
   nombre: string;
   numeroDocumentoIdentidad: string;
   telefono: string;
+  direccion: string;
 }

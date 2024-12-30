@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  DocumentoCompraFilter,
-  DocumentoCompraModal,
-  useDocumentoCompraColumn,
-} from ".";
+import { DocumentoCompraFilter, useDocumentoCompraColumn } from ".";
 import {
   ButtonGroup,
   DeleteModal,
@@ -25,9 +21,11 @@ import {
   handleResetMensajeError,
   handleSetPermisoYMenu,
 } from "../../../util";
+import { useNavigate } from "react-router-dom";
 
 const DocumentoCompra: React.FC = () => {
   //#region useState
+  const navigate = useNavigate();
   const menu: string = "Compra/DocumentoCompra";
   const { globalContext, setGlobalContext } = useGlobalContext();
   const { api, mensajes, table, modal, form } = globalContext;
@@ -56,6 +54,11 @@ const DocumentoCompra: React.FC = () => {
   useEffect(() => {
     primer.tipo && !form.data && handleModal();
   }, [primer.tipo]);
+
+  useEffect(() => {
+    form.data && primer.tipo && api.menu === menu && navigate("form");
+  }, [form.data]);
+  
   //#endregion
 
   //#region funciones
@@ -105,9 +108,9 @@ const DocumentoCompra: React.FC = () => {
             {primer.tipo === "eliminar" && (
               <DeleteModal propText={"descripcion"} />
             )}
-            {form.data && primer.tipo && api.menu === menu && (
+            {/* {form.data && primer.tipo && api.menu === menu && (
               <DocumentoCompraModal />
-            )}
+            )} */}
           </>
         )}
       </div>

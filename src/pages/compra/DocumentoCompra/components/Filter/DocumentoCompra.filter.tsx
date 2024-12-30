@@ -48,6 +48,8 @@ const DocumentoCompraFilter: React.FC = () => {
     try {
       const params = new URLSearchParams({
         proveedor: search.proveedor,
+        fechaInicio: search.fechaInicio,
+        fechaFin: search.fechaFin,
       });
       const { data, total }: { data: IDocumentoCompraTable[]; total: number } =
         await getListar(globalContext, params);
@@ -62,18 +64,46 @@ const DocumentoCompraFilter: React.FC = () => {
     <div className="filter-base">
       <span className="filter-base-text">Filtrar por</span>
       <BasicKeyHandler selector="articulo-filter">
-        <div className="input-base-row articulo-filter">
-          <div className="input-base-container-75">
-            <label htmlFor="proveedorFilter" className="label-base">
-              Proveedor
+        <div className="input-base-row">
+          <div className="input-base-container-33 articulo-filter">
+            <div className="input-base-container-75">
+              <label htmlFor="proveedorFilter" className="label-base">
+                Proveedor
+              </label>
+              <input
+                id="proveedorFilter"
+                name="proveedor"
+                placeholder="Descripción"
+                value={filter.proveedor}
+                onChange={handleData}
+                autoComplete="off"
+                className="input-base"
+              />
+            </div>
+          </div>
+          <div className="input-base-container-20">
+            <label htmlFor="fechaInicio" className="label-base">
+              Desde
             </label>
             <input
-              id="proveedorFilter"
-              name="proveedor"
-              placeholder="Descripción"
-              value={filter.proveedor}
+              type="date"
+              id="fechaInicio"
+              name="fechaInicio"
+              value={filter.fechaInicio}
               onChange={handleData}
-              autoComplete="off"
+              className="input-base"
+            />
+          </div>
+          <div className="input-base-container-20">
+            <label htmlFor="fechaFin" className="label-base">
+              Hasta
+            </label>
+            <input
+              type="date"
+              id="fechaFin"
+              name="fechaFin"
+              value={filter.fechaFin}
+              onChange={handleData}
               className="input-base"
             />
           </div>

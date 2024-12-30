@@ -1,12 +1,12 @@
 .modal-base {
-  @apply fixed top-0 left-0 z-40 ;
+  @apply fixed top-0 left-0 z-40;
   @apply h-full w-full;
   @apply flex items-center justify-center;
   @apply bg-gray-500/30 dark:bg-black/50;
 
   &-dialog {
     @apply relative;
-    @apply h-full w-full md:h-auto md:w-auto;
+    @apply h-full w-full sm:max-h-[80%] md:h-auto md:w-auto;
     @apply p-4 rounded-sm;
     @apply flex flex-col gap-y-2;
     @apply main-base-bg-color;
