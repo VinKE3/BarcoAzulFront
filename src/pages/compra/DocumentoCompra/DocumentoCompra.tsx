@@ -58,7 +58,7 @@ const DocumentoCompra: React.FC = () => {
   useEffect(() => {
     form.data && primer.tipo && api.menu === menu && navigate("form");
   }, [form.data]);
-  
+
   //#endregion
 
   //#region funciones
@@ -80,6 +80,7 @@ const DocumentoCompra: React.FC = () => {
         handleResetMensajeError(setGlobalContext, true, true, error);
       });
   };
+
   //#endregion
   return (
     <div className="main-base">

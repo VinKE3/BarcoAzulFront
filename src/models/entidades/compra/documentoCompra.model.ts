@@ -27,7 +27,7 @@ export interface IDocumentoCompra {
   numeroOperacion: string;
   cuentaCorrienteId: string;
   documentoReferenciaId: string;
-  abonar: true;
+  abonar: boolean;
   motivoNotaId: string;
   motivoSustento: string;
   guiaRemision: string;
@@ -37,8 +37,9 @@ export interface IDocumentoCompra {
   montoIGV: number;
   totalNeto: number;
   total: number;
-  incluyeIGV: true;
-  afectarStock: true;
+  incluyeIGV: boolean;
+  afectarStock: boolean;
+  afectarPrecio: boolean;
   detalles: IDocumentoCompraDetalle[];
 }
 
@@ -82,7 +83,7 @@ export const defaultDocumentoCompra: IDocumentoCompra = {
   numeroOperacion: "",
   cuentaCorrienteId: "",
   documentoReferenciaId: "",
-  abonar: true,
+  abonar: false,
   motivoNotaId: "",
   motivoSustento: "",
   guiaRemision: "",
@@ -92,8 +93,9 @@ export const defaultDocumentoCompra: IDocumentoCompra = {
   montoIGV: 0,
   totalNeto: 0,
   total: 0,
-  incluyeIGV: true,
-  afectarStock: true,
+  incluyeIGV: false,
+  afectarStock: false,
+  afectarPrecio: false,
   detalles: [],
 };
 
@@ -137,6 +139,14 @@ export interface IDocumentoCompraCuentaCorriente {
   saldoFinal: number;
 }
 
+export interface IDocumentoCompraPendiente {
+  id: string;
+  fechaContable: string;
+  numeroDocumento: string;
+  proveedorNombre: string;
+  monedaId: string;
+  total: number;
+}
 export interface IDocumentoCompraTablas {
   tiposDocumento: ICombo[];
   tiposCompra: ICombo[];
@@ -144,8 +154,8 @@ export interface IDocumentoCompraTablas {
   monedas: IMoneda[];
   porcentajesIGV: IDocumentoCompraPorcentajes[];
   porcentajesPercepcion: IDocumentoCompraPorcentajes[];
-  motivosNota: ICombo[];
-  cuentasCorriente: IDocumentoCompraCuentaCorriente[];
+  motivosNota: IMotivosNota[];
+  cuentasCorrientes: IDocumentoCompraCuentaCorriente[];
 }
 
 export const defaultDocumentoCompraTablas: IDocumentoCompraTablas = {
@@ -156,7 +166,7 @@ export const defaultDocumentoCompraTablas: IDocumentoCompraTablas = {
   porcentajesIGV: [],
   porcentajesPercepcion: [],
   motivosNota: [],
-  cuentasCorriente: [],
+  cuentasCorrientes: [],
 };
 
 export interface IDocumentoCompraTable {

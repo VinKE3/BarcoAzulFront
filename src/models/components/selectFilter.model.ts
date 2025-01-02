@@ -1,5 +1,5 @@
 export interface IOptionType {
-  value: string | number | null;
+  value: string | number;
   label?: string;
   descripcion?: string;
 }

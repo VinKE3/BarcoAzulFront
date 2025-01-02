@@ -1,4 +1,4 @@
-import { IResponseBlob } from "../../models";
+import { IResponseBlob, IOptionType } from "../../models";
 
 //#region Formatos numéricos
 /**
@@ -146,4 +146,36 @@ export const meses = [
   { numero: 10, nombre: "OCTUBRE" },
   { numero: 11, nombre: "NOVIEMBRE" },
   { numero: 12, nombre: "DICIEMBRE" },
+];
+
+
+export const yearsText = (): IOptionType[] => {
+  const startYear = 2010;
+  const numYears = 50;
+  const yearsArray: IOptionType[] = [];
+
+  for (let i = 0; i < numYears; i++) {
+    const year = startYear + i;
+    yearsArray.push({
+      value: year.toString(),
+      descripcion: year.toString(),
+    });
+  }
+
+  return yearsArray;
+};
+
+export const monthsText: IOptionType[] = [
+  { value: "01", descripcion: "Enero" },
+  { value: "02", descripcion: "Febrero" },
+  { value: "03", descripcion: "Marzo" },
+  { value: "04", descripcion: "Abril" },
+  { value: "05", descripcion: "Mayo" },
+  { value: "06", descripcion: "Junio" },
+  { value: "07", descripcion: "Julio" },
+  { value: "08", descripcion: "Agosto" },
+  { value: "09", descripcion: "Setiembre" },
+  { value: "10", descripcion: "Octubre" },
+  { value: "11", descripcion: "Noviembre" },
+  { value: "12", descripcion: "Diciembre" },
 ];

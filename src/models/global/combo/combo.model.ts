@@ -39,3 +39,15 @@ export const defaultComboNumeric: IComboNumeric = {
   nombre: "",
   nick: "",
 };
+
+export interface ITipoDocumentoIdentidad {
+  id: string;
+  descripcion: string;
+  abreviatura: string;
+}
+
+export const defaultTipoDocumentoIdentidad: ITipoDocumentoIdentidad = {
+  id: "",
+  descripcion: "",
+  abreviatura: "",
+};

@@ -30,10 +30,10 @@ const DocumentoCompraForm = () => {
   const navigate = useNavigate();
   const backPage: string = `/${privateRoutes.COMPRAS}/${comprasRoutes.TODASLASCOMPRAS}`;
   const { globalContext, setGlobalContext } = useGlobalContext();
-  const { modal, form, mensajes, extra } = globalContext;
-  const { primer, segundo } = modal;
+  const { modal, form, mensajes } = globalContext;
+  const {  segundo } = modal;
   const { retorno } = form;
-  const { simplificado } = extra;
+  // const { simplificado } = extra;
   const mensaje = mensajes.filter((x) => x.origen === "form" && x.tipo >= 0);
   const [data, setData] = useState<IDocumentoCompra>(
     form.data || defaultDocumentoCompra
@@ -55,7 +55,6 @@ const DocumentoCompraForm = () => {
     //Botones
     "buttonProveedorFind",
     "buttonArticuloFind",
-    "buttonLoteFind"
     //Botones
   );
   //#endregion
@@ -88,9 +87,9 @@ const DocumentoCompraForm = () => {
     handleSetInputs(setGlobalContext, inputs);
   }, [inputs]);
 
-  useEffect(() => {
-    data.detalles && handleTotales(data.detalles);
-  }, [data.detalles]);
+  // useEffect(() => {
+  //   data.detalles && handleTotales(data.detalles);
+  // }, [data.detalles]);
 
   useEffect(() => {
     retorno && retorno.origen === "proveedorFind" && handleProveedor(retorno);
@@ -102,12 +101,12 @@ const DocumentoCompraForm = () => {
 
   //#region Funciones
 
-  const handleLoad = async (): Promise<void> => {
-    if (primer.tipo === "registrar") {
-      const tipoCambio: number = await handleGetTipoCambio(true, false);
-      setData((x) => ({ ...x, tipoCambio }));
-    }
-  };
+  // const handleLoad = async (): Promise<void> => {
+  //   if (primer.tipo === "registrar") {
+  //     const tipoCambio: number = await handleGetTipoCambio(true, false);
+  //     setData((x) => ({ ...x, tipoCambio }));
+  //   }
+  // };
 
   const handleGetTipoCambio = async (
     retorno: boolean = false,
@@ -151,62 +150,86 @@ const DocumentoCompraForm = () => {
     }));
   };
 
-  const handleTotales = (detalles: IDocumentoCompraDetalle[]): void => {
-    const { porcentajeIGV } = data;
-    const incluyeIGV: boolean = true; // Fijado temporalmente como true
+  // const handleTotales = (detalles: IDocumentoCompraDetalle[]): void => {
+  //   const { porcentajeIGV } = data;
+  //   const incluyeIGV: boolean = true; // Fijado temporalmente como true
 
-    // Inicializar acumuladores
-    let totalOperaciones = {
-      gravadas: 0,
-      exoneradas: 0,
-      inafectas: 0,
-    };
+  //   // Inicializar acumuladores
+  //   let totalOperaciones = {
+  //     gravadas: 0,
+  //     exoneradas: 0,
+  //     inafectas: 0,
+  //   };
 
-    // Calcular totales agrupados por tipo de afectación
-    // detalles.forEach((x) => {
-    //   switch (x.tipoAfectacionIGVId) {
-    //     case "10":
-    //       totalOperaciones.gravadas += x.importe;
-    //       break;
-    //     case "20":
-    //       totalOperaciones.exoneradas += x.importe;
-    //       break;
-    //     case "30":
-    //       totalOperaciones.inafectas += x.importe;
-    //       break;
-    //     default:
-    //       break;
-    //   }
-    // });
+  //   // Calcular totales agrupados por tipo de afectación
+  //   // detalles.forEach((x) => {
+  //   //   switch (x.tipoAfectacionIGVId) {
+  //   //     case "10":
+  //   //       totalOperaciones.gravadas += x.importe;
+  //   //       break;
+  //   //     case "20":
+  //   //       totalOperaciones.exoneradas += x.importe;
+  //   //       break;
+  //   //     case "30":
+  //   //       totalOperaciones.inafectas += x.importe;
+  //   //       break;
+  //   //     default:
+  //   //       break;
+  //   //   }
+  //   // });
 
-    // Calcular totales e IGV
-    let { gravadas } = totalOperaciones;
-    let montoIGV = 0;
+  //   // Calcular totales e IGV
+  //   let { gravadas } = totalOperaciones;
+  //   let montoIGV = 0;
 
-    if (incluyeIGV) {
-      gravadas /= 1 + porcentajeIGV / 100;
-      montoIGV = totalOperaciones.gravadas - gravadas;
-    } else {
-      montoIGV = gravadas * (porcentajeIGV / 100);
-      gravadas += montoIGV;
-    }
+  //   if (incluyeIGV) {
+  //     gravadas /= 1 + porcentajeIGV / 100;
+  //     montoIGV = totalOperaciones.gravadas - gravadas;
+  //   } else {
+  //     montoIGV = gravadas * (porcentajeIGV / 100);
+  //     gravadas += montoIGV;
+  //   }
 
-    const total =
-      totalOperaciones.exoneradas +
-      totalOperaciones.inafectas +
-      gravadas +
-      montoIGV;
+  //   const total =
+  //     totalOperaciones.exoneradas +
+  //     totalOperaciones.inafectas +
+  //     gravadas +
+  //     montoIGV;
 
-    // Actualizar datos redondeados
-    setData((x) => ({
-      ...x,
-      totalOperacionesGravadas: roundNumber(gravadas),
-      totalOperacionesExoneradas: roundNumber(totalOperaciones.exoneradas),
-      totalOperacionesInafectas: roundNumber(totalOperaciones.inafectas),
-      montoIGV: roundNumber(montoIGV),
-      total: roundNumber(total),
-    }));
+  //   // Actualizar datos redondeados
+  //   setData((x) => ({
+  //     ...x,
+  //     totalOperacionesGravadas: roundNumber(gravadas),
+  //     totalOperacionesExoneradas: roundNumber(totalOperaciones.exoneradas),
+  //     totalOperacionesInafectas: roundNumber(totalOperaciones.inafectas),
+  //     montoIGV: roundNumber(montoIGV),
+  //     total: roundNumber(total),
+  //   }));
+  // };
+
+    const handleNumero = (): void => {
+      let num = data.numero;
+      if (num.length < 10) {
+        num = ("0000000000" + num).slice(-10);
+      }
+      setData((x) => ({
+        ...x,
+        numero: num,
+      }));
+      return;
   };
+  const handleSerie = (): void => {
+    let serie = data.serie;
+      if (serie.length < 4) {
+        serie = ("0000" + serie).slice(-4);
+      }
+      setData((x) => ({
+        ...x,
+        serie: serie,
+      }));
+      return;
+  };
+
   //#endregion
   return (
     <>
@@ -223,6 +246,8 @@ const DocumentoCompraForm = () => {
               data={data}
               handleData={handleData}
               handleGetTipoCambio={handleGetTipoCambio}
+              handleNumero={handleNumero}
+              handleSerie={handleSerie}
             />
             {/* <DocumentoCompraDetalle dataGeneral={data} setDataGeneral={setData} /> */}
           </div>

@@ -1,4 +1,8 @@
-import { ICombo, IMoneda } from "../../global";
+import { defaultLinea, ILinea } from "./linea.model";
+import { defaultMarca, IMarca } from "./marca.model";
+import { defaultSubLinea, ISubLinea } from "./subLinea.model";
+import { defaultUnidadMedida, IUnidadMedida } from "./unidadMedida.model";
+import { ICombo, IMoneda, defaultMoneda } from "../../global";
 
 export interface IArticulo {
   id: string;
@@ -122,3 +126,19 @@ export interface IArticuloTable {
   actualizaPrecio: boolean;
   detraccion: boolean;
 }
+export interface IArticuloCompleto extends IArticulo {
+  linea: ILinea;
+  marca: IMarca;
+  moneda: IMoneda;
+  subLinea: ISubLinea;
+  unidadMedida: IUnidadMedida;
+}
+
+export const defaultArticuloCompleto: IArticuloCompleto = {
+  ...defaultArticulo,
+  linea: defaultLinea,
+  marca: defaultMarca,
+  moneda: defaultMoneda,
+  subLinea: defaultSubLinea,
+  unidadMedida: defaultUnidadMedida,
+};

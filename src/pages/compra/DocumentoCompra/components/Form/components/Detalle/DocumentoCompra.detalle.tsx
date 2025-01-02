@@ -1,11 +1,5 @@
-import React from 'react'
-
 const DocumentoCompraDetalle = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  return <div></div>;
+};
 
-export default DocumentoCompraDetalle
+export default DocumentoCompraDetalle;

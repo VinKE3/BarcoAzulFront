@@ -1,6 +1,7 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, useEffect } from "react";
 import { TbDeviceIpadSearch } from "react-icons/tb";
 import { useGlobalContext } from "../../../../../../../hooks";
+import { CheckBox } from "../../../../../../../components";
 import {
   ICombo,
   IMoneda,
@@ -12,8 +13,9 @@ import {
   IMotivosNota,
   IDocumentoCompraCuentaCorriente,
   IPorcentajes,
+  IDocumentoCompraPendiente,
 } from "../../../../../../../models";
-import { handleHelpModal } from "../../../../../../../util";
+import { handleHelpModal, get } from "../../../../../../../util";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
 
 interface IProps {
@@ -22,13 +24,19 @@ interface IProps {
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => Promise<void> | void;
   handleGetTipoCambio: (retorno: boolean) => Promise<number>;
+  handleNumero: (x: any) => Promise<void> | void;
+  handleSerie: (x: any) => Promise<void> | void;
 }
 const DocumentoCompraCabecera: React.FC<IProps> = ({
   data,
   handleData,
   handleGetTipoCambio,
+  handleNumero,
+  handleSerie,
 }) => {
   //#region useState
+  const documentosPendientesListar: string =
+    "Compra/DocumentoCompra/ListarPendientes";
   const { globalContext, setGlobalContext } = useGlobalContext();
   const { api, modal, form, extra } = globalContext;
   const { primer } = modal;
@@ -40,14 +48,23 @@ const DocumentoCompraCabecera: React.FC<IProps> = ({
     porcentajesIGV,
     porcentajesPercepcion,
     motivosNota,
-    cuentasCorriente,
+    cuentasCorrientes,
   }: IDocumentoCompraTablas = form.tablas || defaultDocumentoCompraTablas;
-  const { inputs } = extra.element;
+  const { element } = extra;
+  const { inputs } = element;
 
   const [filteredTiposPago, setFilteredTiposPago] = useState(tiposPago);
+  const [filterMotivosVenta, setFilterMotivosVenta] = useState<IMotivosNota[]>(
+    []
+  );
+  const [documentosCompraPendientes, setDocumentosCompraPendientes] = useState<
+    IDocumentoCompraPendiente[]
+  >([]);
+  //#endregion
 
-  console.log(tiposCompra, "tipoCompra");
-  console.log(tiposPago, "tipoPago");
+  //#region useEffect
+
+  console.log(globalContext, "dataPagos");
 
   const simulateChangeEvent = (
     name: string,
@@ -58,39 +75,33 @@ const DocumentoCompraCabecera: React.FC<IProps> = ({
     } as React.ChangeEvent<HTMLSelectElement>;
   };
 
-  // Manejar el cambio de tipoCompra
   const handleTipoCompraChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
     const selectedTipoCompraId = event.target.value;
 
-    handleData(event); // Actualiza el estado global
+    handleData(event);
 
-    // Filtrar tiposPago según tipoCompraId
     const pagosFiltrados = tiposPago.filter(
       (pago) => pago.tipoVentaCompraId === selectedTipoCompraId
     );
     setFilteredTiposPago(pagosFiltrados);
 
-    // Resetear el valor del tipoPago
     handleData(simulateChangeEvent("tipoPagoId", ""));
   };
 
-  // Manejar el cambio de tipoPago
   const handleTipoPagoChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
     const selectedTipoPagoId = event.target.value;
 
-    handleData(event); // Actualiza el estado global
+    handleData(event);
 
-    // Encontrar el plazo del tipoPago seleccionado
     const tipoPagoSeleccionado = tiposPago.find(
       (pago) => pago.id === selectedTipoPagoId
     );
     const plazo = tipoPagoSeleccionado?.plazo || 0;
 
-    // Calcular la nueva fecha de vencimiento
     const fechaActual = new Date();
     fechaActual.setDate(fechaActual.getDate() + plazo);
     const nuevaFechaVencimiento = fechaActual.toISOString().split("T")[0];
@@ -106,7 +117,38 @@ const DocumentoCompraCabecera: React.FC<IProps> = ({
     e.stopPropagation();
     handleHelpModal(setGlobalContext, "proveedorFind");
   };
+
+  useEffect(() => {
+    if (data.tipoDocumentoId === "07" || data.tipoDocumentoId === "08") {
+      const motivosFiltrados = motivosNota.filter(
+        (motivo) => motivo.tipoDocumentoId === data.tipoDocumentoId
+      );
+      setFilterMotivosVenta(motivosFiltrados);
+    } else {
+      setFilterMotivosVenta([]);
+    }
+  }, [data.tipoDocumentoId, motivosNota]);
+
   //#endregion
+
+  const getPendientes = async (): Promise<void> => {
+    const urlParams = new URLSearchParams({
+      proveedorId: String(data.proveedorId),
+    });
+    const response = await get({
+      globalContext,
+      menu: documentosPendientesListar,
+      urlParams,
+    });
+    setDocumentosCompraPendientes(response.data);
+  };
+
+  useEffect(() => {
+    if (data.proveedorId) {
+      getPendientes();
+    }
+  }, [data.proveedorId]);
+
   return (
     <div className="form-base-container documento-compra-form">
       <div className="modal-base-content">
@@ -156,9 +198,12 @@ const DocumentoCompraCabecera: React.FC<IProps> = ({
             <input
               id="serie"
               name="serie"
-              value={data.serie}
+              value={data.serie ?? ""}
               placeholder="Serie"
               onChange={handleData}
+              onBlur={handleSerie}
+              autoComplete="off"
+              maxLength={4}
               autoFocus
               disabled={primer.tipo === "consultar" || data.detalles.length > 0}
               className="input-base"
@@ -171,11 +216,13 @@ const DocumentoCompraCabecera: React.FC<IProps> = ({
             <input
               id="numero"
               name="numero"
-              value={data.numero}
               placeholder="Número"
+              value={data.numero ?? ""}
               onChange={handleData}
-              autoFocus
-              disabled={primer.tipo === "consultar" || data.detalles.length > 0}
+              onBlur={handleNumero}
+              autoComplete="off"
+              maxLength={10}
+              disabled={primer.tipo !== "registrar"}
               className="input-base"
             />
           </div>
@@ -313,7 +360,7 @@ const DocumentoCompraCabecera: React.FC<IProps> = ({
               name="tipoPagoId"
               value={data.tipoPagoId ?? ""}
               onChange={handleTipoPagoChange}
-              disabled={primer.tipo === "consultar"}
+              disabled={primer.tipo === "consultar" || data.tipoCompraId === ""}
               className="input-base"
             >
               <option key="default" value="">
@@ -326,6 +373,56 @@ const DocumentoCompraCabecera: React.FC<IProps> = ({
               ))}
             </select>
           </div>
+          {(data.tipoPagoId === "CH" || data.tipoPagoId === "DE") && (
+            <>
+              <div className="input-base-container-33">
+                <label htmlFor="numeroOperacion" className="label-base">
+                  Número
+                </label>
+                <input
+                  id="numeroOperacion"
+                  name="numeroOperacion"
+                  value={data.numeroOperacion}
+                  placeholder="Número"
+                  onChange={handleData}
+                  autoFocus
+                  disabled={
+                    primer.tipo === "consultar" || data.detalles.length > 0
+                  }
+                  className="input-base"
+                />
+              </div>
+              <div className="input-base-container-33">
+                <label htmlFor="cuentaCorrienteId" className="label-base">
+                  Cta Cte
+                </label>
+                <select
+                  id="cuentaCorrienteId"
+                  name="cuentaCorrienteId"
+                  value={data.cuentaCorrienteId ?? ""}
+                  onChange={handleData}
+                  disabled={primer.tipo === "consultar"}
+                  className="input-base"
+                >
+                  <option key="default" value="">
+                    SELECCIONAR
+                  </option>
+                  {cuentasCorrientes.map(
+                    (x: IDocumentoCompraCuentaCorriente) => (
+                      <option
+                        key={x.cuentaCorrienteId}
+                        value={x.cuentaCorrienteId}
+                      >
+                        {x.numero}
+                      </option>
+                    )
+                  )}
+                </select>
+              </div>
+            </>
+          )}
+        </div>
+        <div className="input-base-row">
           <div className="input-base-container-33">
             <label htmlFor="monedaId" className="label-base">
               Moneda
@@ -443,7 +540,7 @@ const DocumentoCompraCabecera: React.FC<IProps> = ({
               id="porcentajeIGV"
               name="porcentajeIGV"
               value={data.porcentajeIGV ?? ""}
-              onChange={handleTipoCompraChange}
+              onChange={handleData}
               disabled={primer.tipo === "consultar"}
               className="input-base"
             >
@@ -457,7 +554,157 @@ const DocumentoCompraCabecera: React.FC<IProps> = ({
               ))}
             </select>
           </div>
+          <div className="input-base-container-33">
+            <label htmlFor="montoIGV" className="label-base">
+              Monto IGV
+            </label>
+            <input
+              id="montoIGV"
+              name="montoIGV"
+              value={data.montoIGV}
+              placeholder="Monto IGV"
+              onChange={handleData}
+              autoFocus
+              disabled
+              className="input-base"
+            />
+          </div>
         </div>
+        <div className="input-base-row">
+          <div className="input-base-container-33">
+            <label htmlFor="total" className="label-base">
+              Total
+            </label>
+            <input
+              id="total"
+              name="total"
+              value={data.total}
+              placeholder="Dirección"
+              onChange={handleData}
+              autoFocus
+              disabled
+              className="input-base"
+            />
+          </div>
+          <div className="input-base-container-33">
+            <label htmlFor="totalNeto" className="label-base">
+              Total Neto
+            </label>
+            <input
+              id="totalNeto"
+              name="totalNeto"
+              value={data.totalNeto}
+              placeholder="Total Neto"
+              onChange={handleData}
+              autoFocus
+              disabled
+              className="input-base"
+            />
+          </div>
+          <div className="input-base-container-auto">
+            {element.responsive === "full" && (
+              <span className="label-base-checkbox">-</span>
+            )}
+            <CheckBox
+              id="incluyeIGV"
+              value={data.incluyeIGV}
+              handleData={handleData}
+              disabled={primer.tipo === "consultar"}
+              label="IGV"
+            />
+          </div>
+          <div className="input-base-container-auto">
+            {element.responsive === "full" && (
+              <span className="label-base-checkbox">-</span>
+            )}
+            <CheckBox
+              id="afectarStock"
+              value={data.afectarStock}
+              handleData={handleData}
+              disabled={primer.tipo === "consultar"}
+              label="Afectar Stock"
+            />
+          </div>
+          {(data.tipoDocumentoId === "07" || data.tipoDocumentoId === "08") && (
+            <div className="input-base-container-auto">
+              {element.responsive === "full" && (
+                <span className="label-base-checkbox">-</span>
+              )}
+              <CheckBox
+                id="afectarPrecio"
+                value={data.afectarPrecio}
+                handleData={handleData}
+                disabled={primer.tipo === "consultar"}
+                label="Afectar Precio"
+              />
+            </div>
+          )}
+        </div>
+        {(data.tipoDocumentoId === "07" || data.tipoDocumentoId === "08") && (
+          <>
+            <div className="input-base-row">
+              <div className="input-base-container-auto">
+                <label htmlFor="documentoReferenciaId" className="label-base">
+                  Documento
+                </label>
+                <select
+                  id="documentoReferenciaId"
+                  name="documentoReferenciaId"
+                  value={data.documentoReferenciaId ?? ""}
+                  onChange={handleData}
+                  disabled={primer.tipo === "consultar"}
+                  className="input-base"
+                >
+                  <option key="default" value="">
+                    SELECCIONAR
+                  </option>
+                  {documentosCompraPendientes.map(
+                    (x: IDocumentoCompraPendiente) => (
+                      <option key={x.id} value={x.id}>
+                        {x.numeroDocumento}
+                      </option>
+                    )
+                  )}
+                </select>
+              </div>
+
+              <div className="input-base-container-auto">
+                <label htmlFor="motivoNotaId" className="label-base">
+                  Motivo
+                </label>
+                <select
+                  id="motivoNotaId"
+                  name="motivoNotaId"
+                  value={data.motivoNotaId ?? ""}
+                  onChange={handleData}
+                  disabled={primer.tipo === "consultar"}
+                  className="input-base"
+                >
+                  <option key="default" value="">
+                    SELECCIONAR
+                  </option>
+                  {filterMotivosVenta.map((x: IMotivosNota) => (
+                    <option key={x.id} value={x.id}>
+                      {x.descripcion}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="input-base-container-auto">
+                {element.responsive === "full" && (
+                  <span className="label-base-checkbox">-</span>
+                )}
+                <CheckBox
+                  id="abonar"
+                  value={data.abonar}
+                  handleData={handleData}
+                  disabled={primer.tipo === "consultar"}
+                  label="Afectar Stock"
+                />
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

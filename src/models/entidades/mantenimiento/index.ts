@@ -1,6 +1,6 @@
 export * from "./almacen.model";
 export * from "./articulo.model";
-export * from "./cliente.model";
+export * from "./cliente";
 export * from "./configuracionLote";
 export * from "./cuadreStock.model";
 export * from "./cuentaBancaria.model";

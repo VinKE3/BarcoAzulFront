@@ -1,5 +1,8 @@
 import { defaultElement, IElement } from "./element.model";
-import { defaultSimplificado, ISimplificado } from "./simplificado.model";
+import {
+  defaultSimplificado,
+  ISimplificado,
+} from "../../entidades/empresa/simplificado.model";
 
 export interface IExtra {
   simplificado: ISimplificado;
