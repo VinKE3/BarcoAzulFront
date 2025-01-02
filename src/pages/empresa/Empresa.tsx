@@ -35,8 +35,14 @@ const Empresa: React.FC = () => {
     { icon: FaRegCalendarAlt, label: "Habilitar Periodo" },
     { icon: FaCog, label: "Configuración" },
   ];
+  console.log(data.mesesHabilitados, "data");
+  const mesesHabilitadosLimpios = data.mesesHabilitados
+    .split(",") // Dividir en un array
+    .map((mes) => mes.trim()) // Eliminar espacios en cada elemento
+    .join(","); // Volver a unirlos en un string si necesitas el formato original
   //#endregion
 
+  console.log(mesesHabilitadosLimpios);
   //#region useEffect
   useEffect(() => {
     handleSetInputs(setGlobalContext, inputs);
@@ -89,13 +95,17 @@ const Empresa: React.FC = () => {
       const porcentajesRetencion = handleMap(response.porcentajesRetencion);
       const porcentajesDetraccion = handleMap(response.porcentajesDetraccion);
       const porcentajesPercepcion = handleMap(response.porcentajesPercepcion);
-
+      const mesesHabilitadosLimpios = response.mesesHabilitados
+        .split(",") // Dividir en un array
+        .map((mes) => mes.trim()) // Eliminar espacios en cada elemento
+        .join(","); // Volver a unirlos en un string si necesitas el formato original
       const empresa: IConfiguracion = {
         ...response,
         porcentajesIGV,
         porcentajesRetencion,
         porcentajesDetraccion,
         porcentajesPercepcion,
+        mesesHabilitados: mesesHabilitadosLimpios,
       };
       const tablas: IConfiguracionTablas = await getTablas(globalContext, menu);
       setData(empresa);
