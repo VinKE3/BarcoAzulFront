@@ -15,13 +15,18 @@ import { Vehiculo } from "./Vehiculo";
 import { Transportista } from "./Transportista";
 import { Articulo } from "./Articulo";
 import { MovimientoArticulo } from "./MovimientoArticulo";
-import { CuadreStock } from ".";
-
+import { CuadreStock } from "./CuadreStock";
+import { Cliente } from "./Cliente";
+import { Proveedor } from "./Proveedor";
+import { Vendedor } from "./Vendedor";
 const Mantenimiento = () => {
   return (
     <RoutesWithNotFound>
       <>
         <Route path="/" element={<Navigate to={mantenimientoRoutes.LINEA} />} />
+        <Route path={mantenimientoRoutes.CLIENTE} element={<Cliente />} />
+        <Route path={mantenimientoRoutes.PROVEEDOR} element={<Proveedor />} />
+        <Route path={mantenimientoRoutes.VENDEDOR} element={<Vendedor />} />
         <Route path={mantenimientoRoutes.LINEA} element={<Linea />} />
         <Route path={mantenimientoRoutes.SUBLINEA} element={<SubLinea />} />
         <Route path={mantenimientoRoutes.MARCA} element={<Marca />} />

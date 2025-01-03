@@ -15,6 +15,7 @@ export * from "./lote.model";
 export * from "./marca.model";
 export * from "./medico.model";
 export * from "./movientoArticulo.model";
+export * from "./personal.model";
 export * from "./precioMayorista.model";
 export * from "./presentacionGeneral.model";
 export * from "./proveedor.model";

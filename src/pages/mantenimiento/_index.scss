@@ -1,4 +1,5 @@
 @import "Articulo/articulo";
+@import "./Cliente/cliente";
 @import "CuadreStock/cuadreStock";
 @import "CuentaCorriente/cuentaCorriente";
 @import "Departamento/departamento";
@@ -7,9 +8,11 @@
 @import "Linea/linea";
 @import "Marca/marca";
 @import "MovimientoArticulo/movimientoArticulo";
+@import "Proveedor/proveedor";
 @import "Provincia/provincia";
 @import "SubLinea/subLinea";
 @import "TipoCambio/tipoCambio";
 @import "Transportista/transportista";
 @import "UnidadMedida/unidadMedida";
 @import "Vehiculo/vehiculo";
+@import "Vendedor/vendedor";

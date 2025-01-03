@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { addDays, format, isBefore, parse } from "date-fns";
 import { es } from "date-fns/locale";
 import {
@@ -5,6 +7,8 @@ import {
   ICombo,
   ICuentaBancaria,
   IGlobalContext,
+  IPersonal,
+  IPersonalTable,
   ITipoCambio,
   ITipoPago,
 } from "../../../models";
@@ -141,6 +145,15 @@ export const handleSelectTipoPago = (
  * @param cuentaBancaria Objeto que contiene la información de la cuenta bancaria.
  * @returns Una cadena formateada que muestra el número de cuenta, la moneda y el nombre de la entidad bancaria.
  */
+/**
+ * Retorna una cadena con el nombre completo del personal
+ * @param personal objeto de tipo IPersonal o IPersonalTable a formatear
+ * @returns cadena con el nombre completo del personal
+ */
+export const handleSelectPersonal = (personal: IPersonal | IPersonalTable): string => {
+  const { apellidoMaterno, apellidoPaterno, nombres } = personal;
+  return `${apellidoPaterno} ${apellidoMaterno} ${nombres}`;
+};
 export const handleSelectCuentaBancaria = (
   cuentaBancaria: ICuentaBancaria
 ): string => {
