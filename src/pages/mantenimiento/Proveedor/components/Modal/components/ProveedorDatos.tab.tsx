@@ -1,17 +1,14 @@
 import React, { ChangeEvent, useEffect, useMemo } from "react";
 import { AiOutlineCloudServer } from "react-icons/ai";
-import {
-  BasicKeyHandler,
-  ButtonFooter,
-  CheckBox,
-} from "../../../../../../components";
+import { BasicKeyHandler, ButtonFooter } from "../../../../../../components";
 import { useFocus, useGlobalContext } from "../../../../../../hooks";
 import {
-  defaultClienteTablas,
-  ICliente,
-  IClienteTablas,
+  defaultProveedorTablas,
+  ICombo,
   IDepartamento,
   IDistrito,
+  IProveedor,
+  IProveedorTablas,
   IProvincia,
 } from "../../../../../../models";
 import {
@@ -24,16 +21,18 @@ import {
 } from "../../../../../../util";
 
 interface IProps {
-  dataGeneral: ICliente;
-  setDataGeneral: React.Dispatch<React.SetStateAction<ICliente>>;
+  dataGeneral: IProveedor;
+  setDataGeneral: React.Dispatch<React.SetStateAction<IProveedor>>;
 }
-const ClienteDatosTab: React.FC<IProps> = ({ dataGeneral, setDataGeneral }) => {
+
+const ProveedorDatos: React.FC<IProps> = ({ dataGeneral, setDataGeneral }) => {
   //#region useState
   const { globalContext, setGlobalContext } = useGlobalContext();
   const { api, modal, form } = globalContext;
   const { primer } = modal;
-  const { departamentos }: IClienteTablas = form.tablas || defaultClienteTablas;
-  const inputs = useFocus("tipoDocumentoIdentidadId", "nombre");
+  const { departamentos, tiposDocumentoIdentidad }: IProveedorTablas =
+    form.tablas || defaultProveedorTablas;
+  const inputs = useFocus("tipoDocumentoIdentidadId", "nombre", "condicion");
   //#endregion
 
   //#region useEffect
@@ -48,6 +47,7 @@ const ClienteDatosTab: React.FC<IProps> = ({ dataGeneral, setDataGeneral }) => {
   }: ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
     const { name } = target;
     const value = handleInputType(target);
+
     setDataGeneral((x) => {
       const newData = { ...x, [name]: value };
 
@@ -106,11 +106,12 @@ const ClienteDatosTab: React.FC<IProps> = ({ dataGeneral, setDataGeneral }) => {
     return provincia?.distritos ?? [];
   }, [dataGeneral.provinciaId, provincias]);
   //#endregion
+
   return (
     <>
       {departamentos.length > 0 && (
-        <BasicKeyHandler selector="cliente-datos">
-          <div className="form-base cliente-datos">
+        <BasicKeyHandler selector="proveedor-datos">
+          <div className="form-base proveedor-datos">
             <div className="input-base-row">
               <div className="input-base-container-25">
                 <label htmlFor="id" className="label-base">
@@ -127,15 +128,41 @@ const ClienteDatosTab: React.FC<IProps> = ({ dataGeneral, setDataGeneral }) => {
                   className="input-base"
                 />
               </div>
-
-              <div className="input-base-container-33">
+              <div className="input-base-container-50">
+                <label
+                  htmlFor="tipoDocumentoIdentidadId"
+                  className="label-base"
+                >
+                  Tipo Documento
+                </label>
+                <select
+                  ref={inputs["tipoDocumentoIdentidadId"]}
+                  id="tipoDocumentoIdentidadId"
+                  name="tipoDocumentoIdentidadId"
+                  value={dataGeneral.tipoDocumentoIdentidadId ?? ""}
+                  onChange={handleData}
+                  autoFocus
+                  disabled={primer.tipo === "consultar"}
+                  className="input-base"
+                >
+                  <option key="default" value="">
+                    SELECCIONAR
+                  </option>
+                  {tiposDocumentoIdentidad.map((x: ICombo) => (
+                    <option key={x.id} value={x.id}>
+                      {x.descripcion}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="input-base-container-50">
                 <label
                   htmlFor="numeroDocumentoIdentidad"
                   className="label-base"
                 >
                   Documento Identidad
                 </label>
-                <div className="input-base-container-button">
+                <div className="input-base-container-anidado">
                   <input
                     id="numeroDocumentoIdentidad"
                     name="numeroDocumentoIdentidad"
@@ -149,7 +176,7 @@ const ClienteDatosTab: React.FC<IProps> = ({ dataGeneral, setDataGeneral }) => {
                       (dataGeneral.tipoDocumentoIdentidadId === "1" ||
                         dataGeneral.tipoDocumentoIdentidadId === "6") &&
                       !api.loading
-                        ? "input-base-button"
+                        ? "input-base-container-button"
                         : "input-base"
                     }
                   />
@@ -164,12 +191,12 @@ const ClienteDatosTab: React.FC<IProps> = ({ dataGeneral, setDataGeneral }) => {
                         accessKey="c"
                         onClick={handleConsultarRuc}
                         onKeyDown={handleKeyDown}
-                        className="button-base-anidado button-base-bg-primary"
+                        className="main-button-anidado main-button-bg-primary"
                       >
                         <AiOutlineCloudServer
                           strokeWidth={2}
                           size="2rem"
-                          className="button-base-icon"
+                          className="main-button-icon"
                         />
                       </button>
                     )}
@@ -190,7 +217,6 @@ const ClienteDatosTab: React.FC<IProps> = ({ dataGeneral, setDataGeneral }) => {
                   value={dataGeneral.nombre ?? ""}
                   onChange={handleData}
                   autoComplete="off"
-                  autoFocus={primer.tipo === "modificar"}
                   disabled={primer.tipo === "consultar"}
                   className="input-base"
                 />
@@ -285,6 +311,41 @@ const ClienteDatosTab: React.FC<IProps> = ({ dataGeneral, setDataGeneral }) => {
                 </select>
               </div>
             </div>
+
+            <div className="input-base-row">
+              <div className="input-base-container-50">
+                <label htmlFor="condicion" className="label-base">
+                  Condición
+                </label>
+                <input
+                  ref={inputs["condicion"]}
+                  id="condicion"
+                  name="condicion"
+                  placeholder="Condición"
+                  value={dataGeneral.condicion ?? ""}
+                  onChange={handleData}
+                  autoComplete="off"
+                  disabled={primer.tipo === "consultar"}
+                  className="input-base"
+                />
+              </div>
+              <div className="input-base-container-50">
+                <label htmlFor="estado" className="label-base">
+                  Estado
+                </label>
+                <input
+                  id="estado"
+                  name="estado"
+                  placeholder="Estado"
+                  value={dataGeneral.estado ?? ""}
+                  onChange={handleData}
+                  autoComplete="off"
+                  disabled={primer.tipo === "consultar"}
+                  className="input-base"
+                />
+              </div>
+            </div>
+
             <div className="input-base-row">
               <div className="input-base-container-33">
                 <label htmlFor="correoElectronico" className="label-base">
@@ -335,41 +396,30 @@ const ClienteDatosTab: React.FC<IProps> = ({ dataGeneral, setDataGeneral }) => {
                 />
               </div>
             </div>
+
             <div className="input-base-row">
-              <div className="input-base-container-33">
-                <label htmlFor="codigoEstablecimiento" className="label-base">
-                  Código Establecimiento
+              <div className="input-base-container-100">
+                <label htmlFor="observacion" className="label-base">
+                  Observación
                 </label>
                 <input
-                  id="codigoEstablecimiento"
-                  name="codigoEstablecimiento"
-                  placeholder="Código Establecimiento"
-                  value={dataGeneral.codigoEstablecimiento ?? ""}
+                  id="observacion"
+                  name="observacion"
+                  placeholder="Observación"
+                  value={dataGeneral.observacion ?? ""}
                   onChange={handleData}
                   autoComplete="off"
                   disabled={primer.tipo === "consultar"}
                   className="input-base"
                 />
               </div>
-              <div className="input-base-container-auto">
-                <CheckBox
-                  id="isAgenteRetencion"
-                  value={dataGeneral.isAgenteRetencion}
-                  handleData={handleData}
-                  disabled={primer.tipo === "consultar"}
-                  label="Agente Retención"
-                />
-              </div>
             </div>
-            <ButtonFooter
-              data={dataGeneral}
-              inputFocus="numeroDocumentoIdentidad"
-            />
+
+            <ButtonFooter data={dataGeneral} inputFocus="condicion" />
           </div>
         </BasicKeyHandler>
       )}
     </>
   );
 };
-
-export default ClienteDatosTab;
+export default ProveedorDatos;

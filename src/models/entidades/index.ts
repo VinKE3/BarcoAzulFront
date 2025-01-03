@@ -4,6 +4,8 @@ export * from './empresa';
 export * from './informe';
 export * from './mantenimiento/configuracionLote';
 export * from './mantenimiento';
+export * from "./mantenimiento/cliente";
+export * from "./mantenimiento/proveedor";
 export * from './mantenimiento/usuario';
 export * from './tesoreria/cajaChica';
 export * from './tesoreria/cajaChicaConfiguracion';

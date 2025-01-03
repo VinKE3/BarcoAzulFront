@@ -10,12 +10,16 @@ const useProveedorColumn = (): Column<IProveedorTable>[] => {
       {
         Header: "Código",
         accessor: "id",
-        Cell: ({ value }: { value: string }) => <p className="text-center">{value ?? "-"}</p>,
+        Cell: ({ value }: { value: string }) => (
+          <p className="text-center">{value ?? "-"}</p>
+        ),
       },
       {
         Header: "RUC/DNI",
         accessor: "numeroDocumentoIdentidad",
-        Cell: ({ value }: { value: string }) => <p className="text-center">{value ?? "-"}</p>,
+        Cell: ({ value }: { value: string }) => (
+          <p className="text-center">{value ?? "-"}</p>
+        ),
       },
       {
         Header: "Nombre",
@@ -24,12 +28,18 @@ const useProveedorColumn = (): Column<IProveedorTable>[] => {
       {
         Header: "Teléfono",
         accessor: "telefono",
-        Cell: ({ value }: { value: string }) => <p className="text-center">{value ?? "-"}</p>,
+        Cell: ({ value }: { value: string }) => (
+          <p className="text-center">{value ?? "-"}</p>
+        ),
       },
       {
         Header: "Acciones",
         Cell: ({ row }: { row: { original: IProveedorTable } }) => (
-          <ActionBar id={row.original.id} rowData={row.original} isTablas={true} />
+          <ActionBar
+            id={row.original.id}
+            rowData={row.original}
+            isTablas={true}
+          />
         ),
       },
     ],

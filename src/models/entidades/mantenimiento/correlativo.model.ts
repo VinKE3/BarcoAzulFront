@@ -1,26 +1,32 @@
 import { ICombo } from "../../global";
 
 export interface ICorrelativo {
-  id: string;
-  numero: number;
-  puntoVentaId: string;
-  serie: string;
   tipoDocumentoId: string;
-  tipoDocumentoDescripcion: string | null;
+  tipoDocumentoDescripcion: string;
+  serie: string;
+  numero: number;
 }
 
 export const defaultCorrelativo: ICorrelativo = {
-  id: "",
   tipoDocumentoId: "",
-  tipoDocumentoDescripcion: null,
+  tipoDocumentoDescripcion: "",
   serie: "",
   numero: 0,
-  puntoVentaId: "",
 };
 
 export interface ICorrelativoTablas {
   tiposDocumento: ICombo[];
 }
+
 export const defaultCorrelativoTablas: ICorrelativoTablas = {
   tiposDocumento: [],
 };
+
+export interface ICorrelativoFilter {}
+
+export interface ICorrelativoTable {
+  numero: number;
+  serie: string;
+  tipoDocumentoDescripcion: string;
+  tipoDocumentoId: string;
+}

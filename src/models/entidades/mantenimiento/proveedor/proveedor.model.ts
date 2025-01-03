@@ -73,7 +73,7 @@ export interface IProveedorTable {
   nombre: string;
   numeroCuentaBancaria: string;
   numeroDocumentoIdentidad: string;
-  telefono: string | null;
+  telefono: string ;
   vendedorCelular: string | null;
   vendedorNombreCompleto: string | null;
 }
