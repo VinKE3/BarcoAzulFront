@@ -159,10 +159,13 @@ const Igv: React.FC<IProps> = ({ dataIGV, handleIGV }) => {
             id="buttonAgregarIGV"
             name="buttonAgregarIGV"
             onClick={handleNew}
-            className="main-button main-button-bg-secondary"
+            className="button-base button-base-bg-secondary"
           >
-            <BsFileEarmarkPlusFill size={"1.5rem"} className="main-button-icon" />
-            <span className="main-button-text">Agregar IGV</span>
+            <BsFileEarmarkPlusFill
+              size={"1.5rem"}
+              className="button-base-icon"
+            />
+            <span className="button-base-text">Agregar IGV</span>
           </button>
         </ButtonGroup>
       )}
@@ -170,9 +173,9 @@ const Igv: React.FC<IProps> = ({ dataIGV, handleIGV }) => {
       {show && (
         <BasicKeyHandler selector={"igv"}>
           <div className="main-modal-secondary igv">
-            <div className="main-input-group">
-              <div className="main-input-100">
-                <label htmlFor="porcentajeIGV" className="main-label">
+            <div className="input-base-row">
+              <div className="input-base-container-100">
+                <label htmlFor="porcentajeIGV" className="label-base">
                   Porcentaje
                 </label>
                 <input
@@ -187,11 +190,11 @@ const Igv: React.FC<IProps> = ({ dataIGV, handleIGV }) => {
                   autoComplete="off"
                   min={0}
                   step={0.1}
-                  className="main-input"
+                  className="input-base"
                 />
               </div>
-              <div className="main-input-auto">
-                <label htmlFor="defaultIGV" className="main-label">
+              <div className="input-base-container-auto">
+                <label htmlFor="defaultIGV" className="label-base">
                   Estado
                 </label>
                 <CheckBox

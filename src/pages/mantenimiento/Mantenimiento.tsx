@@ -19,6 +19,7 @@ import { CuadreStock } from "./CuadreStock";
 import { Cliente } from "./Cliente";
 import { Proveedor } from "./Proveedor";
 import { Vendedor } from "./Vendedor";
+import {Personal} from "./Personal";
 const Mantenimiento = () => {
   return (
     <RoutesWithNotFound>
@@ -27,6 +28,7 @@ const Mantenimiento = () => {
         <Route path={mantenimientoRoutes.CLIENTE} element={<Cliente />} />
         <Route path={mantenimientoRoutes.PROVEEDOR} element={<Proveedor />} />
         <Route path={mantenimientoRoutes.VENDEDOR} element={<Vendedor />} />
+        <Route path={mantenimientoRoutes.PERSONAL} element={<Personal />} />
         <Route path={mantenimientoRoutes.LINEA} element={<Linea />} />
         <Route path={mantenimientoRoutes.SUBLINEA} element={<SubLinea />} />
         <Route path={mantenimientoRoutes.MARCA} element={<Marca />} />

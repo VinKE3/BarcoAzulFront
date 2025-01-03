@@ -1,16 +1,27 @@
-import { ChangeEvent, useEffect, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { useDebounce, useGlobalContext } from "../../../../../hooks";
-import { ILineaFilter, ILineaTable, defaultLineaFilter } from "../../../../../models";
-import { getListar, handleInputType, handleSetErrorMensaje, resetPagination } from "../../../../../util";
+import {
+  IPersonalFilter,
+  IPersonalTable,
+  defaultPersonalFilter,
+} from "../../../../../models";
+import {
+  getListar,
+  handleInputType,
+  handleSetErrorMensaje,
+  resetPagination,
+} from "../../../../../util";
 
-const LineaFilter: React.FC = () => {
+const PersonalFilter: React.FC = () => {
   //#region useState
   const { globalContext, setGlobalContext } = useGlobalContext();
   const { table, modal, mensajes } = globalContext;
   const { primer } = modal;
   const { pagina } = table;
   const mensaje = mensajes.filter((x) => x.tipo === 0);
-  const [filter, setFilter] = useState<ILineaFilter>(defaultLineaFilter);
+  const [filter, setFilter] = useState<IPersonalFilter>(defaultPersonalFilter);
   const search = useDebounce(filter);
   //#endregion
 
@@ -35,9 +46,10 @@ const LineaFilter: React.FC = () => {
   const handleListar = async (): Promise<void> => {
     try {
       const params = new URLSearchParams({
-        descripcion: search.descripcion,
+        nombreCompleto: search.nombreCompleto,
       });
-      const { data, total }: { data: ILineaTable[]; total: number } = await getListar(globalContext, params);
+      const { data, total }: { data: IPersonalTable[]; total: number } =
+        await getListar(globalContext, params);
       setGlobalContext((x) => ({ ...x, table: { ...x.table, data, total } }));
     } catch (error) {
       handleSetErrorMensaje(setGlobalContext, error);
@@ -49,14 +61,14 @@ const LineaFilter: React.FC = () => {
     <div className="filter-base">
       <span className="filter-base-text">Filtrar por</span>
       <div className="input-base-container-100">
-        <label htmlFor="descripcionFilter" className="label-base">
-          Descripción
+        <label htmlFor="nombreFilter" className="label-base">
+          Nombre
         </label>
         <input
-          id="descripcionFilter"
-          name="descripcion"
-          placeholder="Descripción"
-          value={filter.descripcion}
+          id="nombreFilter"
+          name="nombreCompleto"
+          placeholder="Nombre"
+          value={filter.nombreCompleto}
           onChange={handleData}
           autoComplete="off"
           autoFocus
@@ -66,4 +78,5 @@ const LineaFilter: React.FC = () => {
     </div>
   );
 };
-export default LineaFilter;
+
+export default PersonalFilter;

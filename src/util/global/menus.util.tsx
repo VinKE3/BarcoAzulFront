@@ -16,7 +16,7 @@ const { MANTENIMIENTO, TESORERIA, COMPRAS, VENTAS } = privateRoutes;
 const {
   CLIENTE,
   PROVEEDOR,
-  VENDEDOR,
+  PERSONAL,
   TRANSPORTISTA,
   VEHICULOS,
   LINEA,
@@ -54,7 +54,7 @@ export function navbarMenu(): IMenuElement[] {
       subMenus: createSubMenu([
         { text: "Cliente", path: `${MANTENIMIENTO}/${CLIENTE}` },
         { text: "Proveedor", path: `${MANTENIMIENTO}/${PROVEEDOR}` },
-        { text: "Vendedor", path: `${MANTENIMIENTO}/${VENDEDOR}` },
+        { text: "Personal", path: `${MANTENIMIENTO}/${PERSONAL}` },
         {
           text: "Vehículos",
           path: `${MANTENIMIENTO}/${VEHICULOS}`,

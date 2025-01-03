@@ -204,13 +204,13 @@ const Detraccion: React.FC<IProps> = ({ dataDetraccion, handleDetraccion }) => {
             id="buttonAgregarDetraccion"
             name="buttonAgregarDetraccion"
             onClick={handleNew}
-            className="main-button main-button-bg-secondary"
+            className="button-base button-base-bg-secondary"
           >
             <BsFileEarmarkPlusFill
               size={"1.5rem"}
-              className="main-button-icon"
+              className="button-base-icon"
             />
-            <span className="main-button-text">Agregar Detracción</span>
+            <span className="button-base-text">Agregar Detracción</span>
           </button>
         </ButtonGroup>
       )}

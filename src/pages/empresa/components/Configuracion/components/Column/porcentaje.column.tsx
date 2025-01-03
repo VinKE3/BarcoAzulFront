@@ -26,8 +26,8 @@ const usePorcentajeColumn = (
       {
         Header: "Tipo",
         accessor: "tipoPercepcion",
-        Cell: ({ value }: { value: string }) => {
-          return <p className="text-center">{`${value}`}</p>;
+        Cell: ({ value }: { value: string | null }) => {
+          return <p className="text-center">{value ?? "SIN TIPO"}</p>;
         },
       },
       {

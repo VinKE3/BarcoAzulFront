@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { useEffect, useState } from "react";
-import { LineaFilter, LineaModal, useLineaColumn } from ".";
+import { PersonalFilter, PersonalModal, usePersonalColumn } from ".";
 import {
   ButtonGroup,
   DeleteModal,
@@ -9,7 +11,7 @@ import {
   Table,
 } from "../../../components";
 import { useGlobalContext, usePermisos } from "../../../hooks";
-import { ILinea, defaultLinea } from "../../../models";
+import { IPersonal, IPersonalTablas, defaultPersonal } from "../../../models";
 import {
   handleInitialData,
   handlePrimaryModal,
@@ -18,22 +20,19 @@ import {
   handleSetPermisoYMenu,
 } from "../../../util";
 
-const Linea: React.FC = () => {
+const Personal: React.FC = () => {
   //#region useState
-  const menu: string = "Mantenimiento/Linea";
+  const menu: string = "Mantenimiento/Personal";
   const { globalContext, setGlobalContext } = useGlobalContext();
   const { api, mensajes, table, modal, form } = globalContext;
   const { primer } = modal;
   const mensaje = mensajes.filter((x) => x.origen === "global" && x.tipo >= 0);
   const [ready, setReady] = useState(false);
-  const { visible, permisos } = usePermisos("Linea");
-  const columns = useLineaColumn();
+  const { visible, permisos } = usePermisos("Personal");
+  const columns = usePersonalColumn();
   //#endregion
 
   //#region useEffect
-  useEffect(() => {
-    console.log(table, "API");
-  }, []);
   useEffect(() => {
     const resetContext = async () => {
       handleResetContext(setGlobalContext);
@@ -59,23 +58,23 @@ const Linea: React.FC = () => {
       return;
     }
 
-    handleInitialData(globalContext, defaultLinea)
+    handleInitialData(globalContext, defaultPersonal)
       .then((response) => {
-        const { data }: { data: ILinea } = response;
-        handlePrimaryModal(setGlobalContext, data);
-        console.log(data);
+        const { data, tablas }: { data: IPersonal; tablas: IPersonalTablas } =
+          response;
+        handlePrimaryModal(setGlobalContext, data, tablas);
       })
       .catch((error) => {
         handleResetMensajeError(setGlobalContext, true, true, error);
       });
   };
-  //#endregion
 
+  //#endregion
   return (
     <div className="main-base">
       <div className="main-header">
-        <h4 className="main-header-title">Líneas</h4>
-        {ready && visible && <ButtonGroup />}
+        <h4 className="main-header-title">Personal</h4>
+        {ready && visible && <ButtonGroup isTablas={true} />}
       </div>
 
       <div className="main-body">
@@ -85,23 +84,23 @@ const Linea: React.FC = () => {
         {ready && visible && (
           <>
             {mensaje.length > 0 && <Messages mensajes={mensajes} />}
-            {visible && <LineaFilter />}
+            {visible && <PersonalFilter />}
             {visible && (
               <Table
                 data={table.data}
                 columns={columns}
-                tableClassName="linea-table"
+                tableClassName="personal-table"
+                isTablas={true}
               />
             )}
 
-            {primer.tipo === "eliminar" && (
-              <DeleteModal propText={"descripcion"} />
-            )}
-            {form.data && primer.tipo && api.menu === menu && <LineaModal />}
+            {primer.tipo === "eliminar" && <DeleteModal propText={"nombre"} />}
+            {form.data && primer.tipo && api.menu === menu && <PersonalModal />}
           </>
         )}
       </div>
     </div>
   );
 };
-export default Linea;
+
+export default Personal;

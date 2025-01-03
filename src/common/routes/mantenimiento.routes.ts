@@ -2,6 +2,7 @@ export const mantenimientoRoutes = {
   CLIENTE: "cliente",
   PROVEEDOR: "proveedor",
   VENDEDOR: "vendedor",
+  PERSONAL: "personal",
   TRANSPORTISTA: "transportista",
   MEDICO: "medico",
   USUARIO: "usuario",

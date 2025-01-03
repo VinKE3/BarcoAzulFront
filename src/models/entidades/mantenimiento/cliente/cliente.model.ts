@@ -26,13 +26,8 @@ export interface ICliente {
   departamentoId: string | null;
   provinciaId: string | null;
   distritoId: string | null;
-  zonaId: string | null;
-  tipoVentaId: string | null;
-  tipoCobroId: string | null;
-  maximoCreditoUSD: number;
-  maximoCreditoPEN: number;
-  creditoUSD: number;
-  creditoPEN: number;
+  codigoEstablecimiento: string | null;
+  isAgenteRetencion: boolean;
   observacion: string | null;
 }
 
@@ -48,13 +43,8 @@ export const defaultCliente: ICliente = {
   departamentoId: null,
   provinciaId: null,
   distritoId: null,
-  zonaId: null,
-  tipoVentaId: null,
-  tipoCobroId: null,
-  maximoCreditoUSD: 0,
-  maximoCreditoPEN: 0,
-  creditoUSD: 0,
-  creditoPEN: 0,
+  codigoEstablecimiento: null,
+  isAgenteRetencion: false,
   observacion: null,
 };
 

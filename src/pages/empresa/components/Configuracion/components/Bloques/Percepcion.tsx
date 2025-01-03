@@ -204,13 +204,13 @@ const Percepcion: React.FC<IProps> = ({ dataPercepcion, handlePercepcion }) => {
             id="buttonAgregarPercepcion"
             name="buttonAgregarPercepcion"
             onClick={handleNew}
-            className="main-button main-button-bg-secondary"
+            className="button-base button-base-bg-secondary"
           >
             <BsFileEarmarkPlusFill
               size={"1.5rem"}
-              className="main-button-icon"
+              className="button-base-icon"
             />
-            <span className="main-button-text">Agregar Percepcion</span>
+            <span className="button-base-text">Agregar Percepcion</span>
           </button>
         </ButtonGroup>
       )}
@@ -218,9 +218,9 @@ const Percepcion: React.FC<IProps> = ({ dataPercepcion, handlePercepcion }) => {
       {show && (
         <BasicKeyHandler selector={"percepcion"}>
           <div className="main-modal-secondary percepcion">
-            <div className="main-input-group">
-              <div className="main-input-100">
-                <label htmlFor="porcentajePercepcion" className="main-label">
+            <div className="input-base-row">
+              <div className="input-base-container-100">
+                <label htmlFor="porcentajePercepcion" className="label-base">
                   Porcentaje
                 </label>
                 <input
@@ -235,11 +235,11 @@ const Percepcion: React.FC<IProps> = ({ dataPercepcion, handlePercepcion }) => {
                   autoComplete="off"
                   min={0}
                   step={0.1}
-                  className="main-input"
+                  className="input-base"
                 />
               </div>
-              <div className="main-input-auto">
-                <label htmlFor="defaultPercepcion" className="main-label">
+              <div className="input-base-container-auto">
+                <label htmlFor="defaultPercepcion" className="label-base">
                   Estado
                 </label>
                 <CheckBox

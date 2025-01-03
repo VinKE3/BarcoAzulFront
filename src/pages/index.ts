@@ -59,6 +59,14 @@ export * from "./mantenimiento/MovimientoArticulo/components/Column/movimientoar
 export * from "./mantenimiento/MovimientoArticulo/components/Filter/MovimientoArticulo.filter";
 export * from "./mantenimiento/MovimientoArticulo/components/Modal/MovimientoArticulo.modal";
 export * from "./mantenimiento/MovimientoArticulo/components/Modal/movimientoarticulomodal.column";
+export * from "./mantenimiento/Personal/Personal";
+export * from "./mantenimiento/Personal/components/Column/personal.column";
+export * from "./mantenimiento/Personal/components/Filter/Personal.filter";
+export * from "./mantenimiento/Personal/components/Modal/Personal.modal";
+export * from "./mantenimiento/Provincia/components/Column";
+export * from "./mantenimiento/Provincia/components/Filter";
+export * from "./mantenimiento/Provincia/components/Modal";
+export * from "./mantenimiento/Provincia/components";
 export * from "./mantenimiento/Provincia/Provincia";
 export * from "./mantenimiento/Provincia/components/Column/provincia.column";
 export * from "./mantenimiento/Provincia/components/Filter/Provincia.filter";
