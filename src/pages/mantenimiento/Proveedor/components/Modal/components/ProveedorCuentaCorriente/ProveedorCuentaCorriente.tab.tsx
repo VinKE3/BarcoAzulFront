@@ -33,19 +33,31 @@ interface IProp {
   handleListarCuentaCorriente: () => Promise<IProveedorCuentaCorriente[]>;
 }
 
-const ProveedorCuentaCorrienteTab: React.FC<IProp> = ({ dataCuenta, handleListarCuentaCorriente }) => {
+const ProveedorCuentaCorrienteTab: React.FC<IProp> = ({
+  dataCuenta,
+  handleListarCuentaCorriente,
+}) => {
   //#region useState
   const menu: string = "Mantenimiento/ProveedorCuentaCorriente";
   const { globalContext, setGlobalContext } = useGlobalContext();
   const { modal, form, mensajes } = globalContext;
   const { primer, segundo } = modal;
   const { retorno } = form;
-  const { entidadesBancarias, monedas } = dataCuenta.tablas || defaultProveedorCuentaCorrienteTablas;
-  const mensaje = mensajes.filter((x) => x.tipo >= 0 && x.origen === "proveedorCuentaCorriente");
-  const mensajeSuccess = mensajes.filter((x) => x.tipo === 0 && x.origen === "proveedorCuentaCorriente");
+  const { entidadesBancarias, monedas } =
+    dataCuenta.tablas || defaultProveedorCuentaCorrienteTablas;
+  const mensaje = mensajes.filter(
+    (x) => x.tipo >= 0 && x.origen === "proveedorCuentaCorriente"
+  );
+  const mensajeSuccess = mensajes.filter(
+    (x) => x.tipo === 0 && x.origen === "proveedorCuentaCorriente"
+  );
 
-  const [data, setData] = useState<IProveedorCuentaCorriente>(defaultProveedorCuentaCorriente);
-  const [table, setTable] = useState<IProveedorCuentaCorriente[]>(dataCuenta.data || []);
+  const [data, setData] = useState<IProveedorCuentaCorriente>(
+    defaultProveedorCuentaCorriente
+  );
+  const [table, setTable] = useState<IProveedorCuentaCorriente[]>(
+    dataCuenta.data || []
+  );
   const [show, setShow] = useState<boolean>(false);
   const columns = useProveedorCuentaCorrienteColumn(entidadesBancarias);
   const inputs = useFocus("monedaId");
@@ -72,7 +84,9 @@ const ProveedorCuentaCorrienteTab: React.FC<IProp> = ({ dataCuenta, handleListar
   //#endregion
 
   //#region Funciones
-  const handleData = ({ target }: ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
+  const handleData = ({
+    target,
+  }: ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
     const { name } = target;
     const value = handleInputType(target);
     setData((x) => ({ ...x, [name]: value }));
@@ -83,13 +97,22 @@ const ProveedorCuentaCorrienteTab: React.FC<IProp> = ({ dataCuenta, handleListar
       return;
     }
 
-    handleInitialData(globalContext, defaultProveedorCuentaCorriente, "segundo", menu)
+    handleInitialData(
+      globalContext,
+      defaultProveedorCuentaCorriente,
+      "segundo",
+      menu
+    )
       .then((response) => {
         setShow(true);
         setData(response.data as IProveedorCuentaCorriente);
       })
       .catch((error) => {
-        handleSetErrorMensaje(setGlobalContext, error, "proveedorCuentaCorriente");
+        handleSetErrorMensaje(
+          setGlobalContext,
+          error,
+          "proveedorCuentaCorriente"
+        );
       });
   };
 
@@ -132,20 +155,23 @@ const ProveedorCuentaCorrienteTab: React.FC<IProp> = ({ dataCuenta, handleListar
               accessKey="a"
               autoFocus={segundo.tipo === null}
               onClick={handleNew}
-              className="main-button main-button-bg-secondary"
+              className="button-base button-base-bg-secondary"
             >
-              <BsFileEarmarkPlusFill size={"1.5rem"} className="main-button-icon" />
-              <span className="main-button-text">Agregar Cuenta</span>
+              <BsFileEarmarkPlusFill
+                size={"1.5rem"}
+                className="button-base-icon"
+              />
+              <span className="button-base-text">Agregar Cuenta</span>
             </button>
           </ButtonGroup>
         )}
 
         {show && (
           <BasicKeyHandler selector={"proveedor-cuenta-corriente-modal"}>
-            <div className="main-filter proveedor-cuenta-corriente-modal">
-              <div className="main-input-group">
-                <div className="main-input-33">
-                  <label htmlFor="monedaId" className="main-label">
+            <div className="filter-base proveedor-cuenta-corriente-modal">
+              <div className="input-base-row">
+                <div className="input-base-container-33">
+                  <label htmlFor="monedaId" className="label-base">
                     Moneda
                   </label>
                   <select
@@ -156,7 +182,7 @@ const ProveedorCuentaCorrienteTab: React.FC<IProp> = ({ dataCuenta, handleListar
                     onChange={handleData}
                     autoFocus={segundo.tipo !== null}
                     disabled={segundo.tipo === "consultar"}
-                    className="main-input"
+                    className="input-base"
                   >
                     <option key="default" value="">
                       SELECCIONAR
@@ -168,8 +194,8 @@ const ProveedorCuentaCorrienteTab: React.FC<IProp> = ({ dataCuenta, handleListar
                     ))}
                   </select>
                 </div>
-                <div className="main-input-33">
-                  <label htmlFor="entidadBancariaId" className="main-label">
+                <div className="input-base-container-33">
+                  <label htmlFor="entidadBancariaId" className="label-base">
                     Cuenta
                   </label>
                   <select
@@ -178,7 +204,7 @@ const ProveedorCuentaCorrienteTab: React.FC<IProp> = ({ dataCuenta, handleListar
                     value={data.entidadBancariaId ?? ""}
                     onChange={handleData}
                     disabled={segundo.tipo === "consultar"}
-                    className="main-input"
+                    className="input-base"
                   >
                     <option key="default" value="">
                       SELECCIONAR
@@ -190,8 +216,8 @@ const ProveedorCuentaCorrienteTab: React.FC<IProp> = ({ dataCuenta, handleListar
                     ))}
                   </select>
                 </div>
-                <div className="main-input-33">
-                  <label htmlFor="numero" className="main-label">
+                <div className="input-base-container-33">
+                  <label htmlFor="numero" className="label-base">
                     Número
                   </label>
                   <input
@@ -202,7 +228,7 @@ const ProveedorCuentaCorrienteTab: React.FC<IProp> = ({ dataCuenta, handleListar
                     onChange={handleData}
                     autoComplete="off"
                     disabled={segundo.tipo === "consultar"}
-                    className="main-input"
+                    className="input-base"
                   />
                 </div>
               </div>

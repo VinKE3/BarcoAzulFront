@@ -1,7 +1,7 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import React from "react";
 import { BiBuildings } from "react-icons/bi";
-import { FaDoorOpen } from "react-icons/fa";
+import { FaDoorOpen, FaSortNumericDown } from "react-icons/fa";
 import { PiPasswordBold } from "react-icons/pi";
 import { TiUser } from "react-icons/ti";
 import { useDispatch } from "react-redux";
@@ -51,7 +51,7 @@ const HeaderMenu: React.FC = () => {
               className="menu-base-items-item"
             >
               <BiBuildings size={"3rem"} className="menu-base-items-icon" />
-              <span className="menu-base-items-text">Establecimiento</span>
+              <span className="menu-base-items-text">Empresa</span>
             </Link>
           </MenuItem>
 
@@ -62,6 +62,18 @@ const HeaderMenu: React.FC = () => {
             >
               <TiUser size={"3rem"} className="menu-base-items-icon" />
               <span className="menu-base-items-text">Usuario</span>
+            </Link>
+          </MenuItem>
+          <MenuItem>
+            <Link
+              to={`${privateRoutes.MANTENIMIENTO}/${mantenimientoRoutes.CORRELATIVO}`}
+              className="menu-base-items-item"
+            >
+              <FaSortNumericDown
+                size={"3rem"}
+                className="menu-base-items-icon"
+              />
+              <span className="menu-base-items-text">Correlativo</span>
             </Link>
           </MenuItem>
 

@@ -19,12 +19,18 @@ import { CuadreStock } from "./CuadreStock";
 import { Cliente } from "./Cliente";
 import { Proveedor } from "./Proveedor";
 import { Vendedor } from "./Vendedor";
-import {Personal} from "./Personal";
+import { Personal } from "./Personal";
+import { Correlativo } from "./Correlativo";
 const Mantenimiento = () => {
   return (
     <RoutesWithNotFound>
       <>
         <Route path="/" element={<Navigate to={mantenimientoRoutes.LINEA} />} />
+        <Route
+          path={mantenimientoRoutes.CORRELATIVO}
+          element={<Correlativo />}
+        />
+
         <Route path={mantenimientoRoutes.CLIENTE} element={<Cliente />} />
         <Route path={mantenimientoRoutes.PROVEEDOR} element={<Proveedor />} />
         <Route path={mantenimientoRoutes.VENDEDOR} element={<Vendedor />} />

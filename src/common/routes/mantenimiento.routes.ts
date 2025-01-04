@@ -3,6 +3,7 @@ export const mantenimientoRoutes = {
   PROVEEDOR: "proveedor",
   VENDEDOR: "vendedor",
   PERSONAL: "personal",
+  CORRELATIVO: "correlativo",
   TRANSPORTISTA: "transportista",
   MEDICO: "medico",
   USUARIO: "usuario",

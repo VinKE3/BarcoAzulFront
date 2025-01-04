@@ -32,7 +32,10 @@ interface IProp {
   handleListarContacto: () => Promise<IProveedorContacto[]>;
 }
 
-const ProveedorContactoTab: React.FC<IProp> = ({ dataContacto, handleListarContacto }) => {
+const ProveedorContactoTab: React.FC<IProp> = ({
+  dataContacto,
+  handleListarContacto,
+}) => {
   //#region useState
   const menu: string = "Mantenimiento/ProveedorContacto";
   const { globalContext, setGlobalContext } = useGlobalContext();
@@ -40,11 +43,19 @@ const ProveedorContactoTab: React.FC<IProp> = ({ dataContacto, handleListarConta
   const { primer, segundo } = modal;
   const { retorno } = form;
   const { cargos } = dataContacto.tablas || defaultProveedorContactoTablas;
-  const mensaje = mensajes.filter((x) => x.tipo >= 0 && x.origen === "proveedorContacto");
-  const mensajeSuccess = mensajes.filter((x) => x.tipo === 0 && x.origen === "proveedorContacto");
+  const mensaje = mensajes.filter(
+    (x) => x.tipo >= 0 && x.origen === "proveedorContacto"
+  );
+  const mensajeSuccess = mensajes.filter(
+    (x) => x.tipo === 0 && x.origen === "proveedorContacto"
+  );
 
-  const [data, setData] = useState<IProveedorContacto>(defaultProveedorContacto);
-  const [table, setTable] = useState<IProveedorContacto[]>(dataContacto.data || []);
+  const [data, setData] = useState<IProveedorContacto>(
+    defaultProveedorContacto
+  );
+  const [table, setTable] = useState<IProveedorContacto[]>(
+    dataContacto.data || []
+  );
   const [show, setShow] = useState<boolean>(false);
   const columns = useProveedorContactoColumn();
   const inputs = useFocus("numeroDocumentoIdentidad", "nombres");
@@ -71,7 +82,9 @@ const ProveedorContactoTab: React.FC<IProp> = ({ dataContacto, handleListarConta
   //#endregion
 
   //#region Funciones
-  const handleData = ({ target }: ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
+  const handleData = ({
+    target,
+  }: ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
     const { name } = target;
     const value = handleInputType(target);
     setData((x) => ({ ...x, [name]: value }));
@@ -129,20 +142,26 @@ const ProveedorContactoTab: React.FC<IProp> = ({ dataContacto, handleListarConta
               accessKey="a"
               autoFocus={segundo.tipo === null}
               onClick={handleNew}
-              className="main-button main-button-bg-secondary"
+              className="button-base button-base-bg-secondary"
             >
-              <BsFileEarmarkPlusFill size={"1.5rem"} className="main-button-icon" />
-              <span className="main-button-text">Agregar Contacto</span>
+              <BsFileEarmarkPlusFill
+                size={"1.5rem"}
+                className="button-base-icon"
+              />
+              <span className="button-base-text">Agregar Contacto</span>
             </button>
           </ButtonGroup>
         )}
 
         {show && (
           <BasicKeyHandler selector={"proveedor-contacto-modal"}>
-            <div className="main-filter proveedor-contacto-modal">
-              <div className="main-input-group">
-                <div className="main-input-33">
-                  <label htmlFor="numeroDocumentoIdentidad" className="main-label">
+            <div className="filter-base proveedor-contacto-modal">
+              <div className="input-base-row">
+                <div className="input-base-container-33">
+                  <label
+                    htmlFor="numeroDocumentoIdentidad"
+                    className="label-base"
+                  >
                     Documento
                   </label>
                   <input
@@ -155,11 +174,11 @@ const ProveedorContactoTab: React.FC<IProp> = ({ dataContacto, handleListarConta
                     autoComplete="off"
                     autoFocus={segundo.tipo !== null}
                     disabled={segundo.tipo === "consultar"}
-                    className="main-input"
+                    className="input-base"
                   />
                 </div>
-                <div className="main-input-100">
-                  <label htmlFor="nombres" className="main-label">
+                <div className="input-base-container-100">
+                  <label htmlFor="nombres" className="label-base">
                     Nombre
                   </label>
                   <input
@@ -171,14 +190,14 @@ const ProveedorContactoTab: React.FC<IProp> = ({ dataContacto, handleListarConta
                     onChange={handleData}
                     autoComplete="off"
                     disabled={segundo.tipo === "consultar"}
-                    className="main-input"
+                    className="input-base"
                   />
                 </div>
               </div>
 
-              <div className="main-input-group">
-                <div className="main-input-50">
-                  <label htmlFor="cargoId" className="main-label">
+              <div className="input-base-row">
+                <div className="input-base-container-50">
+                  <label htmlFor="cargoId" className="label-base">
                     Cargo
                   </label>
                   <select
@@ -187,7 +206,7 @@ const ProveedorContactoTab: React.FC<IProp> = ({ dataContacto, handleListarConta
                     value={data.cargoId ?? ""}
                     onChange={handleData}
                     disabled={segundo.tipo === "consultar"}
-                    className="main-input"
+                    className="input-base"
                   >
                     <option key="default" value="">
                       SELECCIONAR
@@ -199,8 +218,8 @@ const ProveedorContactoTab: React.FC<IProp> = ({ dataContacto, handleListarConta
                     ))}
                   </select>
                 </div>
-                <div className="main-input-50">
-                  <label htmlFor="celular" className="main-label">
+                <div className="input-base-container-50">
+                  <label htmlFor="celular" className="label-base">
                     Celular
                   </label>
                   <input
@@ -211,14 +230,14 @@ const ProveedorContactoTab: React.FC<IProp> = ({ dataContacto, handleListarConta
                     onChange={handleData}
                     autoComplete="off"
                     disabled={segundo.tipo === "consultar"}
-                    className="main-input"
+                    className="input-base"
                   />
                 </div>
               </div>
 
-              <div className="main-input-group">
-                <div className="main-input-50">
-                  <label htmlFor="correoElectronico" className="main-label">
+              <div className="input-base-row">
+                <div className="input-base-container-50">
+                  <label htmlFor="correoElectronico" className="label-base">
                     Correo Electrónico
                   </label>
                   <input
@@ -230,11 +249,11 @@ const ProveedorContactoTab: React.FC<IProp> = ({ dataContacto, handleListarConta
                     onChange={handleData}
                     autoComplete="off"
                     disabled={segundo.tipo === "consultar"}
-                    className="main-input"
+                    className="input-base"
                   />
                 </div>
-                <div className="main-input-50">
-                  <label htmlFor="telefono" className="main-label">
+                <div className="input-base-container-50">
+                  <label htmlFor="telefono" className="label-base">
                     Teléfono
                   </label>
                   <input
@@ -245,14 +264,14 @@ const ProveedorContactoTab: React.FC<IProp> = ({ dataContacto, handleListarConta
                     onChange={handleData}
                     autoComplete="off"
                     disabled={segundo.tipo === "consultar"}
-                    className="main-input"
+                    className="input-base"
                   />
                 </div>
               </div>
 
-              <div className="main-input-group">
-                <div className="main-input-100">
-                  <label htmlFor="direccion" className="main-label">
+              <div className="input-base-row">
+                <div className="input-base-container-100">
+                  <label htmlFor="direccion" className="label-base">
                     Dirección
                   </label>
                   <input
@@ -263,7 +282,7 @@ const ProveedorContactoTab: React.FC<IProp> = ({ dataContacto, handleListarConta
                     onChange={handleData}
                     autoComplete="off"
                     disabled={segundo.tipo === "consultar"}
-                    className="main-input"
+                    className="input-base"
                   />
                 </div>
               </div>
