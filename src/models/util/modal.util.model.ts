@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { IGlobalContext } from "../context";
 import { ModalCrudType, ModalPropType } from "../types";
 
@@ -15,9 +16,11 @@ import { ModalCrudType, ModalPropType } from "../types";
 export interface IHandleSecondaryModalParams {
   globalContext: IGlobalContext;
   setGlobalContext: React.Dispatch<React.SetStateAction<IGlobalContext>>;
+  origen: string;
+  tipo?: ModalCrudType;
   isTablas?: boolean;
   dataForm?: any;
   rowProp?: string;
-  tipo?: ModalCrudType;
   modalProp?: ModalPropType;
 }
+

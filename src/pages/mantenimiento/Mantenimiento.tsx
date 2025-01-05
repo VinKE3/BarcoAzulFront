@@ -21,6 +21,7 @@ import { Proveedor } from "./Proveedor";
 import { Vendedor } from "./Vendedor";
 import { Personal } from "./Personal";
 import { Correlativo } from "./Correlativo";
+import { Usuario } from "./Usuario";
 const Mantenimiento = () => {
   return (
     <RoutesWithNotFound>
@@ -35,6 +36,7 @@ const Mantenimiento = () => {
         <Route path={mantenimientoRoutes.PROVEEDOR} element={<Proveedor />} />
         <Route path={mantenimientoRoutes.VENDEDOR} element={<Vendedor />} />
         <Route path={mantenimientoRoutes.PERSONAL} element={<Personal />} />
+        <Route path={mantenimientoRoutes.USUARIO} element={<Usuario />} />
         <Route path={mantenimientoRoutes.LINEA} element={<Linea />} />
         <Route path={mantenimientoRoutes.SUBLINEA} element={<SubLinea />} />
         <Route path={mantenimientoRoutes.MARCA} element={<Marca />} />

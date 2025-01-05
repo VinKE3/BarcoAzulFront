@@ -56,5 +56,8 @@ export interface IUsuarioTable {
   id: string;
   isActivo: boolean;
   nick: string;
-  tipoUsuarioId: string;
+  tipoUsuarioDescripcion: string;
+  fechaInicio: string;
+  fechaModificacion: string;
 }
+

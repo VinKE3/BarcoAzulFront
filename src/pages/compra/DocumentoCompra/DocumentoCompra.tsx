@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { useEffect, useState } from "react";
 import { DocumentoCompraFilter, useDocumentoCompraColumn } from ".";
 import {
@@ -80,6 +82,7 @@ const DocumentoCompra: React.FC = () => {
         handleResetMensajeError(setGlobalContext, true, true, error);
       });
   };
+  console.log(table);
 
   //#endregion
   return (

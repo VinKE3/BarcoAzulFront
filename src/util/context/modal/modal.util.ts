@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { NavigateFunction } from "react-router-dom";
 import {
@@ -90,17 +91,18 @@ export const handlePrimaryModal = (
  * @param isTablas Indica si se deben obtener tablas relacionadas (por defecto es true).
  * @param dataForm Los datos del formulario a utilizar (por defecto es null).
  * @param rowProp La propiedad de la fila que se utilizará para obtener el ID (por defecto es "id").
- * @param tipo El tipo de modal a abrir (por defecto es "adicional").
+ * @param origen El origen de modal a abrir (por defecto es "adicional").
  * @param modalProp La propiedad del modal a utilizar en el contexto (por defecto es "primer").
  */
 export const handleSecondaryModal = ({
   globalContext,
   setGlobalContext,
+  origen,
+  modalProp = "primer",
+  tipo = null,
   isTablas = true,
   dataForm = null,
   rowProp = "id",
-  tipo = "adicional",
-  modalProp = "primer",
 }: IHandleSecondaryModalParams): void => {
   const { table } = globalContext; // Obtener la tabla del contexto global
   const { row, data } = table as { row: number; data: any }; // Desestructurar fila y datos de la tabla
@@ -111,7 +113,7 @@ export const handleSecondaryModal = ({
   // Obtener el ID de la fila seleccionada usando rowProp
   const id = data[row][rowProp];
   // Configurar el modal con el tipo, ID y si se deben obtener tablas
-  const modal: IModal = { tipo, id, isTablas };
+  const modal: IModal = { tipo, id, origen, isTablas };
 
   // Actualizar el contexto global con el nuevo estado del modal y del formulario
   setGlobalContext((x) => ({
@@ -312,6 +314,12 @@ export const handleOpenModal = async (
   }
 };
 
+export const handleSetRefrescar = (
+  setGlobalContext: React.Dispatch<React.SetStateAction<IGlobalContext>>,
+  refrescar: boolean = false
+): void => {
+  setGlobalContext((x) => ({ ...x, api: { ...x.api, refrescar } }));
+};
 /**
  * `helpModalMap` es un objeto que mapea los identificadores de los botones a sus respectivos modales de ayuda.
  * Cada clave en este objeto es el identificador de un botón en la interfaz de usuario, y el valor asociado es la clave del modal de ayuda correspondiente.
