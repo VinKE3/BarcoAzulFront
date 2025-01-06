@@ -1,4 +1,4 @@
-import { ICombo } from "../../../global";
+import { IPersonal } from "../personal.model";
 
 export interface IUsuario {
   id: string;
@@ -6,10 +6,13 @@ export interface IUsuario {
   tipoUsuarioId: string;
   observacion: string | null;
   isActivo: boolean;
-  vendedorId: string | null;
+  habilitarAfectarStock: boolean;
+  reaperturaCerrarCuadre: boolean;
+  editarFechaPedidoVenta: boolean;
+  habilitarTipoCambio:  boolean;
   clave: string;
   claveConfirmacion: string;
-  puntoVentaId: string;
+  personalId: string | null;
   bloquearPrecioEnVentas: boolean;
   bloquearCampoAlmacen: boolean;
   bloquearFechaEmision: boolean;
@@ -21,29 +24,25 @@ export const defaultUsuario: IUsuario = {
   tipoUsuarioId: "NO", //Usuario no configurado
   observacion: null,
   isActivo: true,
-  vendedorId: null,
+  habilitarAfectarStock: false,
+  reaperturaCerrarCuadre: false,
+  editarFechaPedidoVenta: false,
+  habilitarTipoCambio: false,
   clave: "",
   claveConfirmacion: "",
-  puntoVentaId: "",
+  personalId: "",
   bloquearCampoAlmacen: false,
   bloquearPrecioEnVentas: false,
   bloquearFechaEmision: false,
 };
 
 export interface IUsuarioTablas {
-  vendedores: ICombo[];
-  tiposUsuario: ICombo[];
-  puntosVenta: ICombo[];
+  personal: IPersonal[];
 }
 
 export const defaultUsuarioTablas: IUsuarioTablas = {
-  vendedores: [],
-  tiposUsuario: [],
-  puntosVenta: [],
+  personal: [],
 };
-
-
-
 export interface IUsuarioFilter {
   nick: string;
 }
@@ -60,4 +59,3 @@ export interface IUsuarioTable {
   fechaInicio: string;
   fechaModificacion: string;
 }
-

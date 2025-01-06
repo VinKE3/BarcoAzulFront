@@ -162,7 +162,7 @@ const ProveedorDatos: React.FC<IProps> = ({ dataGeneral, setDataGeneral }) => {
                 >
                   Documento Identidad
                 </label>
-                <div className="input-base-container-anidado">
+                <div className="input-base-container-button">
                   <input
                     id="numeroDocumentoIdentidad"
                     name="numeroDocumentoIdentidad"
@@ -176,7 +176,7 @@ const ProveedorDatos: React.FC<IProps> = ({ dataGeneral, setDataGeneral }) => {
                       (dataGeneral.tipoDocumentoIdentidadId === "1" ||
                         dataGeneral.tipoDocumentoIdentidadId === "6") &&
                       !api.loading
-                        ? "input-base-container-button"
+                        ? "input-base-button"
                         : "input-base"
                     }
                   />
@@ -191,12 +191,12 @@ const ProveedorDatos: React.FC<IProps> = ({ dataGeneral, setDataGeneral }) => {
                         accessKey="c"
                         onClick={handleConsultarRuc}
                         onKeyDown={handleKeyDown}
-                        className="main-button-anidado main-button-bg-primary"
+                        className="button-base-anidado button-base-bg-primary"
                       >
                         <AiOutlineCloudServer
                           strokeWidth={2}
                           size="2rem"
-                          className="main-button-icon"
+                          className="button-base-icon"
                         />
                       </button>
                     )}

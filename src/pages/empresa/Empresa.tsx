@@ -35,14 +35,13 @@ const Empresa: React.FC = () => {
     { icon: FaRegCalendarAlt, label: "Habilitar Periodo" },
     { icon: FaCog, label: "Configuración" },
   ];
-  console.log(data.mesesHabilitados, "data");
+
   const mesesHabilitadosLimpios = data.mesesHabilitados
     .split(",") // Dividir en un array
     .map((mes) => mes.trim()) // Eliminar espacios en cada elemento
     .join(","); // Volver a unirlos en un string si necesitas el formato original
   //#endregion
 
-  console.log(mesesHabilitadosLimpios);
   //#region useEffect
   useEffect(() => {
     handleSetInputs(setGlobalContext, inputs);

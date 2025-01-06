@@ -154,8 +154,7 @@ const ClienteDatosTab: React.FC<IProps> = ({ dataGeneral, setDataGeneral }) => {
                     }
                   />
                   {primer.tipo === "registrar" &&
-                    (dataGeneral.tipoDocumentoIdentidadId === "1" ||
-                      dataGeneral.tipoDocumentoIdentidadId === "6") &&
+                   
                     !api.loading && (
                       <button
                         id="buttonConsultarRUC"

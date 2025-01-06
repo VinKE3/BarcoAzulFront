@@ -209,7 +209,7 @@ const PersonaModal: React.FC = () => {
                 >
                   Documento Identidad
                 </label>
-                <div className="input-base-anidado">
+                <div className="input-base-container-button">
                   <input
                     ref={inputs["numeroDocumentoIdentidad"]}
                     id="numeroDocumentoIdentidad"
@@ -233,12 +233,12 @@ const PersonaModal: React.FC = () => {
                       accessKey="c"
                       onClick={handleConsultarRuc}
                       onKeyDown={handleKeyDown}
-                      className="input-base-anidado input-base-bg-primary"
+                      className="button-base-anidado button-base-bg-primary"
                     >
                       <AiOutlineCloudServer
                         strokeWidth={2}
                         size="2rem"
-                        className="input-base-icon"
+                        className="button-base-icon"
                       />
                     </button>
                   )}

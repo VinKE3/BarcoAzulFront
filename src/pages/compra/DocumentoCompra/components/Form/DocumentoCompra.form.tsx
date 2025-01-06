@@ -31,7 +31,7 @@ const DocumentoCompraForm = () => {
   const backPage: string = `/${privateRoutes.COMPRAS}/${comprasRoutes.TODASLASCOMPRAS}`;
   const { globalContext, setGlobalContext } = useGlobalContext();
   const { modal, form, mensajes } = globalContext;
-  const {  segundo } = modal;
+  const { primer, segundo } = modal;
   const { retorno } = form;
   // const { simplificado } = extra;
   const mensaje = mensajes.filter((x) => x.origen === "form" && x.tipo >= 0);
@@ -54,7 +54,7 @@ const DocumentoCompraForm = () => {
 
     //Botones
     "buttonProveedorFind",
-    "buttonArticuloFind",
+    "buttonArticuloFind"
     //Botones
   );
   //#endregion
@@ -101,12 +101,12 @@ const DocumentoCompraForm = () => {
 
   //#region Funciones
 
-  // const handleLoad = async (): Promise<void> => {
-  //   if (primer.tipo === "registrar") {
-  //     const tipoCambio: number = await handleGetTipoCambio(true, false);
-  //     setData((x) => ({ ...x, tipoCambio }));
-  //   }
-  // };
+  const handleLoad = async (): Promise<void> => {
+    if (primer.tipo === "registrar") {
+      const tipoCambio: number = await handleGetTipoCambio(true, false);
+      setData((x) => ({ ...x, tipoCambio }));
+    }
+  };
 
   const handleGetTipoCambio = async (
     retorno: boolean = false,
@@ -207,27 +207,27 @@ const DocumentoCompraForm = () => {
   //   }));
   // };
 
-    const handleNumero = (): void => {
-      let num = data.numero;
-      if (num.length < 10) {
-        num = ("0000000000" + num).slice(-10);
-      }
-      setData((x) => ({
-        ...x,
-        numero: num,
-      }));
-      return;
+  const handleNumero = (): void => {
+    let num = data.numero;
+    if (num.length < 10) {
+      num = ("0000000000" + num).slice(-10);
+    }
+    setData((x) => ({
+      ...x,
+      numero: num,
+    }));
+    return;
   };
   const handleSerie = (): void => {
     let serie = data.serie;
-      if (serie.length < 4) {
-        serie = ("0000" + serie).slice(-4);
-      }
-      setData((x) => ({
-        ...x,
-        serie: serie,
-      }));
-      return;
+    if (serie.length < 4) {
+      serie = ("0000" + serie).slice(-4);
+    }
+    setData((x) => ({
+      ...x,
+      serie: serie,
+    }));
+    return;
   };
 
   //#endregion
