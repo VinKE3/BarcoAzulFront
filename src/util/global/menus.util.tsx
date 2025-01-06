@@ -10,9 +10,10 @@ import { IMenuElement, ISubMenuElement } from "../../models";
 import { tesoreriaRoutes } from "../../common/routes/tesoreria.routes";
 import { comprasRoutes } from "../../common/routes/compras.routes";
 import { ventasRoute } from "../../common/routes/ventas.routes";
+import { finanzasRoutes } from "../../common/routes/finanzas.routes";
 
 //#region Variables
-const { MANTENIMIENTO, TESORERIA, COMPRAS, VENTAS } = privateRoutes;
+const { MANTENIMIENTO, TESORERIA, COMPRAS, VENTAS, FINANZAS } = privateRoutes;
 const {
   CLIENTE,
   PROVEEDOR,
@@ -42,6 +43,7 @@ const {
   NOTAPEDIDO,
   SALIDAPRODUCCION,
 } = ventasRoute;
+const { MOVIMIENTOBANCARIO } = finanzasRoutes;
 const createSubMenu = (items: ISubMenuElement[]) => items;
 //#endregion
 
@@ -127,6 +129,17 @@ export function navbarMenu(): IMenuElement[] {
           path: `${TESORERIA}/${REPORTECUENTABANCARIA}`,
         },
       ]), // Sin submenús definidos
+    },
+    {
+      id: "finanzas",
+      text: "Finanzas",
+      icon: <GiBuyCard className="w-full h-full" />,
+      subMenus: createSubMenu([
+        {
+          text: "Finanzas",
+          path: `${FINANZAS}/${MOVIMIENTOBANCARIO}`,
+        },
+      ]),
     },
     {
       id: "compras",

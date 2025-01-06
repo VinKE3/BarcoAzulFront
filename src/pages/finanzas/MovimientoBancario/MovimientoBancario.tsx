@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import { useEffect, useState } from "react";
-import { DocumentoCompraFilter, useDocumentoCompraColumn } from ".";
+import { MovimientoBancarioFilter, useMovimientoBancarioColumn } from ".";
 import {
   ButtonGroup,
   DeleteModal,
@@ -12,9 +12,9 @@ import {
 } from "../../../components";
 import { useGlobalContext, usePermisos } from "../../../hooks";
 import {
-  IDocumentoCompra,
-  IDocumentoCompraTablas,
-  defaultDocumentoCompra,
+  IMovimientoBancario,
+  IMovimientoBancarioTablas,
+  defaultMovimientoBancario,
 } from "../../../models";
 import {
   handleInitialData,
@@ -25,17 +25,17 @@ import {
 } from "../../../util";
 import { useNavigate } from "react-router-dom";
 
-const DocumentoCompra: React.FC = () => {
+const MovimientoBancario: React.FC = () => {
   //#region useState
   const navigate = useNavigate();
-  const menu: string = "Compra/DocumentoCompra";
+  const menu: string = "Finanzas/MovimientoBancario";
   const { globalContext, setGlobalContext } = useGlobalContext();
   const { api, mensajes, table, modal, form } = globalContext;
   const { primer } = modal;
   const mensaje = mensajes.filter((x) => x.origen === "global" && x.tipo >= 0);
   const [ready, setReady] = useState(false);
-  const { visible, permisos } = usePermisos("DocumentoCompra");
-  const columns = useDocumentoCompraColumn();
+  const { visible, permisos } = usePermisos("MovimientoBancario");
+  const columns = useMovimientoBancarioColumn();
   //#endregion
 
   //#region useEffect
@@ -69,12 +69,12 @@ const DocumentoCompra: React.FC = () => {
       return;
     }
 
-    handleInitialData(globalContext, defaultDocumentoCompra)
+    handleInitialData(globalContext, defaultMovimientoBancario)
       .then((response) => {
         const {
           data,
           tablas,
-        }: { data: IDocumentoCompra; tablas: IDocumentoCompraTablas } =
+        }: { data: IMovimientoBancario; tablas: IMovimientoBancarioTablas } =
           response;
         handlePrimaryModal(setGlobalContext, data, tablas);
       })
@@ -82,12 +82,10 @@ const DocumentoCompra: React.FC = () => {
         handleResetMensajeError(setGlobalContext, true, true, error);
       });
   };
-
-  //#endregion
   return (
     <div className="main-base">
       <div className="main-header">
-        <h4 className="main-header-title">Documento de Compra</h4>
+        <h4 className="main-header-title">Movimiento Bancario</h4>
         {ready && visible && <ButtonGroup isTablas={true} />}
       </div>
 
@@ -98,13 +96,13 @@ const DocumentoCompra: React.FC = () => {
         {ready && visible && (
           <>
             {mensaje.length > 0 && <Messages mensajes={mensajes} />}
-            {visible && <DocumentoCompraFilter />}
+            {visible && <MovimientoBancarioFilter />}
             {visible && (
               <Table
                 data={table.data}
                 columns={columns}
                 isTablas={true}
-                tableClassName="documento-compra-table"
+                tableClassName="movimiento-bancario-table"
               />
             )}
 
@@ -121,4 +119,4 @@ const DocumentoCompra: React.FC = () => {
   );
 };
 
-export default DocumentoCompra;
+export default MovimientoBancario;

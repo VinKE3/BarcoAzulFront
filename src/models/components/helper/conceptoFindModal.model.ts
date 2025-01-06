@@ -1,17 +1,16 @@
 export interface IConceptoFindModal {
   inputFocus: string;
+  modo: string;
 }
 
 export interface IConceptoFindFilter {
   numeroDocumento: string;
-  tipoDocumentoId: string;
-  proveedorId?: string;
-  clienteId?: string;
+  proveedorId: string;
+  clienteId: string;
 }
 
 export const defaultConceptoFindFilter: IConceptoFindFilter = {
   numeroDocumento: "",
-  tipoDocumentoId: "",
   proveedorId: "",
   clienteId: "",
 };

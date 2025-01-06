@@ -10,6 +10,7 @@ import { Login } from "./pages/login";
 import { Mantenimiento } from "./pages/mantenimiento";
 import Compras from "./pages/compra/Compras";
 import { Empresa } from "./pages/empresa";
+import Finanzas from "./pages/finanzas/Finanzas";
 function App() {
   return (
     <>
@@ -53,6 +54,10 @@ function App() {
                 <Route
                   path={`${privateRoutes.COMPRAS}/*`}
                   element={<Compras />}
+                />
+                <Route
+                  path={`${privateRoutes.FINANZAS}/*`}
+                  element={<Finanzas />}
                 />
                 {/* <Route
                   path={`${privateRoutes.VENTAS}/*`}
