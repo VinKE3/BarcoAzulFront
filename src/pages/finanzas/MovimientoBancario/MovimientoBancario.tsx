@@ -12,11 +12,13 @@ import {
 } from "../../../components";
 import { useGlobalContext, usePermisos } from "../../../hooks";
 import {
+  IDocumentoCompraCuentaCorriente,
   IMovimientoBancario,
   IMovimientoBancarioTablas,
   defaultMovimientoBancario,
 } from "../../../models";
 import {
+  get,
   handleInitialData,
   handlePrimaryModal,
   handleResetContext,
@@ -29,6 +31,7 @@ const MovimientoBancario: React.FC = () => {
   //#region useState
   const navigate = useNavigate();
   const menu: string = "Finanzas/MovimientoBancario";
+  const menuTabla: string = "Finanzas/MovimientoBancario/FiltroTablas";
   const { globalContext, setGlobalContext } = useGlobalContext();
   const { api, mensajes, table, modal, form } = globalContext;
   const { primer } = modal;
@@ -36,6 +39,9 @@ const MovimientoBancario: React.FC = () => {
   const [ready, setReady] = useState(false);
   const { visible, permisos } = usePermisos("MovimientoBancario");
   const columns = useMovimientoBancarioColumn();
+  const [cuentasCorrientes, setCuentasCorrientes] = useState<
+    IDocumentoCompraCuentaCorriente[]
+  >([]);
   //#endregion
 
   //#region useEffect
@@ -82,6 +88,16 @@ const MovimientoBancario: React.FC = () => {
         handleResetMensajeError(setGlobalContext, true, true, error);
       });
   };
+  const tablas = async (): Promise<void> => {
+    const response = await get({ globalContext, menu: menuTabla });
+    setCuentasCorrientes(response?.cuentasCorrientes);
+  };
+
+  useEffect(() => {
+    tablas();
+  }, []);
+  //#endregion
+
   return (
     <div className="main-base">
       <div className="main-header">
@@ -96,7 +112,7 @@ const MovimientoBancario: React.FC = () => {
         {ready && visible && (
           <>
             {mensaje.length > 0 && <Messages mensajes={mensajes} />}
-            {visible && <MovimientoBancarioFilter />}
+            {visible && <MovimientoBancarioFilter tablas={cuentasCorrientes} />}
             {visible && (
               <Table
                 data={table.data}

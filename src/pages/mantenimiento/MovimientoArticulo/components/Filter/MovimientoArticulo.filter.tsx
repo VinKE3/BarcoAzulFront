@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { useEffect, useState } from "react";
 import { BasicKeyHandler } from "../../../../../components";
 import { useDebounce, useGlobalContext } from "../../../../../hooks";

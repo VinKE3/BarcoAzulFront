@@ -1,7 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { ChangeEvent, useEffect, useState } from "react";
 import { BasicKeyHandler } from "../../../../../components";
 import { useDebounce, useGlobalContext } from "../../../../../hooks";
 import {
+  IDocumentoCompraCuentaCorriente,
   IMovimientoBancarioFilter,
   IMovimientoBancarioTable,
   defaultMovimientoBancarioFilter,
@@ -13,10 +16,13 @@ import {
   resetPagination,
 } from "../../../../../util";
 
-const MovimientoBancarioFilter: React.FC = () => {
+interface IProps {
+  tablas: IDocumentoCompraCuentaCorriente[];
+}
+const MovimientoBancarioFilter: React.FC<IProps> = ({ tablas }) => {
   //#region useState
   const { globalContext, setGlobalContext } = useGlobalContext();
-  const { table, modal, mensajes, form } = globalContext;
+  const { table, modal, mensajes } = globalContext;
   const { primer } = modal;
   const { pagina } = table;
   const mensaje = mensajes.filter((x) => x.tipo === 0);
@@ -24,7 +30,7 @@ const MovimientoBancarioFilter: React.FC = () => {
     defaultMovimientoBancarioFilter
   );
   const search = useDebounce(filter);
-  console.log(form.tablas);
+
   //#endregion
 
   //#region useEffect
@@ -38,7 +44,9 @@ const MovimientoBancarioFilter: React.FC = () => {
   //#endregion
 
   //#region Funciones
-  const handleData = ({ target }: ChangeEvent<HTMLInputElement>): void => {
+  const handleData = ({
+    target,
+  }: ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
     const { name } = target;
     const value = handleInputType(target);
     resetPagination(setGlobalContext);
@@ -49,6 +57,7 @@ const MovimientoBancarioFilter: React.FC = () => {
     try {
       const params = new URLSearchParams({
         concepto: search.concepto,
+        cuentaCorrienteId: search.cuentaCorrienteId,
         fechaInicio: search.fechaInicio,
         fechaFin: search.fechaFin,
       });
@@ -85,6 +94,24 @@ const MovimientoBancarioFilter: React.FC = () => {
                 className="input-base"
               />
             </div>
+          </div>
+          <div className="input-base-container-50">
+            <label htmlFor="cuentaCorrienteId" className="label-base">
+              Cuenta Corriente
+            </label>
+            <select
+              id="cuentaCorrienteId"
+              name="cuentaCorrienteId"
+              value={filter.cuentaCorrienteId}
+              onChange={handleData}
+              className="input-base"
+            >
+              {tablas.map((x) => (
+                <option key={x.cuentaCorrienteId} value={x.cuentaCorrienteId}>
+                  {x.entidadBancariaNombre}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="input-base-container-20">
             <label htmlFor="fechaInicio" className="label-base">

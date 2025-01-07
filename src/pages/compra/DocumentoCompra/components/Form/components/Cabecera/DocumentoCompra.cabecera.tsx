@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ChangeEvent, useState, useEffect } from "react";
 import { TbDeviceIpadSearch } from "react-icons/tb";
 import { useGlobalContext } from "../../../../../../../hooks";
