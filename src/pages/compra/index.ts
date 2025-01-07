@@ -15,3 +15,8 @@ export * from "./DocumentoCompra/components/Form/components/Cabecera/DocumentoCo
 export * from "./DocumentoCompra/components/Form/components/Detalle/DocumentoCompra.detalle";
 export * from "./DocumentoCompra/components/Modal/DocumentoCompra.modal";
 export * from "./EntradaArticulos/EntradaArticulos";
+export * from "./EntradaArticulos/components/Column/entradaArticulos.column";
+export * from "./EntradaArticulos/components/Filter/EntradaArticulos.filter";
+export * from "./EntradaArticulos/components/Form/EntradaArticulos.form";
+export * from "./EntradaArticulos/components/Form/components/Cabecera/EntradaArticulos.cabecera";
+export * from "./EntradaArticulos/components/Form/components/Detalle/EntradaArticulos.detalle";

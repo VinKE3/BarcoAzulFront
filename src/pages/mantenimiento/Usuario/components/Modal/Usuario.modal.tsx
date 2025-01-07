@@ -21,9 +21,8 @@ import {
 const UsuarioModal: React.FC = () => {
   //#region useState
   const { globalContext, setGlobalContext } = useGlobalContext();
-  const { modal, form, extra } = globalContext;
+  const { modal, form } = globalContext;
   const { primer } = modal;
-  const { element } = extra;
 
   const { personal }: IUsuarioTablas = form.tablas || defaultUsuarioTablas;
   const [data, setData] = useState<IUsuario>(form.data);
