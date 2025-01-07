@@ -1,8 +1,9 @@
 import { Navigate, Route } from "react-router-dom";
 import { comprasRoutes } from "../../common";
 import { RoutesWithNotFound } from "../../util";
-import { DocumentoCompra  } from "./DocumentoCompra";
+import { DocumentoCompra } from "./DocumentoCompra";
 import DocumentoCompraForm from "./DocumentoCompra/components/Form/DocumentoCompra.form";
+import { CuentaPorPagar, CuentaPorPagarForm } from "./CuentaPorPagar";
 const Compras = () => {
   return (
     <RoutesWithNotFound>
@@ -18,6 +19,14 @@ const Compras = () => {
         <Route
           path={comprasRoutes.TODASLASCOMPRAS_FORMULARIO}
           element={<DocumentoCompraForm />}
+        />
+        <Route
+          path={comprasRoutes.CUENTASPORPAGAR}
+          element={<CuentaPorPagar />}
+        />
+        <Route
+          path={comprasRoutes.CUENTASPORPAGAR_FORMULARIO}
+          element={<CuentaPorPagarForm />}
         />
       </>
     </RoutesWithNotFound>

@@ -1,6 +1,7 @@
 import { WrenchScrewdriverIcon } from "@heroicons/react/20/solid";
 import { FaUsers, FaCoins } from "react-icons/fa6";
 import { MdArticle } from "react-icons/md";
+import { BiSolidCoin } from "react-icons/bi";
 import { GiSellCard, GiBuyCard } from "react-icons/gi";
 import { HiOutlineDocumentReport } from "react-icons/hi";
 import { IoMdBarcode } from "react-icons/io";
@@ -133,7 +134,7 @@ export function navbarMenu(): IMenuElement[] {
     {
       id: "finanzas",
       text: "Finanzas",
-      icon: <GiBuyCard className="w-full h-full" />,
+      icon: <BiSolidCoin className="w-full h-full" />,
       subMenus: createSubMenu([
         {
           text: "Finanzas",

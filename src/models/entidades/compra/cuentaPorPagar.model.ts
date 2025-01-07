@@ -84,13 +84,13 @@ export const defaultCuentaPorPagar: ICuentaPorPagar = {
 
 export interface ICuentaPorPagarFilter extends IDocumentoFilter {
   proveedorNombre: string;
-  isCancelado: boolean;
+  isCancelado: string;
 }
 
 export const defaultCuentaPorPagarFilter: ICuentaPorPagarFilter = {
   ...defaultDocumentoFilter,
   proveedorNombre: "",
-  isCancelado: false,
+  isCancelado: "",
 };
 
 export interface ICuentaPorPagarTablas {
@@ -127,3 +127,16 @@ export interface IAbonos {
   tipoPagoId: string;
   tipoPagoDescripcion: string;
 }
+
+export const defaultAbonos: IAbonos = {
+  abonoId: 0,
+  fecha: format(new Date(), "yyyy-MM-dd"),
+  concepto: "",
+  monedaId: "",
+  tipoCambio: 0,
+  monto: 0,
+  montoPEN: 0,
+  montoUSD: 0,
+  tipoPagoId: "",
+  tipoPagoDescripcion: "",
+};

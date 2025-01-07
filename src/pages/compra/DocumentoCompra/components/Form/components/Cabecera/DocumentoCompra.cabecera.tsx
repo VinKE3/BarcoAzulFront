@@ -66,7 +66,6 @@ const DocumentoCompraCabecera: React.FC<IProps> = ({
 
   //#region useEffect
 
-  console.log(globalContext, "dataPagos");
 
   const simulateChangeEvent = (
     name: string,

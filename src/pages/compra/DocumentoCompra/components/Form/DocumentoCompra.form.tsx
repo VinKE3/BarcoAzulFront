@@ -27,7 +27,7 @@ import {
 } from "../../../../../util";
 import { DocumentoCompraCabecera, DocumentoCompraDetalle } from "./components";
 
-const DocumentoCompraForm = () => {
+const DocumentoCompraForm: React.FC = () => {
   //#region useState
   const navigate = useNavigate();
   const backPage: string = `/${privateRoutes.COMPRAS}/${comprasRoutes.TODASLASCOMPRAS}`;
