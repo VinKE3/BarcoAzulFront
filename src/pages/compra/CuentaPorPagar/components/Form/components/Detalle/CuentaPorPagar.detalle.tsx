@@ -53,7 +53,6 @@ const CuentaPorPagarDetalle: React.FC<IProps> = ({
   const handleActionBar = (detalle: IAbonos): void => {
     setData(detalle);
   };
-  console.log(data, "dataabonos");
 
   return (
     <div className="form-base-container guia-remision-form">

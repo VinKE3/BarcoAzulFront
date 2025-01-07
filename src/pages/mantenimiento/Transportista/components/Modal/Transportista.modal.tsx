@@ -37,7 +37,6 @@ const TransportistaModal: React.FC = () => {
   }: ITransportistaTablas = form.tablas || defaultTransportistaTablas;
   const [data, setData] = useState<ITransportista>(form.data);
   const inputs = useFocus("tipo", "numeroDocumentoIdentidad", "nombre");
-  console.log(data.tipoDocumentoIdentidadId);
   //#endregion
 
   //#region useEffect

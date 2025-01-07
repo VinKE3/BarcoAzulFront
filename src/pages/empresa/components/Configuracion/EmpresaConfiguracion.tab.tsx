@@ -18,7 +18,6 @@ const EmpresaConfiguracion: React.FC<IProps> = ({
   ): void => {
     setDataGeneral((prev) => ({ ...prev, [field]: value }));
   };
-  console.log(dataGeneral);
   //#endregion
 
   return (

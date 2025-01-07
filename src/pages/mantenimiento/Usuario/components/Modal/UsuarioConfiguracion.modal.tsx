@@ -41,7 +41,6 @@ const UsuarioConfiguracionModal: React.FC = () => {
     tipoUsuarioId: dataGeneral.tipoUsuarioDescripcion,
     usuarioId: dataGeneral.id,
   });
-  console.log(data, "data");
   const [tablas, setTablas] = useState<IUsuarioPermisoTablas>(
     defaultUsuarioPermisoTablas
   );
@@ -102,7 +101,6 @@ const UsuarioConfiguracionModal: React.FC = () => {
       menu: "Menu/Listar",
       urlParams,
     });
-    console.log(menus);
     const filteredMenu = Object.values(
       menus.reduce((acc, menu) => {
         const { sistemaAreaId, sistemaAreaNombre } = menu;
@@ -114,7 +112,6 @@ const UsuarioConfiguracionModal: React.FC = () => {
         return acc;
       }, {} as Record<number, IMenuList>)
     );
-    console.log(filteredMenu);
     setMenus(filteredMenu);
   };
 

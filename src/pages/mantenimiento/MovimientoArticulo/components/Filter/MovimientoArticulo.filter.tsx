@@ -29,7 +29,6 @@ const MovimientoArticuloFilter: React.FC = () => {
   const [dataCompleta, setDataCompleta] = useState<IMovimientoArticuloTable[]>(
     []
   );
-  console.log(dataCompleta);
   //#endregion
 
   //#region useEffect
@@ -84,8 +83,6 @@ const MovimientoArticuloFilter: React.FC = () => {
       const estadoStockMatch = filter.estadoStock
         ? normalize(x.estadoStock) === normalize(filter.estadoStock)
         : true;
-      console.log(x.estadoStock);
-      console.log(estadoStockMatch);
       return descripcionMatch && estadoStockMatch;
     });
 

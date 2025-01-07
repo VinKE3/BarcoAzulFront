@@ -34,9 +34,6 @@ const Marca: React.FC = () => {
 
   //#region useEffect
   useEffect(() => {
-    console.log(table, "API");
-  }, []);
-  useEffect(() => {
     const resetContext = async () => {
       handleResetContext(setGlobalContext);
     };
@@ -65,7 +62,6 @@ const Marca: React.FC = () => {
       .then((response) => {
         const { data }: { data: IMarca } = response;
         handlePrimaryModal(setGlobalContext, data);
-        console.log(data);
       })
       .catch((error) => {
         handleResetMensajeError(setGlobalContext, true, true, error);

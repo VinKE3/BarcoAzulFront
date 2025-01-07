@@ -18,7 +18,6 @@ const EmpresaPeriodoTab: React.FC<IProps> = ({
   const { extra } = globalContext;
   const { element } = extra;
   const inputs = useFocus("anioHabilitado1", "anioHabilitado2");
-  console.log(dataGeneral);
   //#endregion
 
   //#region Funciones
@@ -38,7 +37,7 @@ const EmpresaPeriodoTab: React.FC<IProps> = ({
     const meses = years.flatMap((year) =>
       monthsText.map((m) => `${year}${m.value}`)
     );
-    console.log(meses, "meses");
+ 
 
     // Utiliza un Sort para ordenar los datos y un Set para eliminar duplicados
     return Array.from(new Set(meses)).sort().join(",");

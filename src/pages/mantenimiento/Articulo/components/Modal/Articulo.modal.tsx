@@ -34,8 +34,6 @@ const ArticuloModal: React.FC = () => {
   const [selectedLinea, setSelectedLinea] = useState(""); // Línea seleccionada
   //#endregion
 
-  console.log(data);
-
   // Transformar el modelo de las sublíneas
   const transformedSubLineas = subLineas.map((subLinea) => ({
     id: subLinea.subLineaId,

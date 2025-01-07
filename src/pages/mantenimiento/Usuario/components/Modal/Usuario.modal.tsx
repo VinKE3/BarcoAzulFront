@@ -29,7 +29,6 @@ const UsuarioModal: React.FC = () => {
   const [data, setData] = useState<IUsuario>(form.data);
   const inputs = useFocus("id", "nombre");
   //#endregion
-  console.log(data, "data");
   //#region useEffect
   useEffect(() => {
     handleSetInputs(setGlobalContext, inputs);

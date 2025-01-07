@@ -142,7 +142,6 @@ const DocumentoCompraForm: React.FC = () => {
 
   const handleProveedor = (proveedor: IProveedorFind): void => {
     const { id, numeroDocumentoIdentidad, nombre, direccion } = proveedor;
-    console.log(proveedor, "proveedor");
     setData((x) => ({
       ...x,
       proveedorId: id,

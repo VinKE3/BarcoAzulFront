@@ -21,7 +21,6 @@ const SubLineaModal = () => {
   const { lineas }: ISubLineaTablas = form.tablas || defaultSubLineaTablas;
   const [data, setData] = useState<ISubLinea>(form.data);
   const inputs = useFocus("subLineaId");
-  console.log(form.tablas);
   //#endregion
 
   //#region useEffect

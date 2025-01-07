@@ -42,7 +42,6 @@ const Percepcion: React.FC<IProps> = ({ dataPercepcion, handlePercepcion }) => {
   const [show, setShow] = useState<boolean>(false);
   const inputs = useFocus("porcentajePercepcion");
   const columns = usePorcentajeColumn("percepcion");
-  console.log(dataPercepcion, "data percep");
   //#endregion
 
   //#region useEffect

@@ -31,7 +31,6 @@ const MovimientoArticuloModal: React.FC = () => {
 
   useEffect(() => {
     setTable(form.data?.detalles);
-    console.log(table, "tabla");
   }, [form.data]);
   //#endregion
   return (
