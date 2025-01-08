@@ -27,7 +27,7 @@ export interface ICuentaPorCobrar {
   observacion: string;
   abonos: IAbonos2[];
   tipoDocumento: ITipoDocumentoIdentidad;
-  proveedor: ICuentaPorPagarCliente;
+  cliente: ICuentaPorPagarCliente;
   moneda: IMoneda;
 }
 
@@ -85,19 +85,19 @@ export const defaultCuentaPorCobrar: ICuentaPorCobrar = {
   observacion: "",
   abonos: [],
   tipoDocumento: defaultTipoDocumentoIdentidad,
-  proveedor: defaultCuentaPorPagarCliente,
+  cliente: defaultCuentaPorPagarCliente,
   moneda: defaultMoneda,
 };
 
 export interface ICuentaPorCobrarFilter extends IDocumentoFilter {
   clienteNombre: string;
-  isCancelado: boolean;
+  isCancelado: string;
 }
 
 export const defaultCuentaPorCobrarFilter: ICuentaPorCobrarFilter = {
   ...defaultDocumentoFilter,
   clienteNombre: "",
-  isCancelado: false,
+  isCancelado: "",
 };
 
 export interface ICuentaPorCobrarTablas {

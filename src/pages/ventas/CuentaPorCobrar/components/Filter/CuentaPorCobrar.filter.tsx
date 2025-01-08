@@ -1,12 +1,11 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { BasicKeyHandler, Radio } from "../../../../../components";
 import { useDebounce, useGlobalContext } from "../../../../../hooks";
 import {
-  ICuentaPorPagarFilter,
-  ICuentaPorPagarTable,
-  defaultCuentaPorPagarFilter,
+  ICuentaPorCobrarFilter,
+  ICuentaPorCobrarTable,
+  defaultCuentaPorCobrarFilter,
 } from "../../../../../models";
 import {
   getListar,
@@ -15,7 +14,7 @@ import {
   resetPagination,
 } from "../../../../../util";
 
-const CuentaPorPagarFilter: React.FC = () => {
+const CuentaPorCobrarFilter: React.FC = () => {
   //#region useState
   const { globalContext, setGlobalContext } = useGlobalContext();
   const { table, modal, mensajes, extra } = globalContext;
@@ -23,8 +22,8 @@ const CuentaPorPagarFilter: React.FC = () => {
   const { primer } = modal;
   const { pagina } = table;
   const mensaje = mensajes.filter((x) => x.tipo === 0);
-  const [filter, setFilter] = useState<ICuentaPorPagarFilter>(
-    defaultCuentaPorPagarFilter
+  const [filter, setFilter] = useState<ICuentaPorCobrarFilter>(
+    defaultCuentaPorCobrarFilter
   );
   const search = useDebounce(filter);
   //#endregion
@@ -55,11 +54,11 @@ const CuentaPorPagarFilter: React.FC = () => {
     try {
       const params = new URLSearchParams({
         isCancelado: search.isCancelado,
-        proveedorNombre: search.proveedorNombre,
+        clienteNombre: search.clienteNombre,
         fechaInicio: search.fechaInicio,
         fechaFin: search.fechaFin,
       });
-      const { data, total }: { data: ICuentaPorPagarTable[]; total: number } =
+      const { data, total }: { data: ICuentaPorCobrarTable[]; total: number } =
         await getListar(globalContext, params);
       setGlobalContext((x) => ({ ...x, table: { ...x.table, data, total } }));
     } catch (error) {
@@ -68,19 +67,19 @@ const CuentaPorPagarFilter: React.FC = () => {
   };
   //#endregion
   return (
-    <BasicKeyHandler selector={"cuenta-por-pagar-filter"}>
-      <div className="filter-base cuenta-por-pagar-filter">
+    <BasicKeyHandler selector={"guia-remision-filter"}>
+      <div className="filter-base guia-remision-filter">
         <span className="filter-base-text">Filtrar por</span>
         <div className="input-base-row">
           <div className="input-base-container-33">
-            <label htmlFor="proveedorNombreFilter" className="label-base">
+            <label htmlFor="clienteNombreFilter" className="label-base">
               Proveedor Nombre
             </label>
             <input
-              id="proveedorNombreFilter"
-              name="proveedorNombre"
+              id="clienteNombreFilter"
+              name="clienteNombre"
               placeholder="Proveedor Nombre"
-              value={filter.proveedorNombre}
+              value={filter.clienteNombre}
               onChange={handleData}
               autoComplete="off"
               autoFocus
@@ -165,4 +164,4 @@ const CuentaPorPagarFilter: React.FC = () => {
   );
 };
 
-export default CuentaPorPagarFilter;
+export default CuentaPorCobrarFilter;

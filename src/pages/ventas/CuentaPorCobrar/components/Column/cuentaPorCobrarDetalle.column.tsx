@@ -9,7 +9,7 @@ import {
   handleNumber,
 } from "../../../../../util";
 
-const useCuentaPorPagarDetalleColumn = (
+const useCuentaPorCobrarDetalleColumn = (
   tipo: ModalCrudType
 ): Column<IAbonos>[] => {
   return useMemo<Column<IAbonos>[]>(() => {
@@ -98,4 +98,4 @@ const useCuentaPorPagarDetalleColumn = (
   }, [tipo]);
 };
 
-export default useCuentaPorPagarDetalleColumn;
+export default useCuentaPorCobrarDetalleColumn;

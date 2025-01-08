@@ -3,7 +3,7 @@ import { IMoneda } from "../../global";
 import { ICuentaBancaria, ITipoPago } from "../mantenimiento";
 import { ICobro } from "./cobro.model";
 
-export interface ICuentaPorCobrar {
+export interface ICuentaPorCobrar2 {
   id: string;
   tipoDocumentoId: string;
   serie: string;
@@ -44,7 +44,7 @@ export interface ICuentaPorCobrar {
   //Adicional
 }
 
-export const defaultCuentaPorCobrar: ICuentaPorCobrar = {
+export const defaultCuentaPorCobrar2: ICuentaPorCobrar2 = {
   id: "",
   tipoDocumentoId: "",
   serie: "",
@@ -97,7 +97,7 @@ export const defaultCuentaPorCobrarTablas: ICuentaPorCobrarTablas = {
   cuentasBancarias: [],
 };
 
-export interface ICuentaPorCobrarFilter {
+export interface ICuentaPorCobrar2Filter {
   clienteNombre: string;
   numeroDocumento: string;
   fechaInicio: string;
@@ -105,7 +105,7 @@ export interface ICuentaPorCobrarFilter {
   filtro: string;
 }
 
-export const defaultCuentaPorCobrarFilter: ICuentaPorCobrarFilter = {
+export const defaultCuentaPorCobrar2Filter: ICuentaPorCobrar2Filter = {
   clienteNombre: "",
   numeroDocumento: "",
   fechaInicio: format(startOfMonth(new Date()), "yyyy-MM-dd"),

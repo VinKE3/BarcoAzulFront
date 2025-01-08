@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { CuentaPorPagarFilter, useCuentaPorPagarColumn } from ".";
+import { CuentaPorCobrarFilter, useCuentaPorCobrarColumn } from ".";
 import {
   ButtonGroup,
   DeleteModal,
@@ -12,9 +12,9 @@ import {
 } from "../../../components";
 import { useGlobalContext, usePermisos } from "../../../hooks";
 import {
-  ICuentaPorPagar,
-  ICuentaPorPagarTablas,
-  defaultCuentaPorPagar,
+  ICuentaPorCobrar,
+  ICuentaPorCobrarTablas,
+  defaultCuentaPorCobrar,
 } from "../../../models";
 import {
   handleInitialData,
@@ -24,17 +24,17 @@ import {
   handleSetPermisoYMenu,
 } from "../../../util";
 
-const CuentaPorPagar: React.FC = () => {
+const CuentaPorCobrar: React.FC = () => {
   //#region useState
   const navigate = useNavigate();
-  const menu: string = "Finanzas/CuentaPorPagar";
+  const menu: string = "Finanzas/CuentaPorCobrar";
   const { globalContext, setGlobalContext } = useGlobalContext();
   const { api, mensajes, table, modal, form } = globalContext;
   const { primer } = modal;
-  const { visible, permisos } = usePermisos("CuentaPorPagar");
+  const { visible, permisos } = usePermisos("CuentaPorCobrar");
   const mensaje = mensajes.filter((x) => x.origen === "global" && x.tipo >= 0);
   const [ready, setReady] = useState(false);
-  const columns = useCuentaPorPagarColumn();
+  const columns = useCuentaPorCobrarColumn();
   //#endregion
 
   //#region useEffect
@@ -77,12 +77,13 @@ const CuentaPorPagar: React.FC = () => {
       return;
     }
 
-    handleInitialData(globalContext, defaultCuentaPorPagar)
+    handleInitialData(globalContext, defaultCuentaPorCobrar)
       .then((response) => {
         const {
           data,
           tablas,
-        }: { data: ICuentaPorPagar; tablas: ICuentaPorPagarTablas } = response;
+        }: { data: ICuentaPorCobrar; tablas: ICuentaPorCobrarTablas } =
+          response;
         handlePrimaryModal(setGlobalContext, data, tablas);
       })
       .catch((error) => {
@@ -90,11 +91,10 @@ const CuentaPorPagar: React.FC = () => {
       });
   };
   //#endregion
-
   return (
     <div className="main-base">
       <div className="main-header">
-        <h4 className="main-header-title">Cuentas Por Pagar</h4>
+        <h4 className="main-header-title">Cuentas Por Cobrar</h4>
         {ready && visible && (
           <ButtonGroup
             isTablas={true}
@@ -112,14 +112,14 @@ const CuentaPorPagar: React.FC = () => {
         {ready && visible && (
           <>
             {mensaje.length > 0 && <Messages mensajes={mensajes} />}
-            {visible && <CuentaPorPagarFilter />}
+            {visible && <CuentaPorCobrarFilter />}
             {visible && (
               <Table
                 data={table.data}
                 columns={columns}
                 isPermitido={true}
                 isTablas={true}
-                tableClassName="cuenta-por-pagar-table"
+                tableClassName="cuenta-por-cobrar-table"
               />
             )}
             {primer.tipo === "eliminar" && (
@@ -135,4 +135,4 @@ const CuentaPorPagar: React.FC = () => {
   );
 };
 
-export default CuentaPorPagar;
+export default CuentaPorCobrar;

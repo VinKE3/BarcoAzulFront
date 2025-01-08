@@ -4,4 +4,5 @@ export const ventasRoute = {
   GUIASREMISION: "guiasRemision",
   SALIDAPRODUCCION: "salidaProduccion",
   CUENTASPORCOBRAR: "cuentasPorCobrar",
+  CUENTASPORCOBRAR_FORMULARIO: "cuentasPorCobrar/form",
 };

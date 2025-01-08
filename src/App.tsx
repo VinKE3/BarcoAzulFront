@@ -11,6 +11,7 @@ import { Mantenimiento } from "./pages/mantenimiento";
 import Compras from "./pages/compra/Compras";
 import { Empresa } from "./pages/empresa";
 import Finanzas from "./pages/finanzas/Finanzas";
+import Ventas from "./pages/ventas/Ventas";
 function App() {
   return (
     <>
@@ -59,10 +60,10 @@ function App() {
                   path={`${privateRoutes.FINANZAS}/*`}
                   element={<Finanzas />}
                 />
-                {/* <Route
+                <Route
                   path={`${privateRoutes.VENTAS}/*`}
-                  element={<Compras />}
-                /> */}
+                  element={<Ventas />}
+                />
               </Route>
             </RoutesWithNotFound>
           </BrowserRouter>

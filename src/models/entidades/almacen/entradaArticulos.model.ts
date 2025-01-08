@@ -1,14 +1,8 @@
 import { format } from "date-fns";
-import {
-  defaultDocumentoFilter,
-  ICombo,
-  IDocumentoFilter,
-  ISerie,
-} from "../../global";
+import { defaultDocumentoFilter, IDocumentoFilter } from "../../global";
 import { CrudType } from "../../types";
-import { IClientePersonal, IPersonal } from "..";
 
-export interface IEntradaAlmacen {
+export interface IEntradaArticulos {
   empresaId: string;
   proveedorId: string | null;
   tipoDocumentoId: string | null;
@@ -24,10 +18,10 @@ export interface IEntradaAlmacen {
   tipoCambio: number;
   numeroOP: string | null;
   observacion: string | null;
-  detalles: IEntradaAlmacenDetalle[];
+  detalles: IEntradaArticulosDetalle[];
 }
 
-export const defaultEntradaAlmacen: IEntradaAlmacen = {
+export const defaultEntradaArticulos: IEntradaArticulos = {
   empresaId: "",
   proveedorId: null,
   tipoDocumentoId: null,
@@ -38,7 +32,7 @@ export const defaultEntradaAlmacen: IEntradaAlmacen = {
   proveedorNombre: null,
   proveedorDireccion: null,
   personalId: null,
-  fechaEmision: format(new Date(), "yyyy-MM-dd'T'HH:mm:ss"),
+  fechaEmision: format(new Date(), "yyyy-MM-dd"),
   monedaId: null,
   tipoCambio: 0,
   numeroOP: null,
@@ -46,7 +40,8 @@ export const defaultEntradaAlmacen: IEntradaAlmacen = {
   detalles: [],
 };
 
-export interface IEntradaAlmacenDetalle {
+export interface IEntradaArticulosDetalle {
+  tipo: CrudType;
   detalleId: number;
   lineaId: string | null;
   subLineaId: string | null;
@@ -64,7 +59,8 @@ export interface IEntradaAlmacenDetalle {
   unidadMedidaDescripcion: string | null;
 }
 
-export const defaultEntradaAlmacenDetalle: IEntradaAlmacenDetalle = {
+export const defaultEntradaArticulosDetalle: IEntradaArticulosDetalle = {
+  tipo: "registrar",
   detalleId: 0,
   lineaId: null,
   subLineaId: null,
@@ -82,7 +78,7 @@ export const defaultEntradaAlmacenDetalle: IEntradaAlmacenDetalle = {
   unidadMedidaDescripcion: null,
 };
 
-export interface IAlmacenPersonal {
+export interface IArticulosPersonal {
   id: string;
   apellidoPaterno: string;
   apellidoMaterno: string;
@@ -92,7 +88,7 @@ export interface IAlmacenPersonal {
   isActivo: boolean;
 }
 
-export const defaultAlmacenPersonal: IAlmacenPersonal = {
+export const defaultArticulosPersonal: IArticulosPersonal = {
   id: "",
   apellidoPaterno: "",
   apellidoMaterno: "",
@@ -102,28 +98,34 @@ export const defaultAlmacenPersonal: IAlmacenPersonal = {
   isActivo: false,
 };
 
-export interface IEntradaAlmacenTablas {
-  personal: IAlmacenPersonal[];
+export interface IEntradaArticulosTablas {
+  personal: IArticulosPersonal[];
+  serie: string;
 }
 
-export const defaultEntradaAlmacenTablas: IEntradaAlmacenTablas = {
+export const defaultEntradaArticulosTablas: IEntradaArticulosTablas = {
   personal: [],
+  serie: "",
 };
 
-export interface IEntradaAlmacenFilter extends IDocumentoFilter {
+export interface IEntradaArticulosFilter extends IDocumentoFilter {
   observacion: string;
 }
 
-export const defaultEntradaAlmacenFilter: IEntradaAlmacenFilter = {
+export const defaultEntradaArticulosFilter: IEntradaArticulosFilter = {
   ...defaultDocumentoFilter,
   observacion: "",
 };
 
-export interface IEntradaAlmacenTable {
-  empresaId: string;
-  fechaEmision: string;
+export interface IEntradaArticulosTable {
   id: string;
   numeroDocumento: string;
-  proveedorNombre: string;
-  tipoDocumentoDescripcion: string;
+  personal: string;
+  concepto: string;
+  observacion: string;
+  monedaId: string;
+  total: number;
+  isCancelado: boolean;
+  isBloqueado: boolean;
+  isAnulado: boolean;
 }

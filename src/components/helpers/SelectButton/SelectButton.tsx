@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { FaCheck, FaSearch } from "react-icons/fa";
 import { useGlobalContext } from "../../../hooks";
 import { IModal, ISelectButton } from "../../../models";

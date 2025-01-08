@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import React, { useEffect, useRef } from "react";
 import { useGlobalContext } from "../../../hooks";
 import { IElementNode, ITableKeyHandler } from "../../../models";

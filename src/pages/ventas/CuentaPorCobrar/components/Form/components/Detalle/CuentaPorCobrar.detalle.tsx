@@ -7,34 +7,31 @@ import {
 } from "../../../../../../../components";
 import { useGlobalContext } from "../../../../../../../hooks";
 import {
-  ICuentaPorPagar,
+  ICuentaPorCobrar,
   IAbonos,
   defaultAbonos,
 } from "../../../../../../../models";
 import {
   handleInputType,
 } from "../../../../../../../util";
-import { useCuentaPorPagarDetalleColumn } from "../../../Column";
+import { useCuentaPorCobrarDetalleColumn } from "../../../Column";
 interface IProps {
-  dataGeneral: ICuentaPorPagar;
-  setDataGeneral: React.Dispatch<React.SetStateAction<ICuentaPorPagar>>;
+  dataGeneral: ICuentaPorCobrar;
+  setDataGeneral: React.Dispatch<React.SetStateAction<ICuentaPorCobrar>>;
 }
 
-const CuentaPorPagarDetalle: React.FC<IProps> = ({
-  dataGeneral
-}) => {
+const CuentaPorCobrarDetalle: React.FC<IProps> = ({ dataGeneral }) => {
   //#region useState
   const { globalContext } = useGlobalContext();
   const { modal, form, mensajes, extra } = globalContext;
   const { primer } = modal;
   const { retorno } = form;
-  const {element } = extra;
+  const { element } = extra;
   const { inputs } = element;
   const mensaje = mensajes.filter((x) => x.origen === "detalle" && x.tipo >= 0);
   const [data, setData] = useState<IAbonos>(defaultAbonos);
-  const columns = useCuentaPorPagarDetalleColumn(primer.tipo);
+  const columns = useCuentaPorCobrarDetalleColumn(primer.tipo);
   //#endregion
-
   //#region useEffect
   useEffect(() => {
     retorno &&
@@ -54,7 +51,6 @@ const CuentaPorPagarDetalle: React.FC<IProps> = ({
   const handleActionBar = (detalle: IAbonos): void => {
     setData(detalle);
   };
-
   return (
     <div className="form-base-container guia-remision-form">
       {mensaje.length > 0 && <Messages />}
@@ -149,4 +145,4 @@ const CuentaPorPagarDetalle: React.FC<IProps> = ({
   );
 };
 
-export default CuentaPorPagarDetalle;
+export default CuentaPorCobrarDetalle;

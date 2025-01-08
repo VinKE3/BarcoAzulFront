@@ -2,61 +2,35 @@
 import { useMemo } from "react";
 import { Column } from "react-table";
 import { ActionBar } from "../../../../../components";
-import { IAbonos, ModalCrudType } from "../../../../../models";
-import {
-  handleFormatRowDate,
-  handleMonedaRow,
-  handleNumber,
-} from "../../../../../util";
+import { IEntradaArticulosDetalle, ModalCrudType } from "../../../../../models";
+import { handleNumber } from "../../../../../util";
 
-const useCuentaPorPagarDetalleColumn = (
+const useEntradaArticulosDetalleColumn = (
   tipo: ModalCrudType
-): Column<IAbonos>[] => {
-  return useMemo<Column<IAbonos>[]>(() => {
-    const columns: Column<IAbonos>[] = [
+): Column<IEntradaArticulosDetalle>[] => {
+  return useMemo<Column<IEntradaArticulosDetalle>[]>(() => {
+    const columns: Column<IEntradaArticulosDetalle>[] = [
       {
         Header: "N°",
-        accessor: "abonoId",
+        accessor: "detalleId",
         Cell: ({ value }: { value: number }) => {
           return <p className="table-base-body-td-center">{value}</p>;
         },
       },
       {
         Header: "Descripción",
-        accessor: "tipoPagoDescripcion",
+        accessor: "descripcion",
       },
       {
-        Header: "Concepto",
-        accessor: "concepto",
+        Header: "Unidad",
+        accessor: "unidadMedidaId",
         Cell: ({ value }: { value: string | null }) => {
           return <p className="table-base-body-td-center">{value}</p>;
         },
       },
       {
-        Header: "Fecha",
-        accessor: "fecha",
-        Cell: ({ value }: { value: string }) => {
-          return (
-            <p className="table-base-body-td-center">
-              {handleFormatRowDate(value)}
-            </p>
-          );
-        },
-      },
-      {
-        Header: "M",
-        accessor: "monedaId",
-        Cell: ({ value }: { value: string }) => {
-          return (
-            <div className="flex justify-center">
-              <p className="main-table-badge-gray">{handleMonedaRow(value)}</p>
-            </div>
-          );
-        },
-      },
-      {
-        Header: "Tipo Cambio",
-        accessor: "tipoCambio",
+        Header: "Cantidad",
+        accessor: "cantidad",
         Cell: ({ value }: { value: number }) => {
           return (
             <p className="table-base-body-td-right">
@@ -66,8 +40,19 @@ const useCuentaPorPagarDetalleColumn = (
         },
       },
       {
-        Header: "Monto",
-        accessor: "monto",
+        Header: "Costo Unitario",
+        accessor: "precioUnitario",
+        Cell: ({ value }: { value: number }) => {
+          return (
+            <p className="table-base-body-td-right">
+              {handleNumber(value, true, true)}
+            </p>
+          );
+        },
+      },
+      {
+        Header: "Importe",
+        accessor: "importe",
         Cell: ({ value }: { value: number }) => {
           return (
             <p className="table-base-body-td-right">
@@ -78,17 +63,16 @@ const useCuentaPorPagarDetalleColumn = (
       },
     ];
 
-    if (tipo !== "modificar") {
+    if (tipo !== "consultar") {
       columns.push({
         Header: "Acciones",
-        Cell: ({ row }: { row: { original: IAbonos } }) => (
+        Cell: ({ row }: { row: { original: IEntradaArticulosDetalle } }) => (
           <ActionBar
             id=""
             isAdminPermisos={true}
             returnRetorno={true}
             rowData={{ ...row.original, origen: "detalle" }}
             showModificar={false}
-            showEliminar={false}
           />
         ),
       });
@@ -98,4 +82,4 @@ const useCuentaPorPagarDetalleColumn = (
   }, [tipo]);
 };
 
-export default useCuentaPorPagarDetalleColumn;
+export default useEntradaArticulosDetalleColumn;
