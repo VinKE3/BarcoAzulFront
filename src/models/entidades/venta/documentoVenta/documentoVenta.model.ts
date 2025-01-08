@@ -16,7 +16,6 @@ import {
   ITipoVenta,
   IUsuarioConfiguracion,
 } from "../../mantenimiento";
-import { ICobro } from "../../tesoreria";
 import { IDocumentoVentaPedido } from "./documentoVentaPedido.model";
 
 export interface IDocumentoVenta extends Omit<ICabeceraVenta, "tipoPagoId"> {
@@ -34,7 +33,6 @@ export interface IDocumentoVenta extends Omit<ICabeceraVenta, "tipoPagoId"> {
 
   //Adjunto
   pedidos: IDocumentoVentaPedido[];
-  cobros: ICobro[];
   //Adjunto
   detalles: IDocumentoVentaDetalle[];
 }
@@ -54,7 +52,6 @@ export const defaultDocumentoVenta: IDocumentoVenta = {
 
   //Adjunto
   pedidos: [],
-  cobros: [],
   //Adjunto
   detalles: [],
 };

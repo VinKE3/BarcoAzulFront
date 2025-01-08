@@ -10,7 +10,6 @@ import {
   ISerie,
 } from "../../../global";
 import { ICuentaBancaria, ITipoPago, ITipoVenta } from "../../mantenimiento";
-import { ICobro } from "../../tesoreria";
 
 //#region Cabecera
 export interface INotaCredito extends ICabeceraVenta {
@@ -27,7 +26,6 @@ export interface INotaCredito extends ICabeceraVenta {
   motivoNotaId: string | null;
   motivoSustento: string | null;
 
-  cobros: ICobro[];
   detalles: INotaCreditoDetalle[];
 }
 export const defaultNotaCredito: INotaCredito = {
@@ -47,7 +45,6 @@ export const defaultNotaCredito: INotaCredito = {
   motivoNotaId: null,
   motivoSustento: null,
 
-  cobros: [],
   detalles: [],
 };
 //#endregion
