@@ -1,34 +1,26 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-import { ChangeEvent, useEffect, useState } from "react"
-import {
-
-  Messages,
-  Table,
-} from "../../../../../../../components";
+import { ChangeEvent, useEffect, useState } from "react";
+import { Messages, Table } from "../../../../../../../components";
 import { useGlobalContext } from "../../../../../../../hooks";
 import {
   ICuentaPorPagar,
   IAbonos,
   defaultAbonos,
 } from "../../../../../../../models";
-import {
-  handleInputType,
-} from "../../../../../../../util";
+import { handleInputType } from "../../../../../../../util";
 import { useCuentaPorPagarDetalleColumn } from "../../../Column";
 interface IProps {
   dataGeneral: ICuentaPorPagar;
   setDataGeneral: React.Dispatch<React.SetStateAction<ICuentaPorPagar>>;
 }
 
-const CuentaPorPagarDetalle: React.FC<IProps> = ({
-  dataGeneral
-}) => {
+const CuentaPorPagarDetalle: React.FC<IProps> = ({ dataGeneral }) => {
   //#region useState
   const { globalContext } = useGlobalContext();
   const { modal, form, mensajes, extra } = globalContext;
   const { primer } = modal;
   const { retorno } = form;
-  const {element } = extra;
+  const { element } = extra;
   const { inputs } = element;
   const mensaje = mensajes.filter((x) => x.origen === "detalle" && x.tipo >= 0);
   const [data, setData] = useState<IAbonos>(defaultAbonos);
@@ -64,7 +56,7 @@ const CuentaPorPagarDetalle: React.FC<IProps> = ({
 
         <>
           <div className="input-base-row">
-            <div className="input-base-container-100">
+            <div className="input-base-container-25">
               <label htmlFor="abonoId" className="label-base">
                 Abono
               </label>
@@ -75,30 +67,11 @@ const CuentaPorPagarDetalle: React.FC<IProps> = ({
                   placeholder="AbonoId"
                   value={data.abonoId ?? ""}
                   disabled
-                  className="input-base-button"
+                  className="input-base"
                 />
               </div>
             </div>
-          </div>
-
-          <div className="input-base-row">
-            <div className="input-base-container-50">
-              <label htmlFor="tipoPagoDescripcion" className="label-base">
-                Tipo Pago
-              </label>
-              <div className="input-base-container-button">
-                <input
-                  id="tipoPagoDescripcion"
-                  name="tipoPagoDescripcion"
-                  placeholder="Lote"
-                  value={data.tipoPagoDescripcion ?? ""}
-                  disabled
-                  className="input-base-button"
-                />
-              </div>
-            </div>
-
-            <div className="input-base-container-50">
+            <div className="input-base-container-25">
               <label htmlFor="fecha" className="label-base">
                 Fecha
               </label>
@@ -106,12 +79,69 @@ const CuentaPorPagarDetalle: React.FC<IProps> = ({
                 type="date"
                 id="fecha"
                 name="fecha"
-                value={data.fecha ?? ""}
-                disabled
+                value={data.fecha}
+                onChange={handleData}
+                disabled={primer.tipo === "consultar"}
                 className="input-base"
               />
             </div>
-            <div className="input-base-container-33">
+            <div className="input-base-container-25">
+              <label htmlFor="tipoPagoDescripcion" className="label-base">
+                Tipo Pago
+              </label>
+              <div className="input-base-container-button">
+                <input
+                  id="tipoPagoDescripcion"
+                  name="tipoPagoDescripcion"
+                  placeholder="Tipo Pago"
+                  value={data.tipoPagoDescripcion ?? ""}
+                  disabled
+                  className="input-base"
+                />
+              </div>
+            </div>
+            <div className="input-base-container-25">
+              <label htmlFor="tipoCambio" className="label-base">
+                tipoCambio
+              </label>
+              <div className="input-base-container-button">
+                <input
+                  ref={inputs["tipoCambio"]}
+                  type="number"
+                  inputMode="numeric"
+                  id="tipoCambio"
+                  name="tipoCambio"
+                  placeholder="tipoCambio"
+                  value={data.tipoCambio ?? 0}
+                  onChange={handleData}
+                  autoComplete="off"
+                  min={0}
+                  step={1}
+                  disabled
+                  className="input-base"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="input-base-row">
+            <div className="input-base-container-25">
+              <label htmlFor="monedaId" className="label-base">
+                Moneda
+              </label>
+              <div className="input-base-container-button">
+                <input
+                  id="monedaId"
+                  name="monedaId"
+                  placeholder="Moneda"
+                  value={data.monedaId ?? ""}
+                  disabled
+                  className="input-base"
+                />
+              </div>
+            </div>
+
+            <div className="input-base-container-25">
               <label htmlFor="monto" className="label-base">
                 monto
               </label>
@@ -129,7 +159,44 @@ const CuentaPorPagarDetalle: React.FC<IProps> = ({
                   min={0}
                   step={1}
                   disabled
-                  className="input-base-button"
+                  className="input-base"
+                />
+              </div>
+            </div>
+            {/* <div className="input-base-container-25">
+              <label htmlFor="monto" className="label-base">
+                monto
+              </label>
+              <div className="input-base-container-button">
+                <input
+                  ref={inputs["monto"]}
+                  type="number"
+                  inputMode="numeric"
+                  id="monto"
+                  name="monto"
+                  placeholder="monto"
+                  value={data.monto ?? 0}
+                  onChange={handleData}
+                  autoComplete="off"
+                  min={0}
+                  step={1}
+                  disabled
+                  className="input-base"
+                />
+              </div>
+            </div> */}
+            <div className="input-base-container-25">
+              <label htmlFor="concepto" className="label-base">
+                Concepto
+              </label>
+              <div className="input-base-container-button">
+                <input
+                  id="concepto"
+                  name="concepto"
+                  placeholder="Concepto"
+                  value={data.concepto ?? ""}
+                  disabled
+                  className="input-base"
                 />
               </div>
             </div>

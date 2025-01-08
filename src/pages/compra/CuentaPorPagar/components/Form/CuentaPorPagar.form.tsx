@@ -9,10 +9,7 @@ import {
   Messages,
 } from "../../../../../components";
 import { useFocus, useGlobalContext } from "../../../../../hooks";
-import {
-  ICuentaPorPagar,
-  defaultCuentaPorPagar,
-} from "../../../../../models";
+import { ICuentaPorPagar, defaultCuentaPorPagar } from "../../../../../models";
 import {
   handleBackPage,
   handleInputType,
@@ -97,7 +94,7 @@ const CuentaPorPagarForm: React.FC = () => {
   return (
     <div className="main-base">
       <div className="main-header">
-        <h4 className="main-header-sub-title">{`${modal.primer.tipo} ingreso de artículos`}</h4>
+        <h4 className="main-header-sub-title">{`${modal.primer.tipo} Cuenta Por Pagar`}</h4>
       </div>
 
       {mensaje.length > 0 && <Messages />}

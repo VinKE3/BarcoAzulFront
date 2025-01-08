@@ -1,21 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
-import { ChangeEvent, useState, useEffect } from "react";
-import { TbDeviceIpadSearch } from "react-icons/tb";
+import { ChangeEvent } from "react";
 import { useGlobalContext } from "../../../../../../../hooks";
-import { CheckBox } from "../../../../../../../components";
-import {
-  ICombo,
-  IMoneda,
-  ICuentaPorCobrar,
-  ICuentaPorCobrarTablas,
-  ITiposPago,
-  defaultCuentaPorCobrarTablas,
-  IMotivosNota,
-  IPorcentajes,
-} from "../../../../../../../models";
-import { handleHelpModal, get } from "../../../../../../../util";
-import { FaMoneyBillTransfer } from "react-icons/fa6";
+import { ICuentaPorCobrar } from "../../../../../../../models";
 
 interface IProps {
   data: ICuentaPorCobrar;
@@ -26,10 +11,8 @@ interface IProps {
 const CuentaPorCobrarCabecera: React.FC<IProps> = ({ data, handleData }) => {
   //#region useState
   const { globalContext } = useGlobalContext();
-  const { modal, form, extra } = globalContext;
+  const { modal } = globalContext;
   const { primer } = modal;
-  const { element } = extra;
-  const { inputs } = element;
   return (
     <div className="form-base-container guia-remision-form">
       <div className="modal-base-content">
@@ -74,14 +57,28 @@ const CuentaPorCobrarCabecera: React.FC<IProps> = ({ data, handleData }) => {
             />
           </div>
           <div className="input-base-container-25">
-            <label htmlFor="fechaContable" className="label-base">
-              Fecha
+            <label htmlFor="fechaEmision" className="label-base">
+              Fecha Emisión
             </label>
             <input
               type="date"
-              id="fechaContable"
-              name="fechaContable"
+              id="fechaEmision"
+              name="fechaEmision"
               value={data.fechaEmision}
+              onChange={handleData}
+              disabled={primer.tipo === "consultar"}
+              className="input-base"
+            />
+          </div>
+          <div className="input-base-container-25">
+            <label htmlFor="fechaVencimiento" className="label-base">
+              Fecha Vencimiento
+            </label>
+            <input
+              type="date"
+              id="fechaVencimiento"
+              name="fechaVencimiento"
+              value={data.fechaVencimiento}
               onChange={handleData}
               disabled={primer.tipo === "consultar"}
               className="input-base"
@@ -119,6 +116,25 @@ const CuentaPorCobrarCabecera: React.FC<IProps> = ({ data, handleData }) => {
           </div>
         </div>
         <div className="input-base-row">
+          <div className="input-base-container-33">
+            <label htmlFor="montoDetraccion" className="label-base">
+              Monto Detraccion
+            </label>
+            <input
+              type="number"
+              inputMode="numeric"
+              id="montoDetraccion"
+              name="montoDetraccion"
+              placeholder="montoDetraccion"
+              value={data.montoDetraccion ?? ""}
+              onChange={handleData}
+              autoComplete="off"
+              min={0}
+              step={1}
+              disabled={primer.tipo === "consultar"}
+              className="input-base"
+            />
+          </div>
           <div className="input-base-container-33">
             <label htmlFor="total" className="label-base">
               Total a Pagar

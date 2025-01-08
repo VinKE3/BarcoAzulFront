@@ -1,21 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { ChangeEvent, useState, useEffect } from "react";
-import { TbDeviceIpadSearch } from "react-icons/tb";
+import { ChangeEvent } from "react";
 import { useGlobalContext } from "../../../../../../../hooks";
-import { CheckBox } from "../../../../../../../components";
+
 import {
-  ICombo,
-  IMoneda,
   ICuentaPorPagar,
-  ICuentaPorPagarTablas,
-  ITiposPago,
-  defaultCuentaPorPagarTablas,
-  IMotivosNota,
-  IPorcentajes,
 } from "../../../../../../../models";
-import { handleHelpModal, get } from "../../../../../../../util";
-import { FaMoneyBillTransfer } from "react-icons/fa6";
+
 interface IProps {
   data: ICuentaPorPagar;
   handleData: (
@@ -25,14 +14,11 @@ interface IProps {
 const CuentaPorPagarCabecera: React.FC<IProps> = ({ data, handleData }) => {
   //#region useState
   const { globalContext } = useGlobalContext();
-  const { modal, form, extra } = globalContext;
+  const { modal} = globalContext;
   const { primer } = modal;
-  const { element } = extra;
-  const { inputs } = element;
-
   //#endregion
   return (
-    <div className="form-base-container guia-remision-form">
+    <div className="form-base-container cuenta-por-pagar-form">
       <div className="modal-base-content">
         <div className="input-base-row">
           <div className="input-base-container-25">
